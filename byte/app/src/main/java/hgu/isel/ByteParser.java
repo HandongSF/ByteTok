@@ -3,12 +3,18 @@
  */
 package hgu.isel;
 
+import hgu.isel.reader.ByteReader;
+
 public class ByteParser {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+    byte[] bytes;
 
     public static void main(String[] args) {
-        System.out.println(new ByteParser().getGreeting());
+        ByteParser parser = new ByteParser();
+        parser.run(args[0]);
+    }
+
+    public void run(String path) {
+        ByteReader byteReader = new ByteReader(path);
+        bytes = byteReader.readClassFile();
     }
 }
