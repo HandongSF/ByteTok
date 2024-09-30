@@ -23,8 +23,6 @@ dependencies {
 
     // This dependency is used by the application.
     implementation libs.guava
-
-    implementation 'org.ow2.asm:asm:9.5' // or the latest version
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
