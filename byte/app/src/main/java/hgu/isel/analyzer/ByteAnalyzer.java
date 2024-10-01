@@ -1,8 +1,8 @@
 package hgu.isel.analyzer;
 
-import hgu.isel.structure.AttributeInformation;
-import hgu.isel.structure.FieldInformation;
-import hgu.isel.structure.MethodInformation;
+import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.field.FieldInformation;
+import hgu.isel.structure.method.MethodInformation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class ByteAnalyzer {
