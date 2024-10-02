@@ -3,6 +3,7 @@
  */
 package hgu.isel;
 
+import hgu.isel.analyzer.ByteAnalyzer;
 import hgu.isel.reader.ByteReader;
 
 public class ByteTok {
@@ -16,5 +17,8 @@ public class ByteTok {
     public void run(String path) {
         ByteReader byteReader = new ByteReader(path);
         bytes = byteReader.readClassFile();
+
+        ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+        byteAnalyzer.analyze();
     }
 }
