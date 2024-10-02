@@ -5,11 +5,11 @@ package hgu.isel;
 
 import hgu.isel.reader.ByteReader;
 
-public class ByteParser {
+public class ByteTok {
     byte[] bytes;
 
     public static void main(String[] args) {
-        ByteParser parser = new ByteParser();
+        ByteTok parser = new ByteTok();
         parser.run(args[0]);
     }
 
