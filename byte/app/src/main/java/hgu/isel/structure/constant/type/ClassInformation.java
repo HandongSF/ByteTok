@@ -22,4 +22,9 @@ public class ClassInformation implements ConstantPoolInformation {
     public void setNameIndex(byte[] nameIndex) {
         this.nameIndex = nameIndex;
     }
+
+    public ClassInformation(byte tag, byte[] nameIndex) {
+        this.tag = tag;
+        this.nameIndex = nameIndex;
+    }
 }

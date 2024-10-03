@@ -30,4 +30,10 @@ public class NameAndTypeInformation implements ConstantPoolInformation {
     public void setDescriptorIndex(byte[] descriptorIndex) {
         this.descriptorIndex = descriptorIndex;
     }
+
+    public NameAndTypeInformation(byte tag, byte[] nameIndex, byte[] descriptorIndex) {
+        this.tag = tag;
+        this.nameIndex = nameIndex;
+        this.descriptorIndex = descriptorIndex;
+    }
 }

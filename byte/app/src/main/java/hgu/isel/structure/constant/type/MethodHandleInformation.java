@@ -30,4 +30,10 @@ public class MethodHandleInformation implements ConstantPoolInformation {
     public void setReferenceIndex(byte[] referenceIndex) {
         this.referenceIndex = referenceIndex;
     }
+
+    public MethodHandleInformation(byte tag, byte referenceKind, byte[] referenceIndex) {
+        this.tag = tag;
+        this.referenceKind = referenceKind;
+        this.referenceIndex = referenceIndex;
+    }
 }

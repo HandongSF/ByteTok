@@ -30,4 +30,10 @@ public class InvokeDynamicInformation implements ConstantPoolInformation {
     public void setNameAndTypeIndex(byte[] nameAndTypeIndex) {
         this.nameAndTypeIndex = nameAndTypeIndex;
     }
+
+    public InvokeDynamicInformation(byte tag, byte[] bootstrapMethodAttributeIndex, byte[] nameAndTypeIndex) {
+        this.tag = tag;
+        this.bootstrapMethodAttributeIndex = bootstrapMethodAttributeIndex;
+        this.nameAndTypeIndex = nameAndTypeIndex;
+    }
 }

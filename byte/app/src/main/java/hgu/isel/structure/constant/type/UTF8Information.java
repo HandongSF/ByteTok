@@ -30,4 +30,10 @@ public class UTF8Information implements ConstantPoolInformation {
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }
+
+    public UTF8Information(byte tag, byte[] length, byte[] bytes) {
+        this.tag = tag;
+        this.length = length;
+        this.bytes = bytes;
+    }
 }
