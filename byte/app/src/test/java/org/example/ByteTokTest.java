@@ -12,122 +12,122 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ByteTokTest {
-    @Test void constantPoolTest1() {
+    @Test void test1() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/Filter.class"));
     }
 
-    @Test void constantPoolTest2() {
+    @Test void test2() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/FilterChain.class"));
     }
 
-    @Test void constantPoolTest3() {
+    @Test void test3() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/FilterConfig.class"));
     }
 
-    @Test void constantPoolTest4() {
+    @Test void test4() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/GenericServlet.class"));
     }
 
-    @Test void constantPoolTest5() {
+    @Test void test5() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/RequestDispatcher.class"));
     }
 
-    @Test void constantPoolTest6() {
+    @Test void test6() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/Servlet.class"));
     }
 
-    @Test void constantPoolTest7() {
+    @Test void test7() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletConfig.class"));
     }
 
-    @Test void constantPoolTest8() {
+    @Test void test8() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletContext.class"));
     }
 
-    @Test void constantPoolTest9() {
+    @Test void test9() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletContextAttributeEvent.class"));
     }
 
-    @Test void constantPoolTest10() {
+    @Test void test10() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletContextAttributeListener.class"));
     }
 
-    @Test void constantPoolTest11() {
+    @Test void test11() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletContextEvent.class"));
     }
 
-    @Test void constantPoolTest12() {
+    @Test void test12() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletContextListener.class"));
     }
 
-    @Test void constantPoolTest13() {
+    @Test void test13() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletException.class"));
     }
 
-    @Test void constantPoolTest14() {
+    @Test void test14() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletInputStream.class"));
     }
 
-    @Test void constantPoolTest15() {
+    @Test void test15() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletOutputStream.class"));
     }
 
-    @Test void constantPoolTest16() {
+    @Test void test16() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletRequest.class"));
     }
 
-    @Test void constantPoolTest17() {
+    @Test void test17() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletRequestAttributeEvent.class"));
     }
 
-    @Test void constantPoolTest18() {
+    @Test void test18() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletRequestAttributeListener.class"));
     }
 
-    @Test void constantPoolTest19() {
+    @Test void test19() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletRequestEvent.class"));
     }
 
-    @Test void constantPoolTest20() {
+    @Test void test20() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletRequestListener.class"));
     }
-    @Test void constantPoolTest21() {
+    @Test void test21() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletRequestWrapper.class"));
     }
-    @Test void constantPoolTest22() {
+    @Test void test22() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletResponse.class"));
     }
-    @Test void constantPoolTest23() {
+    @Test void test23() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/ServletResponseWrapper.class"));
     }
-    @Test void constantPoolTest24() {
+    @Test void test24() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/SingleThreadModel.class"));
     }
-    @Test void constantPoolTest25() {
+    @Test void test25() {
         ByteTok classUnderTest = new ByteTok();
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/UnavailableException.class"));
     }

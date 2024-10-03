@@ -41,40 +41,46 @@ public class ByteAnalyzer {
         analyzeMajorVersion();
         analyzeConstantPoolCount();
         analyzeConstantPool();
+        analyzeAccessFlag();
+        analyzeThisClass();
+        analyzeSuperClass();
+        analyzeInterfaceCount();
+        analyzeInterfaces();
+        analyzeFieldsCount();
 
     }
 
     public void analyzeMagicNumber() {
         this.magic = Arrays.copyOfRange(bytes, 0, 4);
-//        check(magic);
+        check(magic);
 
         this.offset = offset + 4;
-//        System.out.println(offset);
+        System.out.println(offset);
     }
 
     public void analyzeMinorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
-//        check(minorVersion);
+        check(minorVersion);
 
         this.offset = offset + 2;
-//        System.out.println(offset);
+        System.out.println(offset);
     }
 
     public void analyzeMajorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
-//        check(minorVersion);
+        check(minorVersion);
 
         this.offset = offset + 2;
-//        System.out.println(offset);
+        System.out.println(offset);
     }
 
     public void analyzeConstantPoolCount() {
         this.constantPoolCount = Arrays.copyOfRange(bytes, offset, offset + 2);
-//        check(constantPoolCount);
+        check(constantPoolCount);
 
         this.offset = offset + 2;
         this.cpCount = ((constantPoolCount[0] & 0xFF) << 8) | (constantPoolCount[1] & 0xFF); // constant pool count
-//        System.out.println(offset);
+        System.out.println(offset);
     }
 
     public void analyzeConstantPool() throws Exception {
@@ -89,13 +95,11 @@ public class ByteAnalyzer {
             count++;
         }
 
-
-
     }
 
     public ConstantPoolInformation createConstantPoolEntry() throws Exception {
         int tag = bytes[offset] & 0xFF;
-        ConstantPoolInformation returnInformation = null;
+        ConstantPoolInformation returnInformation;
 
         switch (tag) {
             case 1:
@@ -175,8 +179,62 @@ public class ByteAnalyzer {
         }
 
         return returnInformation;
-
     }
+
+    public void analyzeAccessFlag() {
+        this.accessFlag = Arrays.copyOfRange(bytes, offset, offset + 2);
+        check(accessFlag);
+
+        this.offset = offset + 2;
+        System.out.println(offset);
+    }
+
+    public void analyzeThisClass() {
+        this.thisClass = Arrays.copyOfRange(bytes, offset, offset + 2);
+        check(thisClass);
+
+        this.offset = offset + 2;
+        System.out.println(offset);
+    }
+
+    public void analyzeSuperClass() {
+        this.superClass = Arrays.copyOfRange(bytes, offset, offset + 2);
+        check(superClass);
+
+        this.offset = offset + 2;
+        System.out.println(offset);
+    }
+
+    public void analyzeInterfaceCount() {
+        this.interfacesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+        check(interfacesCount);
+
+        this.offset = offset + 2;
+        System.out.println(offset);
+    }
+
+    public void analyzeInterfaces() {
+        int count = 0;
+        int interfaceLength = ((interfacesCount[0] & 0xFF) << 8) | (interfacesCount[1] & 0xFF);
+        interfaces = new Interfaces[interfaceLength];
+
+        while(count < interfaceLength) {
+            interfaces[count] = new Interfaces(Arrays.copyOfRange(bytes, offset, offset + 1));
+            offset += 2;
+            count ++;
+        }
+    }
+
+    public void analyzeFieldsCount() {
+        this.fieldsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+        check(fieldsCount);
+
+        this.offset = offset + 2;
+        System.out.println(offset);
+    }
+
+
+
 
 
 
