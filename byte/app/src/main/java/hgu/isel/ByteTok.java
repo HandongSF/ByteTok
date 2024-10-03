@@ -19,6 +19,10 @@ public class ByteTok {
         bytes = byteReader.readClassFile();
 
         ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-        byteAnalyzer.analyze();
+        try {
+            byteAnalyzer.analyze();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

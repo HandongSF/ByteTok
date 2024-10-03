@@ -34,7 +34,7 @@ public class ByteAnalyzer {
         this.bytes = bytes;
     }
 
-    public void analyze() {
+    public void analyze() throws Exception {
 
         analyzeMagicNumber();
         analyzeMinorVersion();
@@ -77,7 +77,7 @@ public class ByteAnalyzer {
 //        System.out.println(offset);
     }
 
-    public void analyzeConstantPool() {
+    public void analyzeConstantPool() throws Exception {
         int count = 0;
         // 실제로 index 0이 사용되지 않기 때문에 constant pool count - 1개의 constant가 존재함
         this.constantPoolInformation = new ConstantPoolInformation[cpCount - 1];
@@ -93,7 +93,7 @@ public class ByteAnalyzer {
 
     }
 
-    public ConstantPoolInformation createConstantPoolEntry() {
+    public ConstantPoolInformation createConstantPoolEntry() throws Exception {
         int tag = bytes[offset] & 0xFF;
         ConstantPoolInformation returnInformation = null;
 
@@ -171,7 +171,7 @@ public class ByteAnalyzer {
                 offset += 3;
                 break;
             default:
-                System.out.println("Error");
+                throw new Exception();
         }
 
         return returnInformation;
