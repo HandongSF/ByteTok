@@ -4,8 +4,8 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class InterfaceMethodReferenceInformation implements ConstantPoolInformation {
     private byte tag;
-    private byte[] classIndex = new byte[2]; // u2
-    private byte[] nameAndTypeIndex = new byte[2]; // u2
+    private byte[] classIndex; // u2
+    private byte[] nameAndTypeIndex; // u2
 
     public byte getTag() {
         return tag;

@@ -5,7 +5,7 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 public class MethodHandleInformation implements ConstantPoolInformation {
     private byte tag;
     private byte referenceKind;
-    private byte[] referenceIndex = new byte[2]; // u2
+    private byte[] referenceIndex; // u2
 
     public byte getTag() {
         return tag;

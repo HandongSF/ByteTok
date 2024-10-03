@@ -7,6 +7,7 @@ import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 public class ByteAnalyzer {
@@ -233,14 +234,96 @@ public class ByteAnalyzer {
         System.out.println(offset);
     }
 
+    // 해당 method 실행 전에 무조건 offset 값 증가 시키기
+    public void analyzeAttribute(int attributeSize) throws UnsupportedEncodingException {
+        int count = 0;
+        // input으로 들어온 size 만큼의 attribute 배열 생성
+        AttributeInformation[] returnInformation = new AttributeInformation[attributeSize];
+
+        while(count < attributeSize) {
+            returnInformation[count] = createAttribute(); // index는 method 안에서 증가시켜야 함
+            count++;
+        }
+    }
+
+    public AttributeInformation createAttribute() throws UnsupportedEncodingException {
+        AttributeInformation returnInformation = null;
+        int utf8Index = ((bytes[offset] & 0xFF) << 8) | (bytes[offset + 1] & 0xFF);
+        UTF8Information utf8Information = (UTF8Information) constantPoolInformation[utf8Index - 1];
+        // 여기서 오류가 발생하면 안됨
+        // UTF8Information type으로 저장이 되어있기 때문에 type casting 오류가 발생할 수 없음
+
+        byte[] attributeName = utf8Information.getBytes();
+        // byte[]는 switch 구문을 사용할 수 없음
+
+        if(Arrays.equals(attributeName, "ConstantValue".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Code".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "StackMapTable".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Exceptions".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "InnerClasses".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "EnclosingMethod".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Synthetic".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Signature".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "SourceFile".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "SourceDebugExtension".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "LineNumberTable".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "LocalVariableTable".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "LocalVariableTypeTable".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Deprecated".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "RuntimeVisibleAnnotations".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "RuntimeInvisibleAnnotations".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "RuntimeVisibleParameterAnnotations".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "RuntimeInvisibleParameterAnnotations".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "RuntimeVisibleTypeAnnotations".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "RuntimeInvisibleTypeAnnotations".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "AnnotationDefault".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "BootstrapMethods".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "MethodParameters".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Module".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "ModulePackages".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "ModuleMainClass".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "NestHost".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "NestMembers".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "Record".getBytes("UTF-8"))) {
+
+        } else if(Arrays.equals(attributeName, "PermittedSubclasses".getBytes("UTF-8"))) {
+
+        } else {
+            throw new UnsupportedEncodingException();
+        }
+
+        return returnInformation;
 
 
-
-
-
-
-
-
+    }
 
     public void check(byte[] input) {
         for(byte s : input) {
