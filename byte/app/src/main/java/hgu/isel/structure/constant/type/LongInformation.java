@@ -4,8 +4,8 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class LongInformation implements ConstantPoolInformation {
     private byte tag;
-    private byte[] highBytes = new byte[4]; // u4
-    private byte[] lowBytes = new byte[4]; // u4
+    private byte[] highBytes; // u4
+    private byte[] lowBytes; // u4
 
     public byte getTag() {
         return tag;

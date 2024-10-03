@@ -4,7 +4,7 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class IntegerInformation implements ConstantPoolInformation {
     private byte tag;
-    private byte[] bytes = new byte[4]; // u4
+    private byte[] bytes; // u4
 
     public byte getTag() {
         return tag;

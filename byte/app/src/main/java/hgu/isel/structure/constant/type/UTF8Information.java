@@ -4,7 +4,7 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class UTF8Information implements ConstantPoolInformation {
     private byte tag;
-    private byte[] length = new byte[2]; // u2
+    private byte[] length; // u2
     private byte[] bytes; // length
 
     public byte getTag() {

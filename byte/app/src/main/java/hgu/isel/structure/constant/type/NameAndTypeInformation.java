@@ -4,8 +4,8 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class NameAndTypeInformation implements ConstantPoolInformation {
     private byte tag;
-    private byte[] nameIndex = new byte[2]; // u2
-    private byte[] descriptorIndex = new byte[2]; // u2
+    private byte[] nameIndex; // u2
+    private byte[] descriptorIndex; // u2
 
     public byte getTag() {
         return tag;
