@@ -30,4 +30,10 @@ public class LongInformation implements ConstantPoolInformation {
     public void setLowBytes(byte[] lowBytes) {
         this.lowBytes = lowBytes;
     }
+
+    public LongInformation(byte tag, byte[] highBytes, byte[] lowBytes) {
+        this.tag = tag;
+        this.highBytes = highBytes;
+        this.lowBytes = lowBytes;
+    }
 }

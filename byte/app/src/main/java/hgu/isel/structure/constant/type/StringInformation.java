@@ -21,4 +21,9 @@ public class StringInformation implements ConstantPoolInformation {
     public void setStringIndex(byte[] stringIndex) {
         this.stringIndex = stringIndex;
     }
+
+    public StringInformation(byte tag, byte[] stringIndex) {
+        this.tag = tag;
+        this.stringIndex = stringIndex;
+    }
 }

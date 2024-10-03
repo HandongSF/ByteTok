@@ -21,4 +21,9 @@ public class MethodTypeInformation implements ConstantPoolInformation {
     public void setDescriptorIndex(byte[] descriptorIndex) {
         this.descriptorIndex = descriptorIndex;
     }
+
+    public MethodTypeInformation(byte tag, byte[] descriptorIndex) {
+        this.tag = tag;
+        this.descriptorIndex = descriptorIndex;
+    }
 }

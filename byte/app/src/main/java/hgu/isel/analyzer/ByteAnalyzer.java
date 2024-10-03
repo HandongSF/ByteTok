@@ -1,6 +1,7 @@
 package hgu.isel.analyzer;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.constant.type.*;
 import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
@@ -45,45 +46,45 @@ public class ByteAnalyzer {
 
     public void analyzeMagicNumber() {
         this.magic = Arrays.copyOfRange(bytes, 0, 4);
-        check(magic);
+//        check(magic);
 
         this.offset = offset + 4;
-        System.out.println(offset);
+//        System.out.println(offset);
     }
 
     public void analyzeMinorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(minorVersion);
+//        check(minorVersion);
 
         this.offset = offset + 2;
-        System.out.println(offset);
+//        System.out.println(offset);
     }
 
     public void analyzeMajorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(minorVersion);
+//        check(minorVersion);
 
         this.offset = offset + 2;
-        System.out.println(offset);
+//        System.out.println(offset);
     }
 
     public void analyzeConstantPoolCount() {
         this.constantPoolCount = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(constantPoolCount);
+//        check(constantPoolCount);
 
         this.offset = offset + 2;
         this.cpCount = ((constantPoolCount[0] & 0xFF) << 8) | (constantPoolCount[1] & 0xFF); // constant pool count
-        System.out.println(offset);
+//        System.out.println(offset);
     }
 
     public void analyzeConstantPool() {
-        int count = 1; // constant pool index는 1부터 시작
+        int count = 0;
         // 실제로 index 0이 사용되지 않기 때문에 constant pool count - 1개의 constant가 존재함
         this.constantPoolInformation = new ConstantPoolInformation[cpCount - 1];
 
-        while(count < cpCount) {
-
-
+        while(count < cpCount - 1) {
+            ConstantPoolInformation information = createConstantPoolEntry();
+            constantPoolInformation[count] = information;
 
             count++;
         }
@@ -92,7 +93,88 @@ public class ByteAnalyzer {
 
     }
 
-    public void createConstantPoolEntry() {
+    public ConstantPoolInformation createConstantPoolEntry() {
+        int tag = bytes[offset] & 0xFF;
+        ConstantPoolInformation returnInformation = null;
+
+        switch (tag) {
+            case 1:
+                int integerLength = ((bytes[offset + 1] & 0xFF) << 8) | (bytes[offset + 2] & 0xFF);
+                byte[] byteLength = Arrays.copyOfRange(bytes, offset + 1, offset + 2);
+                byte[] byteUTF = Arrays.copyOfRange(bytes, offset + 3, offset + integerLength + 3);
+
+                returnInformation = new UTF8Information(bytes[offset], byteLength, byteUTF);
+                offset = offset + 3 + integerLength;
+                break;
+            case 3:
+                returnInformation = new IntegerInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 4));
+                offset += 5;
+                break;
+            case 4:
+                returnInformation = new FloatInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 4));
+                offset += 5;
+                break;
+            case 5:
+                returnInformation = new LongInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 4), Arrays.copyOfRange(bytes, offset + 5, offset + 8));
+                offset += 9;
+                break;
+            case 6:
+                returnInformation = new DoubleInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 4), Arrays.copyOfRange(bytes, offset + 5, offset + 8));
+                offset += 9;
+                break;
+            case 7:
+                returnInformation = new ClassInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2));
+                offset += 3;
+                break;
+            case 8:
+                returnInformation = new StringInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2));
+                offset += 3;
+                break;
+            case 9:
+                returnInformation = new FieldReferenceInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2), Arrays.copyOfRange(bytes, offset + 3, offset + 4));
+                offset += 5;
+                break;
+            case 10:
+                returnInformation = new MethodReferenceInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2), Arrays.copyOfRange(bytes, offset + 3, offset + 4));
+                offset += 5;
+                break;
+            case 11:
+                returnInformation = new InterfaceMethodReferenceInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2), Arrays.copyOfRange(bytes, offset + 3, offset + 4));
+                offset += 5;
+                break;
+            case 12:
+                returnInformation = new NameAndTypeInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2), Arrays.copyOfRange(bytes, offset + 3, offset + 4));
+                offset += 5;
+                break;
+            case 15:
+                returnInformation = new MethodHandleInformation(bytes[offset], bytes[offset + 1], Arrays.copyOfRange(bytes, offset + 2, offset + 3));
+                offset += 4;
+                break;
+            case 16:
+                returnInformation = new MethodTypeInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2));
+                offset += 3;
+                break;
+            case 17:
+                returnInformation = new DynamicInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2), Arrays.copyOfRange(bytes, offset + 3, offset + 4));
+                offset += 5;
+                break;
+            case 18:
+                returnInformation = new InvokeDynamicInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2), Arrays.copyOfRange(bytes, offset + 3, offset + 4));
+                offset += 5;
+                break;
+            case 19:
+                returnInformation = new ModuleInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2));
+                offset += 3;
+                break;
+            case 20:
+                returnInformation = new PackageInformation(bytes[offset], Arrays.copyOfRange(bytes, offset + 1, offset + 2));
+                offset += 3;
+                break;
+            default:
+                System.out.println("Error");
+        }
+
+        return returnInformation;
 
     }
 

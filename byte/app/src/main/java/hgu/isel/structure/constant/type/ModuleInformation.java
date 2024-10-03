@@ -21,4 +21,9 @@ public class ModuleInformation implements ConstantPoolInformation {
     public void setNameIndex(byte[] nameIndex) {
         this.nameIndex = nameIndex;
     }
+
+    public ModuleInformation(byte tag, byte[] nameIndex) {
+        this.tag = tag;
+        this.nameIndex = nameIndex;
+    }
 }

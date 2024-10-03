@@ -21,4 +21,9 @@ public class PackageInformation implements ConstantPoolInformation {
     public void setNameIndex(byte[] nameIndex) {
         this.nameIndex = nameIndex;
     }
+
+    public PackageInformation(byte tag, byte[] nameIndex) {
+        this.tag = tag;
+        this.nameIndex = nameIndex;
+    }
 }

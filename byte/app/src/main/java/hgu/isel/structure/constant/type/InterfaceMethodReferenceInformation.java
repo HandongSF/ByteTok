@@ -30,4 +30,10 @@ public class InterfaceMethodReferenceInformation implements ConstantPoolInformat
     public void setNameAndTypeIndex(byte[] nameAndTypeIndex) {
         this.nameAndTypeIndex = nameAndTypeIndex;
     }
+
+    public InterfaceMethodReferenceInformation(byte tag, byte[] classIndex, byte[] nameAndTypeIndex) {
+        this.tag = tag;
+        this.classIndex = classIndex;
+        this.nameAndTypeIndex = nameAndTypeIndex;
+    }
 }

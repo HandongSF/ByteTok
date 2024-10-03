@@ -21,4 +21,9 @@ public class FloatInformation implements ConstantPoolInformation {
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }
+
+    public FloatInformation(byte tag, byte[] bytes) {
+        this.tag = tag;
+        this.bytes = bytes;
+    }
 }

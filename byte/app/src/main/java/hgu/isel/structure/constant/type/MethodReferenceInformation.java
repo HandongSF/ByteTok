@@ -30,4 +30,10 @@ public class MethodReferenceInformation implements ConstantPoolInformation {
     public void setNameAndTypeIndex(byte[] nameAndTypeIndex) {
         this.nameAndTypeIndex = nameAndTypeIndex;
     }
+
+    public MethodReferenceInformation(byte tag, byte[] classIndex, byte[] nameAndTypeIndex) {
+        this.tag = tag;
+        this.classIndex = classIndex;
+        this.nameAndTypeIndex = nameAndTypeIndex;
+    }
 }

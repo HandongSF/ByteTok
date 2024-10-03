@@ -21,4 +21,9 @@ public class IntegerInformation implements ConstantPoolInformation {
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }
+
+    public IntegerInformation(byte tag, byte[] bytes) {
+        this.tag = tag;
+        this.bytes = bytes;
+    }
 }
