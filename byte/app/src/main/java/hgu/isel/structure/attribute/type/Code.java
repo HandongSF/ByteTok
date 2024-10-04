@@ -14,4 +14,97 @@ public class Code implements AttributeInformation {
     private ExceptionTable[] exceptionTable; // exceptionTableLength
     private byte[] attributesCount; // u2
     private AttributeInformation[] attributes; // attributesCount
+
+    public byte[] getAttributeNameIndex() {
+        return attributeNameIndex;
+    }
+
+    public void setAttributeNameIndex(byte[] attributeNameIndex) {
+        this.attributeNameIndex = attributeNameIndex;
+    }
+
+    public byte[] getAttributeLength() {
+        return attributeLength;
+    }
+
+    public void setAttributeLength(byte[] attributeLength) {
+        this.attributeLength = attributeLength;
+    }
+
+    public byte[] getMaxStack() {
+        return maxStack;
+    }
+
+    public void setMaxStack(byte[] maxStack) {
+        this.maxStack = maxStack;
+    }
+
+    public byte[] getMaxLocals() {
+        return maxLocals;
+    }
+
+    public void setMaxLocals(byte[] maxLocals) {
+        this.maxLocals = maxLocals;
+    }
+
+    public byte[] getCodeLength() {
+        return codeLength;
+    }
+
+    public void setCodeLength(byte[] codeLength) {
+        this.codeLength = codeLength;
+    }
+
+    public byte[] getCode() {
+        return code;
+    }
+
+    public void setCode(byte[] code) {
+        this.code = code;
+    }
+
+    public byte[] getExceptionTableLength() {
+        return exceptionTableLength;
+    }
+
+    public void setExceptionTableLength(byte[] exceptionTableLength) {
+        this.exceptionTableLength = exceptionTableLength;
+    }
+
+    public ExceptionTable[] getExceptionTable() {
+        return exceptionTable;
+    }
+
+    public void setExceptionTable(ExceptionTable[] exceptionTable) {
+        this.exceptionTable = exceptionTable;
+    }
+
+    public byte[] getAttributesCount() {
+        return attributesCount;
+    }
+
+    public void setAttributesCount(byte[] attributesCount) {
+        this.attributesCount = attributesCount;
+    }
+
+    public AttributeInformation[] getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(AttributeInformation[] attributes) {
+        this.attributes = attributes;
+    }
+
+    public Code(byte[] attributeNameIndex, byte[] attributeLength, byte[] maxStack, byte[] maxLocals, byte[] codeLength, byte[] code, byte[] exceptionTableLength, ExceptionTable[] exceptionTable, byte[] attributesCount, AttributeInformation[] attributes) {
+        this.attributeNameIndex = attributeNameIndex;
+        this.attributeLength = attributeLength;
+        this.maxStack = maxStack;
+        this.maxLocals = maxLocals;
+        this.codeLength = codeLength;
+        this.code = code;
+        this.exceptionTableLength = exceptionTableLength;
+        this.exceptionTable = exceptionTable;
+        this.attributesCount = attributesCount;
+        this.attributes = attributes;
+    }
 }

@@ -6,4 +6,34 @@ public class Signature implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
     private byte[] attributeLength; // u4
     private byte[] signatureIndex; // u2
+
+    public byte[] getAttributeNameIndex() {
+        return attributeNameIndex;
+    }
+
+    public void setAttributeNameIndex(byte[] attributeNameIndex) {
+        this.attributeNameIndex = attributeNameIndex;
+    }
+
+    public byte[] getAttributeLength() {
+        return attributeLength;
+    }
+
+    public void setAttributeLength(byte[] attributeLength) {
+        this.attributeLength = attributeLength;
+    }
+
+    public byte[] getSignatureIndex() {
+        return signatureIndex;
+    }
+
+    public void setSignatureIndex(byte[] signatureIndex) {
+        this.signatureIndex = signatureIndex;
+    }
+
+    public Signature(byte[] attributeNameIndex, byte[] attributeLength, byte[] signatureIndex) {
+        this.attributeNameIndex = attributeNameIndex;
+        this.attributeLength = attributeLength;
+        this.signatureIndex = signatureIndex;
+    }
 }

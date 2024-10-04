@@ -4,4 +4,7 @@ import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInfo
 
 public class FloatVariableInformation implements VerificationTypeInformation {
     private final byte tag = 2;
+
+    public FloatVariableInformation() {
+    }
 }

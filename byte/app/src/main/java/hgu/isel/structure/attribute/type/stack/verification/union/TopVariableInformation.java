@@ -4,4 +4,7 @@ import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInfo
 
 public class TopVariableInformation implements VerificationTypeInformation {
     private final byte tag = 0;
+
+    public TopVariableInformation() {
+    }
 }

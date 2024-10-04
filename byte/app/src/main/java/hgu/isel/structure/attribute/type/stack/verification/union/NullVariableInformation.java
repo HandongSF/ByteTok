@@ -4,4 +4,7 @@ import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInfo
 
 public class NullVariableInformation implements VerificationTypeInformation {
     private final byte tag = 5;
+
+    public NullVariableInformation() {
+    }
 }

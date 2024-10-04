@@ -1,6 +1,7 @@
 package hgu.isel.analyzer;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.ConstantValue;
 import hgu.isel.structure.constant.type.*;
 import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
@@ -257,6 +258,7 @@ public class ByteAnalyzer {
         // byte[]는 switch 구문을 사용할 수 없음
 
         if(Arrays.equals(attributeName, "ConstantValue".getBytes("UTF-8"))) {
+            returnInformation = new ConstantValue();
 
         } else if(Arrays.equals(attributeName, "Code".getBytes("UTF-8"))) {
 
