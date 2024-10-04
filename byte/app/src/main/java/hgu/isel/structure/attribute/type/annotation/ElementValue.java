@@ -1,10 +1,29 @@
 package hgu.isel.structure.attribute.type.annotation;
 
+import hgu.isel.structure.attribute.type.annotation.elemet.ElementUnion;
+
 public class ElementValue {
     private byte tag;
-    private byte[] constValueIndex; // u2(union)
-    private EnumConstValue enumConstValue; // union
-    private byte[] classInformationIndex; // u2(union)
-    private Annotation annotationValue; // union
-    private ArrayValue arrayValue; // union
+    private ElementUnion elementUnion;
+
+    public byte getTag() {
+        return tag;
+    }
+
+    public void setTag(byte tag) {
+        this.tag = tag;
+    }
+
+    public ElementUnion getElementUnion() {
+        return elementUnion;
+    }
+
+    public void setElementUnion(ElementUnion elementUnion) {
+        this.elementUnion = elementUnion;
+    }
+
+    public ElementValue(byte tag, ElementUnion elementUnion) {
+        this.tag = tag;
+        this.elementUnion = elementUnion;
+    }
 }

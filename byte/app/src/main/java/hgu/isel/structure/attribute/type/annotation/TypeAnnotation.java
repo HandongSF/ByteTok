@@ -10,4 +10,61 @@ public class TypeAnnotation {
     private byte[] typeIndex; // u2
     private byte[] numberOfElementValuePairs; // u2
     private ElementValuePairs[] elementValuePairs; // numberOfElementValuePairs
+
+    public byte getTargetType() {
+        return targetType;
+    }
+
+    public void setTargetType(byte targetType) {
+        this.targetType = targetType;
+    }
+
+    public TargetInformation getTargetInformation() {
+        return targetInformation;
+    }
+
+    public void setTargetInformation(TargetInformation targetInformation) {
+        this.targetInformation = targetInformation;
+    }
+
+    public TypePath getTargetPath() {
+        return targetPath;
+    }
+
+    public void setTargetPath(TypePath targetPath) {
+        this.targetPath = targetPath;
+    }
+
+    public byte[] getTypeIndex() {
+        return typeIndex;
+    }
+
+    public void setTypeIndex(byte[] typeIndex) {
+        this.typeIndex = typeIndex;
+    }
+
+    public byte[] getNumberOfElementValuePairs() {
+        return numberOfElementValuePairs;
+    }
+
+    public void setNumberOfElementValuePairs(byte[] numberOfElementValuePairs) {
+        this.numberOfElementValuePairs = numberOfElementValuePairs;
+    }
+
+    public ElementValuePairs[] getElementValuePairs() {
+        return elementValuePairs;
+    }
+
+    public void setElementValuePairs(ElementValuePairs[] elementValuePairs) {
+        this.elementValuePairs = elementValuePairs;
+    }
+
+    public TypeAnnotation(byte targetType, TargetInformation targetInformation, TypePath targetPath, byte[] typeIndex, byte[] numberOfElementValuePairs, ElementValuePairs[] elementValuePairs) {
+        this.targetType = targetType;
+        this.targetInformation = targetInformation;
+        this.targetPath = targetPath;
+        this.typeIndex = typeIndex;
+        this.numberOfElementValuePairs = numberOfElementValuePairs;
+        this.elementValuePairs = elementValuePairs;
+    }
 }

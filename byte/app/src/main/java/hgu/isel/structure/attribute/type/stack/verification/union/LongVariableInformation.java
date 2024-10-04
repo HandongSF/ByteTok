@@ -4,4 +4,7 @@ import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInfo
 
 public class LongVariableInformation implements VerificationTypeInformation {
     private final byte tag = 4;
+
+    public LongVariableInformation() {
+    }
 }

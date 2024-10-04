@@ -8,4 +8,43 @@ public class RuntimeInvisibleTypeAnnotations implements AttributeInformation {
     private byte[] attributeLength; // u4
     private byte[] numberOfAnnotations; // u2
     private TypeAnnotation[] annotations; // numberOfAnnotations
+
+    public byte[] getAttributeNameIndex() {
+        return attributeNameIndex;
+    }
+
+    public void setAttributeNameIndex(byte[] attributeNameIndex) {
+        this.attributeNameIndex = attributeNameIndex;
+    }
+
+    public byte[] getAttributeLength() {
+        return attributeLength;
+    }
+
+    public void setAttributeLength(byte[] attributeLength) {
+        this.attributeLength = attributeLength;
+    }
+
+    public byte[] getNumberOfAnnotations() {
+        return numberOfAnnotations;
+    }
+
+    public void setNumberOfAnnotations(byte[] numberOfAnnotations) {
+        this.numberOfAnnotations = numberOfAnnotations;
+    }
+
+    public TypeAnnotation[] getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(TypeAnnotation[] annotations) {
+        this.annotations = annotations;
+    }
+
+    public RuntimeInvisibleTypeAnnotations(byte[] attributeNameIndex, byte[] attributeLength, byte[] numberOfAnnotations, TypeAnnotation[] annotations) {
+        this.attributeNameIndex = attributeNameIndex;
+        this.attributeLength = attributeLength;
+        this.numberOfAnnotations = numberOfAnnotations;
+        this.annotations = annotations;
+    }
 }

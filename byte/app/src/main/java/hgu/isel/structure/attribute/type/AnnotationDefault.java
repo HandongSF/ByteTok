@@ -7,4 +7,34 @@ public class AnnotationDefault implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
     private byte[] attributeLength; // u4
     private ElementValue defaultValue;
+
+    public byte[] getAttributeNameIndex() {
+        return attributeNameIndex;
+    }
+
+    public void setAttributeNameIndex(byte[] attributeNameIndex) {
+        this.attributeNameIndex = attributeNameIndex;
+    }
+
+    public byte[] getAttributeLength() {
+        return attributeLength;
+    }
+
+    public void setAttributeLength(byte[] attributeLength) {
+        this.attributeLength = attributeLength;
+    }
+
+    public ElementValue getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(ElementValue defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public AnnotationDefault(byte[] attributeNameIndex, byte[] attributeLength, ElementValue defaultValue) {
+        this.attributeNameIndex = attributeNameIndex;
+        this.attributeLength = attributeLength;
+        this.defaultValue = defaultValue;
+    }
 }
