@@ -36,4 +36,7 @@ public class DoubleInformation implements ConstantPoolInformation {
         this.highBytes = highBytes;
         this.lowBytes = lowBytes;
     }
+    public String toString() {
+        return "DoubleInformation";
+    }
 }

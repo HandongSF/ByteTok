@@ -80,6 +80,9 @@ public class ByteAnalyzer {
         analyzeMajorVersion();
         analyzeConstantPoolCount();
         analyzeConstantPool();
+
+//        printConstantPool();
+
         analyzeAccessFlag();
         analyzeThisClass();
         analyzeSuperClass();
@@ -91,39 +94,48 @@ public class ByteAnalyzer {
         analyzeMethods();
         analyzeAttributeCount();
         this.attributeInformation = analyzeAttribute(((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF));
+
+    }
+
+    public void printConstantPool() {
+        for(int i = 0; i < constantPoolInformation.length; i++) {
+            if(constantPoolInformation[i] != null) {
+                System.out.println(constantPoolInformation[i].toString());
+            }
+        }
     }
 
     public void analyzeMagicNumber() {
         this.magic = Arrays.copyOfRange(bytes, 0, 4);
-        check(magic);
+
 
         this.offset = offset + 4;
-        System.out.println(offset);
+
     }
 
     public void analyzeMinorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(minorVersion);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
     }
 
     public void analyzeMajorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(minorVersion);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
     }
 
     public void analyzeConstantPoolCount() {
         this.constantPoolCount = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(constantPoolCount);
+
 
         this.offset = offset + 2;
         this.cpCount = ((constantPoolCount[0] & 0xFF) << 8) | (constantPoolCount[1] & 0xFF); // constant pool count
-        System.out.println(offset);
+
     }
 
     public void analyzeConstantPool() throws Exception {
@@ -134,6 +146,10 @@ public class ByteAnalyzer {
         while(count < cpCount - 1) {
             ConstantPoolInformation information = createConstantPoolEntry();
             constantPoolInformation[count] = information;
+
+            if(information instanceof LongInformation || information instanceof DoubleInformation) {
+                count++;
+            }
 
             count++;
         }
@@ -147,7 +163,7 @@ public class ByteAnalyzer {
         switch (tag) {
             case 1:
                 int integerLength = ((bytes[offset + 1] & 0xFF) << 8) | (bytes[offset + 2] & 0xFF);
-                byte[] byteLength = Arrays.copyOfRange(bytes, offset + 1, offset + 2);
+                byte[] byteLength = Arrays.copyOfRange(bytes, offset + 1, offset + 3);
                 byte[] byteUTF = Arrays.copyOfRange(bytes, offset + 3, offset + integerLength + 3);
 
                 returnInformation = new UTF8Information(bytes[offset], byteLength, byteUTF);
@@ -226,34 +242,34 @@ public class ByteAnalyzer {
 
     public void analyzeAccessFlag() {
         this.accessFlag = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(accessFlag);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
     }
 
     public void analyzeThisClass() {
         this.thisClass = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(thisClass);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
     }
 
     public void analyzeSuperClass() {
         this.superClass = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(superClass);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
     }
 
     public void analyzeInterfaceCount() {
         this.interfacesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(interfacesCount);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
     }
 
     public void analyzeInterfaces() {
@@ -270,10 +286,10 @@ public class ByteAnalyzer {
 
     public void analyzeFieldsCount() {
         this.fieldsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(fieldsCount);
+
 
         this.offset = offset + 2;
-        System.out.println(offset);
+
 
 
 
@@ -314,10 +330,10 @@ public class ByteAnalyzer {
 
     public void analyzeMethodsCount() {
         this.methodsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
-        check(methodsCount);
+
 
         offset += 2;
-        System.out.println(offset);
+
 
 
 
@@ -378,9 +394,11 @@ public class ByteAnalyzer {
     }
 
     public AttributeInformation createAttribute() throws UnsupportedEncodingException {
-        AttributeInformation returnInformation = null;
+
+        AttributeInformation returnInformation;
         int utf8Index = ((bytes[offset] & 0xFF) << 8) | (bytes[offset + 1] & 0xFF);
         UTF8Information utf8Information = (UTF8Information) constantPoolInformation[utf8Index - 1];
+
         // 여기서 오류가 발생하면 안됨
         // UTF8Information type으로 저장이 되어있기 때문에 type casting 오류가 발생할 수 없음
 
@@ -442,7 +460,7 @@ public class ByteAnalyzer {
 
             returnInformation = new Code(attributeNameIndex, attributeLength, maxStack, maxLocals, codeLength, code, exceptionTableLength, exceptionTables, attributesCount, attributes);
 
-        } else if(Arrays.equals(attributeName, "StackMapTable".getBytes("UTF-8"))) { // 이거 좀 나중에 하자
+        } else if(Arrays.equals(attributeName, "StackMapTable".getBytes("UTF-8"))) {
             byte[] numberOfEntries = Arrays.copyOfRange(bytes, offset, offset + 2);
             offset += 2;
 
@@ -452,33 +470,34 @@ public class ByteAnalyzer {
             int count = 0;
 
             while(count < numberOfEntriesInteger) {
-                byte frameType = bytes[offset];
+                byte frame = bytes[offset];
+                int frameType = bytes[offset] & 0xFF;
                 offset += 1;
 
                 if(frameType < 64) {
-                    stackMapFrames[count] = new SameFrame(frameType);
+                    stackMapFrames[count] = new SameFrame(frame);
 
                 } else if(frameType >= 64 && frameType < 128) {
                     VerificationTypeInformation verificationTypeInformation = analyzeVerificationTypeInformation();
-                    stackMapFrames[count] = new SameLocals1StackItemFrame(frameType, verificationTypeInformation);
+                    stackMapFrames[count] = new SameLocals1StackItemFrame(frame, verificationTypeInformation);
 
                 } else if(frameType == 247) {
-                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset += 2);
+                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
                     offset += 2;
                     VerificationTypeInformation verificationTypeInformation = analyzeVerificationTypeInformation();
-                    stackMapFrames[count] = new SameLocals1StackItemFrameExtended(frameType, offsetDelta, verificationTypeInformation);
+                    stackMapFrames[count] = new SameLocals1StackItemFrameExtended(frame, offsetDelta, verificationTypeInformation);
 
                 } else if(frameType >= 248 && frameType <= 250) {
                     byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
                     offset += 2;
 
-                    stackMapFrames[count] = new ChopFrame(frameType, offsetDelta);
+                    stackMapFrames[count] = new ChopFrame(frame, offsetDelta);
 
                 } else if(frameType == 251) {
                     byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
                     offset += 2;
 
-                    stackMapFrames[count] = new SameFrameExtended(frameType, offsetDelta);
+                    stackMapFrames[count] = new SameFrameExtended(frame, offsetDelta);
 
                 } else if(frameType >= 252 && frameType <= 254) {
                     int numberOfVerifications = frameType - 251;
@@ -495,7 +514,7 @@ public class ByteAnalyzer {
                         loop++;
                     }
 
-                    stackMapFrames[count] = new AppendedFrame(frameType, offsetDelta, verificationTypeInformation);
+                    stackMapFrames[count] = new AppendedFrame(frame, offsetDelta, verificationTypeInformation);
 
                 } else if(frameType == 255) {
                     byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
@@ -522,11 +541,12 @@ public class ByteAnalyzer {
                     VerificationTypeInformation[] stack = new VerificationTypeInformation[numberOfStackItemsInteger];
 
                     while(loop < numberOfStackItemsInteger) {
-                        locals[loop] = analyzeVerificationTypeInformation();
+                        stack[loop] = analyzeVerificationTypeInformation();
 
                         loop++;
                     }
 
+                    stackMapFrames[count] = new FullFrame(frame, offsetDelta, numberOfLocals, locals, numberOfStackItems, stack);
 
                 }
                 count++;

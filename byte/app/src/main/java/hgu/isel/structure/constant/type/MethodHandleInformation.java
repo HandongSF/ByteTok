@@ -36,4 +36,7 @@ public class MethodHandleInformation implements ConstantPoolInformation {
         this.referenceKind = referenceKind;
         this.referenceIndex = referenceIndex;
     }
+    public String toString() {
+        return "MethodHandleInformation";
+    }
 }

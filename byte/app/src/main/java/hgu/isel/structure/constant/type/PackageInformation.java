@@ -26,4 +26,7 @@ public class PackageInformation implements ConstantPoolInformation {
         this.tag = tag;
         this.nameIndex = nameIndex;
     }
+    public String toString() {
+        return "PackageInformation";
+    }
 }

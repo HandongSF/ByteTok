@@ -36,4 +36,7 @@ public class FieldReferenceInformation implements ConstantPoolInformation {
         this.classIndex = classIndex;
         this.nameAndTypeIndex = nameAndTypeIndex;
     }
+    public String toString() {
+        return "FieldReferenceInformation";
+    }
 }

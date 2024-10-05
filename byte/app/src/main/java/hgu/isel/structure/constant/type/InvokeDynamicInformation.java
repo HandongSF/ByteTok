@@ -36,4 +36,7 @@ public class InvokeDynamicInformation implements ConstantPoolInformation {
         this.bootstrapMethodAttributeIndex = bootstrapMethodAttributeIndex;
         this.nameAndTypeIndex = nameAndTypeIndex;
     }
+    public String toString() {
+        return "InvokeDynamicInformation";
+    }
 }

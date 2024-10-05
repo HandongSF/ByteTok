@@ -26,4 +26,7 @@ public class StringInformation implements ConstantPoolInformation {
         this.tag = tag;
         this.stringIndex = stringIndex;
     }
+    public String toString() {
+        return "StringInformation";
+    }
 }
