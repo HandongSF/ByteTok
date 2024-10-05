@@ -86,7 +86,11 @@ public class ByteAnalyzer {
         analyzeInterfaceCount();
         analyzeInterfaces();
         analyzeFieldsCount();
-
+        analyzeFields();
+        analyzeMethodsCount();
+        analyzeMethods();
+        analyzeAttributeCount();
+        this.attributeInformation = analyzeAttribute(((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF));
     }
 
     public void analyzeMagicNumber() {
@@ -270,6 +274,93 @@ public class ByteAnalyzer {
 
         this.offset = offset + 2;
         System.out.println(offset);
+
+
+
+        int fieldsCount = ((this.fieldsCount[0] & 0xFF) << 8) | (this.fieldsCount[1] & 0xFF);
+
+        this.fieldInformation = new FieldInformation[fieldsCount];
+    }
+
+    public void analyzeFields() throws UnsupportedEncodingException {
+        int count = 0;
+        int fieldsCount = ((this.fieldsCount[0] & 0xFF) << 8) | (this.fieldsCount[1] & 0xFF);
+
+        while(count < fieldsCount) {
+            fieldInformation[count] = createField();
+
+            count++;
+        }
+    }
+
+    public FieldInformation createField() throws UnsupportedEncodingException {
+        byte[] accessFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] nameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] descriptorIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] attributesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        int attributesCountInteger = ((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF);
+        AttributeInformation[] attributeInformation = analyzeAttribute(attributesCountInteger);
+
+        return new FieldInformation(accessFlags, nameIndex, descriptorIndex, attributesCount, attributeInformation);
+    }
+
+    public void analyzeMethodsCount() {
+        this.methodsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+        check(methodsCount);
+
+        offset += 2;
+        System.out.println(offset);
+
+
+
+        int methodsCount = ((this.methodsCount[0] & 0xFF) << 8) | (this.methodsCount[1] & 0xFF);
+
+        this.methodInformation = new MethodInformation[methodsCount];
+    }
+
+    public void analyzeMethods() throws UnsupportedEncodingException {
+        int count = 0;
+        int methodsCount = ((this.methodsCount[0] & 0xFF) << 8) | (this.methodsCount[1] & 0xFF);
+
+        while(count < methodsCount) {
+            methodInformation[count] = createMethod();
+
+            count++;
+        }
+
+    }
+
+    public MethodInformation createMethod() throws UnsupportedEncodingException {
+        byte[] accessFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] nameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] descriptorIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] attributesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        int attributesCountInteger = ((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF);
+        AttributeInformation[] attributeInformation = analyzeAttribute(attributesCountInteger);
+
+        return new MethodInformation(accessFlags, nameIndex, descriptorIndex, attributesCount, attributeInformation);
+
+    }
+
+    public void analyzeAttributeCount() {
+        this.attributesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
     }
 
     // 해당 method 실행 전에 무조건 offset 값 증가 시키기
