@@ -33,6 +33,9 @@ import hgu.isel.structure.attribute.type.path.Path;
 import hgu.isel.structure.attribute.type.path.TypePath;
 import hgu.isel.structure.attribute.type.record.RecordComponentInformation;
 import hgu.isel.structure.attribute.type.stack.frame.StackMapFrame;
+import hgu.isel.structure.attribute.type.stack.frame.union.*;
+import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
+import hgu.isel.structure.attribute.type.stack.verification.union.*;
 import hgu.isel.structure.attribute.type.target.*;
 import hgu.isel.structure.attribute.type.target.local.LocalVariableTargetTable;
 import hgu.isel.structure.constant.type.*;
@@ -349,17 +352,95 @@ public class ByteAnalyzer {
             returnInformation = new Code(attributeNameIndex, attributeLength, maxStack, maxLocals, codeLength, code, exceptionTableLength, exceptionTables, attributesCount, attributes);
 
         } else if(Arrays.equals(attributeName, "StackMapTable".getBytes("UTF-8"))) { // 이거 좀 나중에 하자
-//            byte[] numberOfEntries = Arrays.copyOfRange(bytes, offset, offset + 1);
-//            int numberOfEntriesInteger = ((numberOfEntries[0] & 0xFF) << 8) | (numberOfEntries[1] & 0xFF);
-//            offset += 2;
-//
-//            StackMapFrame[] stackMapFrames = new StackMapFrame[numberOfEntriesInteger];
-//            int count = 0;
-//
-//            while(count < numberOfEntriesInteger) {
-//
-//                count++;
-//            }
+            byte[] numberOfEntries = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int numberOfEntriesInteger = ((numberOfEntries[0] & 0xFF) << 8) | (numberOfEntries[1] & 0xFF);
+
+            StackMapFrame[] stackMapFrames = new StackMapFrame[numberOfEntriesInteger];
+            int count = 0;
+
+            while(count < numberOfEntriesInteger) {
+                byte frameType = bytes[offset];
+                offset += 1;
+
+                if(frameType < 64) {
+                    stackMapFrames[count] = new SameFrame(frameType);
+
+                } else if(frameType >= 64 && frameType < 128) {
+                    VerificationTypeInformation verificationTypeInformation = analyzeVerificationTypeInformation();
+                    stackMapFrames[count] = new SameLocals1StackItemFrame(frameType, verificationTypeInformation);
+
+                } else if(frameType == 247) {
+                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset += 2);
+                    offset += 2;
+                    VerificationTypeInformation verificationTypeInformation = analyzeVerificationTypeInformation();
+                    stackMapFrames[count] = new SameLocals1StackItemFrameExtended(frameType, offsetDelta, verificationTypeInformation);
+
+                } else if(frameType >= 248 && frameType <= 250) {
+                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    stackMapFrames[count] = new ChopFrame(frameType, offsetDelta);
+
+                } else if(frameType == 251) {
+                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    stackMapFrames[count] = new SameFrameExtended(frameType, offsetDelta);
+
+                } else if(frameType >= 252 && frameType <= 254) {
+                    int numberOfVerifications = frameType - 251;
+
+                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    VerificationTypeInformation[] verificationTypeInformation = new VerificationTypeInformation[numberOfVerifications];
+                    int loop = 0;
+
+                    while(loop < numberOfVerifications) {
+                        verificationTypeInformation[loop] = analyzeVerificationTypeInformation();
+
+                        loop++;
+                    }
+
+                    stackMapFrames[count] = new AppendedFrame(frameType, offsetDelta, verificationTypeInformation);
+
+                } else if(frameType == 255) {
+                    byte[] offsetDelta = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    byte[] numberOfLocals = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    int numberOfLocalsInteger = ((numberOfLocals[0] & 0xFF) << 8) | (numberOfLocals[1] & 0xFF);
+                    VerificationTypeInformation[] locals = new VerificationTypeInformation[numberOfLocalsInteger];
+                    int loop = 0;
+
+                    while(loop < numberOfLocalsInteger) {
+                        locals[loop] = analyzeVerificationTypeInformation();
+
+                        loop++;
+                    }
+
+                    loop = 0;
+
+                    byte[] numberOfStackItems = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+                    int numberOfStackItemsInteger = ((numberOfStackItems[0] & 0xFF) << 8) | (numberOfStackItems[1] & 0xFF);
+                    VerificationTypeInformation[] stack = new VerificationTypeInformation[numberOfStackItemsInteger];
+
+                    while(loop < numberOfStackItemsInteger) {
+                        locals[loop] = analyzeVerificationTypeInformation();
+
+                        loop++;
+                    }
+
+
+                }
+                count++;
+            }
+            returnInformation = new StackMapTable(attributeNameIndex, attributeLength, numberOfEntries, stackMapFrames);
 
         } else if(Arrays.equals(attributeName, "Exceptions".getBytes("UTF-8"))) {
             byte[] numberOfExceptions = Arrays.copyOfRange(bytes, offset, offset + 2);
@@ -901,6 +982,48 @@ public class ByteAnalyzer {
         }
 
         return returnInformation;
+    }
+
+    public VerificationTypeInformation analyzeVerificationTypeInformation() {
+        VerificationTypeInformation verificationTypeInformation;
+
+        byte tag = bytes[offset];
+        offset += 1;
+
+        switch(tag) {
+            case 0:
+                verificationTypeInformation = new TopVariableInformation();
+                break;
+            case 1:
+                verificationTypeInformation = new IntegerVariableInformation();
+                break;
+            case 2:
+                verificationTypeInformation = new FloatVariableInformation();
+                break;
+            case 3:
+                verificationTypeInformation = new DoubleVariableInformation();
+                break;
+            case 4:
+                verificationTypeInformation = new LongVariableInformation();
+                break;
+            case 5:
+                verificationTypeInformation = new NullVariableInformation();
+                break;
+            case 6:
+                verificationTypeInformation = new UninitializedThisVariableInformation();
+                break;
+            case 7:
+                verificationTypeInformation = new ObjectVariableInformation(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+                break;
+            case 8:
+                verificationTypeInformation = new UninitializedVariableInformation(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+                break;
+            default:
+                throw new Error();
+        }
+        return verificationTypeInformation;
     }
 
     public TypeAnnotation analyzeTypeAnnotations() {
