@@ -1,9 +1,11 @@
 package hgu.isel.structure.attribute.type.module;
 
+import hgu.isel.structure.attribute.type.module.provide.ProvidesIndex;
+
 public class Provides {
     private byte[] providesIndex; // u2
     private byte[] providesWithCount; // u2
-    private byte[] providesWithIndex; // u2
+    private ProvidesIndex[] providesWithIndex; // u2
 
     public byte[] getProvidesIndex() {
         return providesIndex;
@@ -21,15 +23,15 @@ public class Provides {
         this.providesWithCount = providesWithCount;
     }
 
-    public byte[] getProvidesWithIndex() {
+    public ProvidesIndex[] getProvidesWithIndex() {
         return providesWithIndex;
     }
 
-    public void setProvidesWithIndex(byte[] providesWithIndex) {
+    public void setProvidesWithIndex(ProvidesIndex[] providesWithIndex) {
         this.providesWithIndex = providesWithIndex;
     }
 
-    public Provides(byte[] providesIndex, byte[] providesWithCount, byte[] providesWithIndex) {
+    public Provides(byte[] providesIndex, byte[] providesWithCount, ProvidesIndex[] providesWithIndex) {
         this.providesIndex = providesIndex;
         this.providesWithCount = providesWithCount;
         this.providesWithIndex = providesWithIndex;
