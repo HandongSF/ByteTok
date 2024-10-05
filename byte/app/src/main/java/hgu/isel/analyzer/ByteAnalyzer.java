@@ -3,16 +3,38 @@ package hgu.isel.analyzer;
 import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.*;
 import hgu.isel.structure.attribute.type.Deprecated;
+import hgu.isel.structure.attribute.type.Module;
+import hgu.isel.structure.attribute.type.Record;
 import hgu.isel.structure.attribute.type.annotation.ElementValue;
 import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+import hgu.isel.structure.attribute.type.annotation.ParameterAnnotations;
+import hgu.isel.structure.attribute.type.annotation.TypeAnnotation;
 import hgu.isel.structure.attribute.type.annotation.elemet.union.*;
+import hgu.isel.structure.attribute.type.boot.BootstrapArgument;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.exception.ExceptionIndexTable;
 import hgu.isel.structure.attribute.type.exception.ExceptionTable;
 import hgu.isel.structure.attribute.type.inner.InnerClassInformation;
 import hgu.isel.structure.attribute.type.line.LineNumberTableInformation;
 import hgu.isel.structure.attribute.type.local.LocalVariableTableInformation;
 import hgu.isel.structure.attribute.type.local.LocalVariableTypeTableInformation;
+import hgu.isel.structure.attribute.type.module.Exports;
+import hgu.isel.structure.attribute.type.module.Opens;
+import hgu.isel.structure.attribute.type.module.Provides;
+import hgu.isel.structure.attribute.type.module.Requires;
+import hgu.isel.structure.attribute.type.module.export.ExportIndex;
+import hgu.isel.structure.attribute.type.module.open.OpenIndex;
+import hgu.isel.structure.attribute.type.module.provide.ProvidesIndex;
+import hgu.isel.structure.attribute.type.module.uses.UsesIndex;
+import hgu.isel.structure.attribute.type.nest.Classes;
+import hgu.isel.structure.attribute.type.packages.PackageIndex;
+import hgu.isel.structure.attribute.type.parameter.Parameter;
+import hgu.isel.structure.attribute.type.path.Path;
+import hgu.isel.structure.attribute.type.path.TypePath;
+import hgu.isel.structure.attribute.type.record.RecordComponentInformation;
 import hgu.isel.structure.attribute.type.stack.frame.StackMapFrame;
+import hgu.isel.structure.attribute.type.target.*;
+import hgu.isel.structure.attribute.type.target.local.LocalVariableTargetTable;
 import hgu.isel.structure.constant.type.*;
 import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
@@ -512,40 +534,600 @@ public class ByteAnalyzer {
             returnInformation = new RuntimeVisibleAnnotations(attributeNameIndex, attributeLength, numberOfAnnotations, annotations);
 
         } else if(Arrays.equals(attributeName, "RuntimeInvisibleAnnotations".getBytes("UTF-8"))) {
+            byte[] numberOfAnnotations = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int numberOfAnnotationsInteger = ((numberOfAnnotations[0] & 0xFF) << 8) | (numberOfAnnotations[1] & 0xFF);
+
+            Annotation[] annotations = analyzeAnnotations(numberOfAnnotationsInteger);
+            returnInformation = new RuntimeInvisibleAnnotations(attributeNameIndex, attributeLength, numberOfAnnotations, annotations);
 
         } else if(Arrays.equals(attributeName, "RuntimeVisibleParameterAnnotations".getBytes("UTF-8"))) {
+            byte numberOfParameters = bytes[offset];
+            offset += 1;
+            int count = 0;
+            ParameterAnnotations[] parameterAnnotations = new ParameterAnnotations[(int) numberOfParameters];
+
+            while(count < (int) numberOfParameters) {
+                byte[] numberOfAnnotations = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                int numberOfAnnotationsInteger = ((numberOfAnnotations[0] & 0xFF) << 8) | (numberOfAnnotations[1] & 0xFF);
+
+                Annotation[] annotations = analyzeAnnotations(numberOfAnnotationsInteger);
+                parameterAnnotations[count] = new ParameterAnnotations(numberOfAnnotations, annotations);
+
+                count++;
+            }
+            returnInformation = new RuntimeVisibleParameterAnnotations(attributeNameIndex, attributeLength, numberOfParameters, parameterAnnotations);
+
 
         } else if(Arrays.equals(attributeName, "RuntimeInvisibleParameterAnnotations".getBytes("UTF-8"))) {
+            byte numberOfParameters = bytes[offset];
+            offset += 1;
+            int count = 0;
+            ParameterAnnotations[] parameterAnnotations = new ParameterAnnotations[(int) numberOfParameters];
+
+            while(count < (int) numberOfParameters) {
+                byte[] numberOfAnnotations = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                int numberOfAnnotationsInteger = ((numberOfAnnotations[0] & 0xFF) << 8) | (numberOfAnnotations[1] & 0xFF);
+
+                Annotation[] annotations = analyzeAnnotations(numberOfAnnotationsInteger);
+                parameterAnnotations[count] = new ParameterAnnotations(numberOfAnnotations, annotations);
+
+                count++;
+            }
+
+            returnInformation = new RuntimeInvisibleParameterAnnotations(attributeNameIndex, attributeLength, numberOfParameters, parameterAnnotations);
 
         } else if(Arrays.equals(attributeName, "RuntimeVisibleTypeAnnotations".getBytes("UTF-8"))) {
+            byte[] numberOfAnnotations = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int numberOfAnnotationsInteger = ((numberOfAnnotations[0] & 0xFF) << 8) | (numberOfAnnotations[1] & 0xFF);
+            int count = 0;
+
+            TypeAnnotation[] typeAnnotations = new TypeAnnotation[numberOfAnnotationsInteger];
+
+            while(count < numberOfAnnotationsInteger) {
+                typeAnnotations[count] = analyzeTypeAnnotations();
+
+                count++;
+            }
+
+            returnInformation = new RuntimeVisibleTypeAnnotations(attributeNameIndex, attributeLength, numberOfAnnotations, typeAnnotations);
 
         } else if(Arrays.equals(attributeName, "RuntimeInvisibleTypeAnnotations".getBytes("UTF-8"))) {
+            byte[] numberOfAnnotations = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int numberOfAnnotationsInteger = ((numberOfAnnotations[0] & 0xFF) << 8) | (numberOfAnnotations[1] & 0xFF);
+            int count = 0;
+
+            TypeAnnotation[] typeAnnotations = new TypeAnnotation[numberOfAnnotationsInteger];
+
+            while(count < numberOfAnnotationsInteger) {
+                typeAnnotations[count] = analyzeTypeAnnotations();
+
+                count++;
+            }
+
+            returnInformation = new RuntimeInvisibleTypeAnnotations(attributeNameIndex, attributeLength, numberOfAnnotations, typeAnnotations);
 
         } else if(Arrays.equals(attributeName, "AnnotationDefault".getBytes("UTF-8"))) {
+            ElementValue elementValue = createElementValue();
+
+            returnInformation = new AnnotationDefault(attributeNameIndex, attributeLength, elementValue);
 
         } else if(Arrays.equals(attributeName, "BootstrapMethods".getBytes("UTF-8"))) {
+            byte[] numberOfBootstrapMethods = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int numberOfBootstrapMethodsInteger = ((numberOfBootstrapMethods[0] & 0xFF) << 8) | (numberOfBootstrapMethods[1] & 0xFF);
+            int count = 0;
+            BootstrapMethodInformation[] bootstrapMethodInformation = new BootstrapMethodInformation[numberOfBootstrapMethodsInteger];
+
+            while(count < numberOfBootstrapMethodsInteger) {
+                byte[] bootstrapMethodReference = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] numberOfBootstrapArguments = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                int numberOfBootstrapArgumentsInteger = ((numberOfBootstrapArguments[0] & 0xFF) << 8) | (numberOfBootstrapArguments[1] & 0xFF);
+
+                int bootstrapCount = 0;
+                BootstrapArgument[] bootstrapArguments = new BootstrapArgument[numberOfBootstrapArgumentsInteger];
+
+                while(bootstrapCount < numberOfBootstrapArgumentsInteger) {
+                    bootstrapArguments[bootstrapCount] = new BootstrapArgument(Arrays.copyOfRange(bytes, offset, offset + 2));
+                    offset += 2;
+
+                    bootstrapCount++;
+                }
+
+                bootstrapMethodInformation[count] = new BootstrapMethodInformation(bootstrapMethodReference, numberOfBootstrapArguments, bootstrapArguments);
+
+                count++;
+            }
+
+            returnInformation = new BootstrapMethods(attributeNameIndex, attributeLength, numberOfBootstrapMethods, bootstrapMethodInformation);
+
 
         } else if(Arrays.equals(attributeName, "MethodParameters".getBytes("UTF-8"))) {
+            byte parametersCount = bytes[offset];
+            offset += 1;
+            int count = 0;
+            Parameter[] parameters = new Parameter[parametersCount];
+
+            while(count < parametersCount) {
+                byte[] nameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] accessFlag = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                parameters[count] = new Parameter(nameIndex, accessFlag);
+
+                count++;
+            }
+
+            returnInformation = new MethodParameters(attributeNameIndex, attributeLength, parametersCount, parameters);
 
         } else if(Arrays.equals(attributeName, "Module".getBytes("UTF-8"))) {
+            byte[] moduleNameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            byte[] moduleFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            byte[] moduleVersionIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            byte[] requiresCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int requiresCountInteger = ((requiresCount[0] & 0xFF) << 8) | (requiresCount[1] & 0xFF);
+            Requires[] requires = new Requires[requiresCountInteger];
+            int count = 0;
+
+            while(count < requiresCountInteger) {
+                byte[] requiresIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] requiresFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] requiresVersionIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                requires[count] = new Requires(requiresIndex, requiresFlags, requiresVersionIndex);
+
+                count++;
+            }
+
+            byte[] exportsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int exportsCountInteger = ((exportsCount[0] & 0xFF) << 8) | (exportsCount[1] & 0xFF);
+            Exports[] exports = new Exports[exportsCountInteger];
+            count = 0;
+
+            while(count < exportsCountInteger) {
+                byte[] exportsIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] exportsFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] exportsToCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                int exportsToCountInteger = ((exportsToCount[0] & 0xFF) << 8) | (exportsToCount[1] & 0xFF);
+                ExportIndex[] exportIndices = new ExportIndex[exportsToCountInteger];
+                int loop = 0;
+
+                while(loop < exportsToCountInteger) {
+                    exportIndices[loop] = new ExportIndex(Arrays.copyOfRange(bytes, offset, offset + 2));
+                    offset += 2;
+
+                    loop++;
+                }
+                exports[count] = new Exports(exportsIndex, exportsFlags, exportsToCount, exportIndices);
+                count++;
+            }
+
+            byte[] opensCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int opensCountInteger = ((opensCount[0] & 0xFF) << 8) | (opensCount[1] & 0xFF);
+            Opens[] opens = new Opens[opensCountInteger];
+            count = 0;
+
+            while(count < opensCountInteger) {
+                byte[] opensIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] opensFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] opensToCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                int opensToCountInteger = ((opensToCount[0] & 0xFF) << 8) | (opensToCount[1] & 0xFF);
+                OpenIndex[] openToIndex = new OpenIndex[opensToCountInteger];
+                int loop = 0;
+
+                while(loop < opensToCountInteger) {
+                    openToIndex[loop] = new OpenIndex(Arrays.copyOfRange(bytes, offset, offset + 2));
+                    offset += 2;
+
+                    loop++;
+                }
+                opens[count] = new Opens(opensIndex, opensFlags, opensToCount, openToIndex);
+
+                count++;
+            }
+
+            byte[] usesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int usesCountInteger = ((usesCount[0] & 0xFF) << 8) | (usesCount[1] & 0xFF);
+            UsesIndex[] usesIndex = new UsesIndex[usesCountInteger];
+            count = 0;
+
+            while(count < usesCountInteger) {
+                usesIndex[count] = new UsesIndex(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+
+                count++;
+            }
+
+            byte[] providesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int providesCountInteger = ((providesCount[0] & 0xFF) << 8) | (providesCount[1] & 0xFF);
+            count = 0;
+            Provides[] provides = new Provides[providesCountInteger];
+
+            while(count < providesCountInteger) {
+                byte[] providesIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] providesWithCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+
+                int providesWithCountInteger = ((providesWithCount[0] & 0xFF) << 8) | (providesWithCount[1] & 0xFF);
+                ProvidesIndex[] providesWithIndex = new ProvidesIndex[providesWithCountInteger];
+                int loop = 0;
+
+                while(loop < providesWithCountInteger) {
+                    providesWithIndex[loop] = new ProvidesIndex(Arrays.copyOfRange(bytes, offset, offset + 2));
+                    offset += 2;
+
+                    loop++;
+                }
+
+                provides[count] = new Provides(providesIndex, providesWithCount, providesWithIndex);
+
+                count++;
+            }
+            returnInformation = new Module(attributeNameIndex, attributeLength, moduleNameIndex, moduleFlags, moduleVersionIndex, requiresCount, requires, exportsCount, exports, opensCount, opens, usesCount, usesIndex, providesCount, provides);
 
         } else if(Arrays.equals(attributeName, "ModulePackages".getBytes("UTF-8"))) {
+            byte[] packageCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int packageCountInteger = ((packageCount[0] & 0xFF) << 8) | (packageCount[1] & 0xFF);
+            int count = 0;
+            PackageIndex[] packageIndex = new PackageIndex[packageCountInteger];
+
+            while(count < packageCountInteger) {
+                packageIndex[count] = new PackageIndex(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+
+                count++;
+            }
+
+            returnInformation = new ModulePackages(attributeNameIndex, attributeLength, packageCount, packageIndex);
+
 
         } else if(Arrays.equals(attributeName, "ModuleMainClass".getBytes("UTF-8"))) {
+            byte[] mainClassIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            returnInformation = new ModuleMainClass(attributeNameIndex, attributeLength, mainClassIndex);
 
         } else if(Arrays.equals(attributeName, "NestHost".getBytes("UTF-8"))) {
+            byte[] hostClassIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            returnInformation = new NestHost(attributeNameIndex, attributeLength, hostClassIndex);
 
         } else if(Arrays.equals(attributeName, "NestMembers".getBytes("UTF-8"))) {
+            byte[] numberOfClasses = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int numberOfClassesInteger = ((numberOfClasses[0] & 0xFF) << 8) | (numberOfClasses[1] & 0xFF);
+            int count = 0;
+            Classes[] classes = new Classes[numberOfClassesInteger];
+
+            while(count < numberOfClassesInteger) {
+                classes[count] = new Classes(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+
+                count++;
+            }
+            returnInformation = new NestMembers(attributeNameIndex, attributeLength, numberOfClasses, classes);
 
         } else if(Arrays.equals(attributeName, "Record".getBytes("UTF-8"))) {
+            byte[] componentsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+            int componentsCountInteger = ((componentsCount[0] & 0xFF) << 8) | (componentsCount[1] & 0xFF);
+            int count = 0;
+
+            RecordComponentInformation[] information = new RecordComponentInformation[componentsCountInteger];
+
+            while(count < componentsCountInteger) {
+                byte[] nameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] descriptorIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                byte[] attributesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                int attributesCountInteger = ((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF);
+                AttributeInformation[] attributeInformation = analyzeAttribute(attributesCountInteger);
+
+                information[count] = new RecordComponentInformation(nameIndex, descriptorIndex, attributesCount, attributeInformation);
+
+                count++;
+            }
+
+            returnInformation = new Record(attributeNameIndex, attributeLength, componentsCount, information);
 
         } else if(Arrays.equals(attributeName, "PermittedSubclasses".getBytes("UTF-8"))) {
+            byte[] numberOfClasses = Arrays.copyOfRange(bytes, offset, offset + 2);
+            offset += 2;
+
+            int numberOfClassesInteger = ((numberOfClasses[0] & 0xFF) << 8) | (numberOfClasses[1] & 0xFF);
+            Classes[] classes = new Classes[numberOfClassesInteger];
+            int count = 0;
+
+            while(count < numberOfClassesInteger) {
+                classes[count] = new Classes(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+
+                count++;
+            }
+            returnInformation = new PermittedSubClasses(attributeNameIndex, attributeLength, numberOfClasses, classes);
 
         } else {
             throw new UnsupportedEncodingException();
         }
 
         return returnInformation;
+    }
+
+    public TypeAnnotation analyzeTypeAnnotations() {
+        byte targetType = bytes[offset];
+        offset += 1;
+        TargetInformation targetInformation;
+
+
+
+        byte[] tableLength;
+        int tableLengthInteger;
+        LocalVariableTargetTable[] table;
+        int tableLengthCount = 0;
+        byte[] offsetTarget;
+        byte typeArgumentIndex;
+
+        switch (targetType) {
+            case 0x00:
+                targetInformation = new TypeParameterTarget(bytes[offset]);
+                offset += 1;
+
+                break;
+            case 0x01:
+                targetInformation = new TypeParameterTarget(bytes[offset]);
+                offset += 1;
+
+                break;
+            case 0x10:
+                targetInformation = new SuperTypeTarget(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+
+                break;
+            case 0x11:
+                targetInformation = new TypeParameterBoundTarget(bytes[offset], bytes[offset + 1]);
+                offset += 2;
+
+                break;
+            case 0x12:
+                targetInformation = new TypeParameterBoundTarget(bytes[offset], bytes[offset + 1]);
+                offset += 2;
+
+                break;
+            case 0x13:
+                targetInformation = new EmptyTarget();
+
+                break;
+            case 0x14:
+                targetInformation = new EmptyTarget();
+
+                break;
+            case 0x15:
+                targetInformation = new EmptyTarget();
+
+                break;
+            case 0x16:
+                targetInformation = new FormalParameterTarget(bytes[offset]);
+                offset += 1;
+
+                break;
+            case 0x17:
+                targetInformation = new ThrowsTarget(Arrays.copyOfRange(bytes, offset, offset + 2));
+                offset += 2;
+
+                break;
+            case 0x40:
+                tableLength = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                tableLengthInteger = ((tableLength[0] & 0xFF) << 8) | (tableLength[1] & 0xFF);
+                table = new LocalVariableTargetTable[tableLengthInteger];
+
+                while(tableLengthCount < tableLengthInteger) {
+                    byte[] startPC = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    byte[] length = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    byte[] index = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    table[tableLengthCount] = new LocalVariableTargetTable(startPC, length, index);
+
+                    tableLengthCount++;
+                }
+                targetInformation = new LocalVariableTarget(tableLength, table);
+
+                break;
+            case 0x41:
+                tableLength = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+                tableLengthInteger = ((tableLength[0] & 0xFF) << 8) | (tableLength[1] & 0xFF);
+                table = new LocalVariableTargetTable[tableLengthInteger];
+
+
+                while(tableLengthCount < tableLengthInteger) {
+                    byte[] startPC = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    byte[] length = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    byte[] index = Arrays.copyOfRange(bytes, offset, offset + 2);
+                    offset += 2;
+
+                    table[tableLengthCount] = new LocalVariableTargetTable(startPC, length, index);
+
+                    tableLengthCount++;
+                }
+                targetInformation = new LocalVariableTarget(tableLength, table);
+
+                break;
+            case 0x42:
+                byte[] exceptionTableIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                targetInformation = new CatchTarget(exceptionTableIndex);
+
+                break;
+            case 0x43:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                targetInformation = new OffsetTarget(offsetTarget);
+
+
+                break;
+            case 0x44:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                targetInformation = new OffsetTarget(offsetTarget);
+
+                break;
+            case 0x45:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                targetInformation = new OffsetTarget(offsetTarget);
+
+                break;
+            case 0x46:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                targetInformation = new OffsetTarget(offsetTarget);
+
+                break;
+            case 0x47:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                typeArgumentIndex = bytes[offset];
+                offset += 1;
+
+                targetInformation = new TypeArgumentTarget(offsetTarget, typeArgumentIndex);
+
+                break;
+            case 0x48:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                typeArgumentIndex = bytes[offset];
+                offset += 1;
+
+                targetInformation = new TypeArgumentTarget(offsetTarget, typeArgumentIndex);
+
+                break;
+            case 0x49:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                typeArgumentIndex = bytes[offset];
+                offset += 1;
+
+                targetInformation = new TypeArgumentTarget(offsetTarget, typeArgumentIndex);
+
+                break;
+            case 0x4A:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                typeArgumentIndex = bytes[offset];
+                offset += 1;
+
+                targetInformation = new TypeArgumentTarget(offsetTarget, typeArgumentIndex);
+
+                break;
+            case 0x4B:
+                offsetTarget = Arrays.copyOfRange(bytes, offset, offset + 2);
+                offset += 2;
+
+                typeArgumentIndex = bytes[offset];
+                offset += 1;
+
+                targetInformation = new TypeArgumentTarget(offsetTarget, typeArgumentIndex);
+
+                break;
+            default:
+                throw new Error();
+        }
+        TypePath typePath = analyzeTypePath();
+        byte[] typeIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+
+        byte[] numberOfElementValuePairs = Arrays.copyOfRange(bytes, offset, offset + 2);
+        offset += 2;
+        int numberOfElementValuePairsInteger = ((numberOfElementValuePairs[0] & 0xFF) << 8) | (numberOfElementValuePairs[1] & 0xFF);
+        ElementValuePairs[] elementValuePairs = analyzeElementValuePairs(numberOfElementValuePairsInteger);
+
+        return new TypeAnnotation(targetType, targetInformation, typePath, typeIndex, numberOfElementValuePairs, elementValuePairs);
+    }
+
+    public TypePath analyzeTypePath() {
+        byte pathLength = bytes[offset];
+        offset += 1;
+
+        int count = 0;
+        Path[] path = new Path[pathLength];
+
+
+        while(count < pathLength) {
+            path[count] = new Path(bytes[offset], bytes[offset + 1]);
+            offset += 2;
+            count++;
+        }
+
+        return new TypePath(pathLength, path);
     }
 
     public Annotation[] analyzeAnnotations(int numberOfAnnotations) {
