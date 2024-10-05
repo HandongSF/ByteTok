@@ -36,4 +36,7 @@ public class LongInformation implements ConstantPoolInformation {
         this.highBytes = highBytes;
         this.lowBytes = lowBytes;
     }
+    public String toString() {
+        return "LongInformation";
+    }
 }

@@ -36,4 +36,8 @@ public class NameAndTypeInformation implements ConstantPoolInformation {
         this.nameIndex = nameIndex;
         this.descriptorIndex = descriptorIndex;
     }
+    public String toString() {
+        return "NameAndTypeInformation";
+    }
+
 }

@@ -36,4 +36,7 @@ public class UTF8Information implements ConstantPoolInformation {
         this.length = length;
         this.bytes = bytes;
     }
+    public String toString() {
+        return "UTF8Information";
+    }
 }

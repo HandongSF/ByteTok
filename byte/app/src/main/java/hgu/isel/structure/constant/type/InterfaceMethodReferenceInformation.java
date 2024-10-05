@@ -36,4 +36,8 @@ public class InterfaceMethodReferenceInformation implements ConstantPoolInformat
         this.classIndex = classIndex;
         this.nameAndTypeIndex = nameAndTypeIndex;
     }
+    public String toString() {
+        return "InterfaceMethodReferenceInformation";
+    }
+
 }

@@ -26,4 +26,7 @@ public class MethodTypeInformation implements ConstantPoolInformation {
         this.tag = tag;
         this.descriptorIndex = descriptorIndex;
     }
+    public String toString() {
+        return "MethodTypeInformation";
+    }
 }
