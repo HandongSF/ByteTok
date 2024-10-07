@@ -21,6 +21,7 @@ public class ByteTok {
         ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
         try {
             byteAnalyzer.analyze();
+            System.out.println(byteAnalyzer.printResult());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

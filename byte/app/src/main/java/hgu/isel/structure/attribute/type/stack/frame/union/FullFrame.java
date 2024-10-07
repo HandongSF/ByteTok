@@ -67,4 +67,31 @@ public class FullFrame implements StackMapFrame {
         this.numberOfStackItems = numberOfStackItems;
         this.stack = stack;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", frameType));
+
+        for(byte b : offsetDelta) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfLocals) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(VerificationTypeInformation v : locals) {
+            stringBuilder.append(v.toString());
+        }
+
+        for(byte b : numberOfStackItems) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(VerificationTypeInformation v : stack) {
+            stringBuilder.append(v.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

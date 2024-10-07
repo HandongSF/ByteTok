@@ -7,4 +7,11 @@ public class FloatVariableInformation implements VerificationTypeInformation {
 
     public FloatVariableInformation() {
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        return stringBuilder.toString();
+    }
 }

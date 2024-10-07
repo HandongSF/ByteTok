@@ -47,4 +47,28 @@ public class RuntimeVisibleAnnotations implements AttributeInformation {
         this.numberOfAnnotations = numberOfAnnotations;
         this.annotations = annotations;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nRuntimeVisibleAnnotations: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfAnnotations) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Annotation a : annotations) {
+            stringBuilder.append(a.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

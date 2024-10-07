@@ -16,4 +16,14 @@ public class ConstValueIndex implements ElementUnion {
     public ConstValueIndex(byte[] constValueIndex) {
         this.constValueIndex = constValueIndex;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : constValueIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

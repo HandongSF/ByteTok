@@ -46,4 +46,25 @@ public class Exports {
         this.exportsToCount = exportsToCount;
         this.exportsToIndex = exportsToIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : exportsIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : exportsFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : exportsToCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(ExportIndex e : exportsToIndex) {
+            stringBuilder.append(e.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

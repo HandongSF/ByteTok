@@ -24,4 +24,17 @@ public class Parameter {
         this.nameIndex = nameIndex;
         this.accessFlags = accessFlags;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : accessFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

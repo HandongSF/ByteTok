@@ -46,4 +46,25 @@ public class Opens {
         this.opensToCount = opensToCount;
         this.opensToIndex = opensToIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : opensIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : opensFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : opensToCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(OpenIndex e : opensToIndex) {
+            stringBuilder.append(e.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

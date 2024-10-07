@@ -1,5 +1,6 @@
 package hgu.isel.structure.constant.type;
 
+import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class DoubleInformation implements ConstantPoolInformation {
@@ -37,6 +38,19 @@ public class DoubleInformation implements ConstantPoolInformation {
         this.lowBytes = lowBytes;
     }
     public String toString() {
-        return "DoubleInformation";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nDoubleInformation: ");
+        stringBuilder.append(String.format("%02X", tag));
+
+        for(byte b : highBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : lowBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

@@ -17,4 +17,15 @@ public class UninitializedVariableInformation implements VerificationTypeInforma
     public void setOffset(byte[] offset) {
         this.offset = offset;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        for(byte b : offset) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

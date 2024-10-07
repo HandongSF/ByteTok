@@ -27,4 +27,12 @@ public class SameLocals1StackItemFrame implements StackMapFrame {
         this.frameType = frameType;
         this.stack = stack;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", frameType));
+        stringBuilder.append(stack.toString());
+
+        return stringBuilder.toString();
+    }
 }

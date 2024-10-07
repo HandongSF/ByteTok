@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 
 public class Deprecated implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -25,5 +26,20 @@ public class Deprecated implements AttributeInformation {
     public Deprecated(byte[] attributeNameIndex, byte[] attributeLength) {
         this.attributeNameIndex = attributeNameIndex;
         this.attributeLength = attributeLength;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nDeprecated: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

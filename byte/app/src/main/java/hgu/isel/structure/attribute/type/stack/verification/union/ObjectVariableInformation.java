@@ -21,4 +21,16 @@ public class ObjectVariableInformation implements VerificationTypeInformation {
     public void setConstantPoolIndex(byte[] constantPoolIndex) {
         this.constantPoolIndex = constantPoolIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        for(byte b : constantPoolIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+
+        return stringBuilder.toString();
+    }
 }

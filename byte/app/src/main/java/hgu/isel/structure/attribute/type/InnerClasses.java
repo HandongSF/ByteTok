@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.inner.InnerClassInformation;
 
 public class InnerClasses implements AttributeInformation {
@@ -46,5 +47,28 @@ public class InnerClasses implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.numberOfClasses = numberOfClasses;
         this.classes = classes;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nBootstrapMethods: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfClasses) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(InnerClassInformation i : classes) {
+            stringBuilder.append(i.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

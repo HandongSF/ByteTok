@@ -36,4 +36,24 @@ public class NestHost implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.hostClassIndex = hostClassIndex;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nNestHost: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : hostClassIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

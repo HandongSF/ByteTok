@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.exception.ExceptionTable;
 
 public class Code implements AttributeInformation {
@@ -106,5 +107,53 @@ public class Code implements AttributeInformation {
         this.exceptionTable = exceptionTable;
         this.attributesCount = attributesCount;
         this.attributes = attributes;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nCode: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : maxStack) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : maxLocals) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : codeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : code) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : exceptionTableLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(ExceptionTable e : exceptionTable) {
+            stringBuilder.append(e.toString());
+        }
+
+        for(byte b : attributesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(AttributeInformation a : attributes) {
+            stringBuilder.append(a.toString());
+        }
+
+
+        return stringBuilder.toString();
     }
 }

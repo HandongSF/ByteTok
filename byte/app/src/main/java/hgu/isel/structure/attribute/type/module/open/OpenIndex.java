@@ -14,4 +14,13 @@ public class OpenIndex {
     public OpenIndex(byte[] opensToIndex) {
         this.opensToIndex = opensToIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : opensToIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

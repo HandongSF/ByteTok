@@ -37,6 +37,16 @@ public class MethodHandleInformation implements ConstantPoolInformation {
         this.referenceIndex = referenceIndex;
     }
     public String toString() {
-        return "MethodHandleInformation";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nMethodHandleInformation: ");
+        stringBuilder.append(String.format("%02X", tag));
+        stringBuilder.append(String.format("%02X", referenceKind));
+
+        for(byte b : referenceIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

@@ -1,7 +1,9 @@
 package hgu.isel.structure.interfaces;
 
+import hgu.isel.structure.attribute.AttributeInformation;
+
 public class Interfaces {
-    private byte[] bytes = new byte[2]; // u2
+    private byte[] bytes; // u2
 
     public byte[] getBytes() {
         return bytes;
@@ -13,5 +15,16 @@ public class Interfaces {
 
     public Interfaces(byte[] bytes) {
         this.bytes = bytes;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nInterface: ");
+
+        for(byte b : bytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

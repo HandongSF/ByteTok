@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.boot;
 
+import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+
 public class BootstrapMethodInformation {
     private byte[] bootstrapMethodReference; // u2
     private byte[] numberOfBootstrapArguments; // u2
@@ -33,5 +35,24 @@ public class BootstrapMethodInformation {
         this.bootstrapMethodReference = bootstrapMethodReference;
         this.numberOfBootstrapArguments = numberOfBootstrapArguments;
         this.bootstrapArguments = bootstrapArguments;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+
+        for(byte b : bootstrapMethodReference) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfBootstrapArguments) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(BootstrapArgument e : bootstrapArguments) {
+            stringBuilder.append(e.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

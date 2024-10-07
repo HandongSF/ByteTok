@@ -2,6 +2,7 @@ package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.annotation.ParameterAnnotations;
+import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 
 public class RuntimeVisibleParameterAnnotations implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -46,5 +47,27 @@ public class RuntimeVisibleParameterAnnotations implements AttributeInformation 
         this.attributeLength = attributeLength;
         this.numberOfParameters = numberOfParameters;
         this.parameterAnnotations = parameterAnnotations;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nRuntimeVisibleParameterAnnotations: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append(String.format("%02X", numberOfParameters));
+
+
+        for(ParameterAnnotations p : parameterAnnotations) {
+            stringBuilder.append(p.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

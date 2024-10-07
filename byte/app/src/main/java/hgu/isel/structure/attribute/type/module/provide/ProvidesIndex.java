@@ -14,4 +14,13 @@ public class ProvidesIndex {
     public ProvidesIndex(byte[] providesIndex) {
         this.providesIndex = providesIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : providesIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

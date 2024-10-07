@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.nest.Classes;
 import hgu.isel.structure.attribute.type.record.RecordComponentInformation;
 
 public class Record implements AttributeInformation {
@@ -46,5 +47,29 @@ public class Record implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.componentsCount = componentsCount;
         this.components = components;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nRecord: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : componentsCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(RecordComponentInformation r : components) {
+            stringBuilder.append(r.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

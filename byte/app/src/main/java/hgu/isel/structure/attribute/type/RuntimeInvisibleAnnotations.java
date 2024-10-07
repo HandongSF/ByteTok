@@ -2,6 +2,7 @@ package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
+import hgu.isel.structure.attribute.type.nest.Classes;
 
 public class RuntimeInvisibleAnnotations implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -46,5 +47,29 @@ public class RuntimeInvisibleAnnotations implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.numberOfAnnotations = numberOfAnnotations;
         this.annotations = annotations;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nRuntimeInvisibleAnnotations: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfAnnotations) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Annotation a : annotations) {
+            stringBuilder.append(a.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

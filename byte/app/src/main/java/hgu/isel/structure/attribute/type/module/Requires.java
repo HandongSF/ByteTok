@@ -34,4 +34,21 @@ public class Requires {
         this.requiresFlags = requiresFlags;
         this.requiresVersionIndex = requiresVersionIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : requiresIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : requiresFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : requiresVersionIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

@@ -24,4 +24,15 @@ public class TypePath {
         this.pathLength = pathLength;
         this.path = path;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", pathLength));
+
+        for(Path p : path) {
+            stringBuilder.append(p.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

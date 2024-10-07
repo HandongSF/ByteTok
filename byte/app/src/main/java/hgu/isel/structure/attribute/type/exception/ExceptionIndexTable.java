@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.exception;
 
+import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+
 public class ExceptionIndexTable {
     private byte[] exceptionIndexTable; // u2
 
@@ -13,5 +15,14 @@ public class ExceptionIndexTable {
 
     public ExceptionIndexTable(byte[] exceptionIndexTable) {
         this.exceptionIndexTable = exceptionIndexTable;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : exceptionIndexTable) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

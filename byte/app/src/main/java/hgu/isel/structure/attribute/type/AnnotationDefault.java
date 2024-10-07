@@ -2,6 +2,7 @@ package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.annotation.ElementValue;
+import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
 
 public class AnnotationDefault implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -36,5 +37,23 @@ public class AnnotationDefault implements AttributeInformation {
         this.attributeNameIndex = attributeNameIndex;
         this.attributeLength = attributeLength;
         this.defaultValue = defaultValue;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nAnnotationsDefault: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append(defaultValue.toString());
+
+        return stringBuilder.toString();
     }
 }

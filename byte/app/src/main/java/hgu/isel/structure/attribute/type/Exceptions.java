@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.exception.ExceptionIndexTable;
 
 public class Exceptions implements AttributeInformation {
@@ -47,4 +48,28 @@ public class Exceptions implements AttributeInformation {
         this.numberOfExceptions = numberOfExceptions;
         this.exceptionIndexTable = exceptionIndexTable;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nExceptions: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfExceptions) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(ExceptionIndexTable e : exceptionIndexTable) {
+            stringBuilder.append(e.toString());
+        }
+
+        return stringBuilder.toString();
+    }
+
 }

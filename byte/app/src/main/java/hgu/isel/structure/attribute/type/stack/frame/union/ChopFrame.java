@@ -26,4 +26,17 @@ public class ChopFrame implements StackMapFrame {
         this.frameType = frameType;
         this.offsetDelta = offsetDelta;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", frameType));
+
+        for(byte b : offsetDelta) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+
+
+        return stringBuilder.toString();
+    }
 }

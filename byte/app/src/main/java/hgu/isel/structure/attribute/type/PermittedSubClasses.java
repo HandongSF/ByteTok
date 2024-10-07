@@ -47,4 +47,28 @@ public class PermittedSubClasses implements AttributeInformation {
         this.numberOfClasses = numberOfClasses;
         this.classes = classes;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nPermittedSubClasses: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfClasses) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Classes c : classes) {
+            stringBuilder.append(c.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

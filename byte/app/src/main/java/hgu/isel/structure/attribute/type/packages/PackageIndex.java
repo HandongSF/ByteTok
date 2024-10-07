@@ -14,4 +14,14 @@ public class PackageIndex {
     public PackageIndex(byte[] packageIndex) {
         this.packageIndex = packageIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : packageIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+
+        return stringBuilder.toString();
+    }
 }

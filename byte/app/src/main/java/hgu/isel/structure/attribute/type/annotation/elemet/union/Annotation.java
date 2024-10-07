@@ -37,4 +37,21 @@ public class Annotation implements ElementUnion {
         this.numberOfElementValuePairs = numberOfElementValuePairs;
         this.elementValuePairs = elementValuePairs;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : typeIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfElementValuePairs) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(ElementValuePairs e : elementValuePairs) {
+            stringBuilder.append(e.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

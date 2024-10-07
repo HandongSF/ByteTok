@@ -7,4 +7,11 @@ public class NullVariableInformation implements VerificationTypeInformation {
 
     public NullVariableInformation() {
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        return stringBuilder.toString();
+    }
 }

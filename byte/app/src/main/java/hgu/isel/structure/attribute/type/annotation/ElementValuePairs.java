@@ -24,4 +24,16 @@ public class ElementValuePairs {
         this.elementNameIndex = elementNameIndex;
         this.value = value;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : elementNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append(value.toString());
+
+        return stringBuilder.toString();
+    }
 }

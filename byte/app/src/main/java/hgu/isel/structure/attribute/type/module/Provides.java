@@ -36,4 +36,22 @@ public class Provides {
         this.providesWithCount = providesWithCount;
         this.providesWithIndex = providesWithIndex;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : providesIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : providesWithCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(ProvidesIndex p : providesWithIndex) {
+            stringBuilder.append(p.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }
