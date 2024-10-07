@@ -26,4 +26,18 @@ public class EnumConstValue implements ElementUnion {
         this.typeNameIndex = typeNameIndex;
         this.constNameIndex = constNameIndex;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : typeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : constNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

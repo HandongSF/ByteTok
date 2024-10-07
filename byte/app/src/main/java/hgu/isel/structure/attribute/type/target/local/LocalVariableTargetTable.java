@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.target.local;
 
+import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
+
 public class LocalVariableTargetTable {
     private byte[] startPC; // u2
     private byte[] length; // u2
@@ -33,5 +35,22 @@ public class LocalVariableTargetTable {
         this.startPC = startPC;
         this.length = length;
         this.index = index;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : startPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : length) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : index) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

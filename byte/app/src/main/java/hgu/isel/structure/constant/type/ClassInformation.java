@@ -1,6 +1,7 @@
 package hgu.isel.structure.constant.type;
 
 
+import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
 public class ClassInformation implements ConstantPoolInformation {
@@ -29,6 +30,15 @@ public class ClassInformation implements ConstantPoolInformation {
     }
 
     public String toString() {
-        return "ClassInformation";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nClassInformation: ");
+        stringBuilder.append(String.format("%02X", tag));
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

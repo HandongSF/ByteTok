@@ -37,4 +37,21 @@ public class AppendedFrame implements StackMapFrame {
         this.offsetDelta = offsetDelta;
         this.locals = locals;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", frameType));
+
+        for(byte b : offsetDelta) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(VerificationTypeInformation v : locals) {
+            stringBuilder.append(v.toString());
+        }
+
+
+
+        return stringBuilder.toString();
+    }
 }

@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.line.LineNumberTableInformation;
 
 public class LineNumberTable implements AttributeInformation {
@@ -46,5 +47,29 @@ public class LineNumberTable implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.lineNumberTableLength = lineNumberTableLength;
         this.lineNumberTable = lineNumberTable;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nLineNumberTable: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : lineNumberTableLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(LineNumberTableInformation l : lineNumberTable) {
+            stringBuilder.append(l.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

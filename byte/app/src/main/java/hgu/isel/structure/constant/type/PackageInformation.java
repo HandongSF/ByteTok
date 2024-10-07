@@ -27,6 +27,15 @@ public class PackageInformation implements ConstantPoolInformation {
         this.nameIndex = nameIndex;
     }
     public String toString() {
-        return "PackageInformation";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nPackageInformation: ");
+        stringBuilder.append(String.format("%02X", tag));
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

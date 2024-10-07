@@ -47,4 +47,28 @@ public class ModulePackages implements AttributeInformation {
         this.packageCount = packageCount;
         this.packageIndex = packageIndex;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nModulePackages: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : packageCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(PackageIndex p : packageIndex) {
+            stringBuilder.append(p.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

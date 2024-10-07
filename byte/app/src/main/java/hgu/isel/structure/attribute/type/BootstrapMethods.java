@@ -47,4 +47,27 @@ public class BootstrapMethods implements AttributeInformation {
         this.numberOfBootstrapMethods = numberOfBootstrapMethods;
         this.bootstrapMethods = bootstrapMethods;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nBootstrapMethods: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfBootstrapMethods) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(BootstrapMethodInformation b : bootstrapMethods) {
+            stringBuilder.append(b.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

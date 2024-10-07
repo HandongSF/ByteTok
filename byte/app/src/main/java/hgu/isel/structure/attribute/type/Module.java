@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.module.Exports;
 import hgu.isel.structure.attribute.type.module.Opens;
 import hgu.isel.structure.attribute.type.module.Provides;
@@ -160,5 +161,72 @@ public class Module implements AttributeInformation {
         this.usesIndex = usesIndex;
         this.providesCount = providesCount;
         this.provides = provides;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nModule: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : moduleNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : moduleFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : moduleVersionIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : requiresCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Requires r : requires) {
+            stringBuilder.append(r.toString());
+        }
+
+        for(byte b : exportsCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Exports e : exports) {
+            stringBuilder.append(e.toString());
+        }
+
+        for(byte b : opensCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Opens o : opens) {
+            stringBuilder.append(o.toString());
+        }
+
+        for(byte b : usesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(UsesIndex i : usesIndex) {
+            stringBuilder.append(i.toString());
+        }
+
+        for(byte b : providesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Provides p : provides) {
+            stringBuilder.append(p.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

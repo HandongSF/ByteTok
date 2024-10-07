@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.target;
 
+import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
+
 public class OffsetTarget implements TargetInformation{
     private byte[] offset; // u2
 
@@ -13,5 +15,14 @@ public class OffsetTarget implements TargetInformation{
 
     public OffsetTarget(byte[] offset) {
         this.offset = offset;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : offset) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

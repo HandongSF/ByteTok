@@ -54,4 +54,29 @@ public class LocalVariableTypeTableInformation {
         this.signatureIndex = signatureIndex;
         this.index = index;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : startPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : length) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : signatureIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : index) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

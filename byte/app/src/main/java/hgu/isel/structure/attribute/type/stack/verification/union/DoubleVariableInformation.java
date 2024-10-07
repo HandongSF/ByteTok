@@ -7,4 +7,11 @@ public class DoubleVariableInformation implements VerificationTypeInformation {
 
     public DoubleVariableInformation() {
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        return stringBuilder.toString();
+    }
 }

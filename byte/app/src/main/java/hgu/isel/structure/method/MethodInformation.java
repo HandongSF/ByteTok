@@ -56,4 +56,32 @@ public class MethodInformation {
         this.attributesCount = attributesCount;
         this.attributes = attributes;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nMethod: ");
+
+        for(byte b : accessFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : descriptorIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(AttributeInformation a : attributes) {
+            stringBuilder.append(a.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

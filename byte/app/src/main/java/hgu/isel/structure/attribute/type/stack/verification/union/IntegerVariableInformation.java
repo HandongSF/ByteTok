@@ -7,4 +7,11 @@ public class IntegerVariableInformation implements VerificationTypeInformation {
 
     public IntegerVariableInformation() {
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        return stringBuilder.toString();
+    }
 }

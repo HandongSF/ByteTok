@@ -45,7 +45,6 @@ import hgu.isel.structure.method.MethodInformation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class ByteAnalyzer {
@@ -73,6 +72,93 @@ public class ByteAnalyzer {
         this.bytes = bytes;
     }
 
+    public String printResult() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Magic Number: ");
+        for(byte b : magic) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nMinor Version: ");
+        for(byte b : minorVersion) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nMajor Version: ");
+        for(byte b : majorVersion) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nConstant Pool Count: ");
+        for(byte b : constantPoolCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nConstant Pool: ");
+        for(ConstantPoolInformation c : constantPoolInformation) {
+            stringBuilder.append(c.toString());
+        }
+
+        stringBuilder.append("\nAccess Flag: ");
+        for(byte b : accessFlag) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nThis Class: ");
+        for(byte b : thisClass) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nSuper Class: ");
+        for(byte b : superClass) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nInterface Count: ");
+        for(byte b : interfacesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nInterfaces: ");
+        for(Interfaces i : interfaces) {
+            stringBuilder.append(i.toString());
+        }
+
+        stringBuilder.append("\nFields Count: ");
+        for(byte b : fieldsCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nFields: ");
+        for(FieldInformation f : fieldInformation) {
+            stringBuilder.append(f.toString());
+        }
+
+        stringBuilder.append("\nMethods Count: ");
+        for(byte b : methodsCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nMethods: ");
+        for(MethodInformation m : methodInformation) {
+            stringBuilder.append(m.toString());
+        }
+
+        stringBuilder.append("\nAttributes Count: ");
+        for(byte b : attributesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append("\nAttributes: ");
+        for(AttributeInformation a : attributeInformation) {
+            stringBuilder.append(a.toString());
+        }
+
+        return stringBuilder.toString();
+
+    }
+
     public void analyze() throws Exception {
 
         analyzeMagicNumber();
@@ -94,6 +180,7 @@ public class ByteAnalyzer {
         analyzeMethods();
         analyzeAttributeCount();
         this.attributeInformation = analyzeAttribute(((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF));
+        System.out.println(bytes.length + "  " + offset);
 
     }
 
@@ -1782,46 +1869,3 @@ public class ByteAnalyzer {
         this.attributeInformation = attributeInformation;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

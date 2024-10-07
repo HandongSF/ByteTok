@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.parameter.Parameter;
 
 public class MethodParameters implements AttributeInformation {
@@ -46,5 +47,26 @@ public class MethodParameters implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.parametersCount = parametersCount;
         this.parameters = parameters;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nMethodParameters: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append(String.format("%02X", parametersCount));
+
+        for(Parameter p : parameters) {
+            stringBuilder.append(p.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

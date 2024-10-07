@@ -27,4 +27,18 @@ public class ArrayValue implements ElementUnion {
         this.numValues = numValues;
         this.values = values;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : numValues) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for (ElementValue value : values) {
+            stringBuilder.append(value.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

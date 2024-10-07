@@ -7,4 +7,11 @@ public class TopVariableInformation implements VerificationTypeInformation {
 
     public TopVariableInformation() {
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", tag));
+
+        return stringBuilder.toString();
+    }
 }

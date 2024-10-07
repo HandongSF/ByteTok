@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.inner;
 
+import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+
 public class InnerClassInformation {
     private byte[] innerClassInformationIndex; // u2
     private byte[] outerClassInformationIndex; // u2
@@ -43,5 +45,26 @@ public class InnerClassInformation {
         this.outerClassInformationIndex = outerClassInformationIndex;
         this.innerNameIndex = innerNameIndex;
         this.innerClassAccessFlags = innerClassAccessFlags;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : innerClassInformationIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : outerClassInformationIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b: innerNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : innerClassAccessFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

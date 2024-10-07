@@ -26,4 +26,16 @@ public class ElementValue {
         this.tag = tag;
         this.elementUnion = elementUnion;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+
+        stringBuilder.append(String.format("%02X", tag));
+        stringBuilder.append(elementUnion.toString());
+
+        return stringBuilder.toString();
+    }
+
+
 }

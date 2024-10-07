@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type.target;
 
 
+import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
 
 public class TypeParameterBoundTarget implements TargetInformation {
     private byte typeParameterIndex;
@@ -25,5 +26,13 @@ public class TypeParameterBoundTarget implements TargetInformation {
     public TypeParameterBoundTarget(byte typeParameterIndex, byte boundIndex) {
         this.typeParameterIndex = typeParameterIndex;
         this.boundIndex = boundIndex;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", typeParameterIndex));
+        stringBuilder.append(String.format("%02X", boundIndex));
+
+        return stringBuilder.toString();
     }
 }

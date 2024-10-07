@@ -27,6 +27,15 @@ public class StringInformation implements ConstantPoolInformation {
         this.stringIndex = stringIndex;
     }
     public String toString() {
-        return "StringInformation";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nStringInformation: ");
+        stringBuilder.append(String.format("%02X", tag));
+
+        for(byte b : stringIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.local;
 
+import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+
 public class LocalVariableTableInformation {
     private byte[] startPC; // u2
     private byte[] length; // u2
@@ -53,5 +55,30 @@ public class LocalVariableTableInformation {
         this.nameIndex = nameIndex;
         this.descriptorIndex = descriptorIndex;
         this.index = index;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : startPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : length) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : descriptorIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : index) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

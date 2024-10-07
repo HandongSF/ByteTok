@@ -26,4 +26,17 @@ public class ParameterAnnotations {
         this.numberOfAnnotations = numberOfAnnotations;
         this.annotations = annotations;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : numberOfAnnotations) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(Annotation b : annotations) {
+            stringBuilder.append(b.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

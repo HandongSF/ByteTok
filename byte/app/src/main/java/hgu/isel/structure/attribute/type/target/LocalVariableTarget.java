@@ -1,5 +1,6 @@
 package hgu.isel.structure.attribute.type.target;
 
+import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
 import hgu.isel.structure.attribute.type.target.local.LocalVariableTargetTable;
 
 public class LocalVariableTarget implements TargetInformation{
@@ -25,5 +26,18 @@ public class LocalVariableTarget implements TargetInformation{
     public LocalVariableTarget(byte[] tableLength, LocalVariableTargetTable[] table) {
         this.tableLength = tableLength;
         this.table = table;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : tableLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(LocalVariableTargetTable t : table) {
+            stringBuilder.append(t.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

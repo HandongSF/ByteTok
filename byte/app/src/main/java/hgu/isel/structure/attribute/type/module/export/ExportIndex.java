@@ -14,4 +14,13 @@ public class ExportIndex {
     public ExportIndex(byte[] exportsToIndex) {
         this.exportsToIndex = exportsToIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : exportsToIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
+    }
 }

@@ -1,5 +1,7 @@
 package hgu.isel.structure.attribute.type.exception;
 
+import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+
 public class ExceptionTable {
     private byte[] startPC; // u2
     private byte[] endPC; // u2
@@ -43,5 +45,29 @@ public class ExceptionTable {
         this.endPC = endPC;
         this.handlerPC = handlerPC;
         this.catchType = catchType;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : startPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : endPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : handlerPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b: catchType) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+
+
+        return stringBuilder.toString();
     }
 }

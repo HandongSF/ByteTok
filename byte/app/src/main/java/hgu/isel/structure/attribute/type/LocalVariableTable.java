@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.local.LocalVariableTableInformation;
 
 public class LocalVariableTable implements AttributeInformation {
@@ -46,5 +47,29 @@ public class LocalVariableTable implements AttributeInformation {
         this.attributeLength = attributeLength;
         this.localVariableTableLength = localVariableTableLength;
         this.localVariableTable = localVariableTable;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nLocalVariableTable: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : localVariableTableLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(LocalVariableTableInformation l : localVariableTable) {
+            stringBuilder.append(l.toString());
+        }
+
+        return stringBuilder.toString();
     }
 }

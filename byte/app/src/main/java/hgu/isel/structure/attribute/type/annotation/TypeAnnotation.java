@@ -67,4 +67,26 @@ public class TypeAnnotation {
         this.numberOfElementValuePairs = numberOfElementValuePairs;
         this.elementValuePairs = elementValuePairs;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", targetType));
+        stringBuilder.append(targetInformation.toString());
+        stringBuilder.append(targetPath.toString());
+
+        for(byte b : typeIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : numberOfElementValuePairs) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(ElementValuePairs e : elementValuePairs) {
+            stringBuilder.append(e.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

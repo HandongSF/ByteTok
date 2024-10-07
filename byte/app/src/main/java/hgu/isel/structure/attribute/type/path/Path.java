@@ -24,4 +24,12 @@ public class Path {
         this.typePathKind = typePathKind;
         this.typeArgumentIndex = typeArgumentIndex;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", typePathKind));
+        stringBuilder.append(String.format("%02X", typeArgumentIndex));
+
+        return stringBuilder.toString();
+    }
 }

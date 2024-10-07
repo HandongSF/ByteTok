@@ -46,4 +46,25 @@ public class RecordComponentInformation {
         this.attributesCount = attributesCount;
         this.attributes = attributes;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : descriptorIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(AttributeInformation a : attributes) {
+            stringBuilder.append(a.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

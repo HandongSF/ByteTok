@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 
 public class SourceFile implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -35,5 +36,25 @@ public class SourceFile implements AttributeInformation {
         this.attributeNameIndex = attributeNameIndex;
         this.attributeLength = attributeLength;
         this.sourceFileIndex = sourceFileIndex;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nSourceFile: ");
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : sourceFileIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        return stringBuilder.toString();
     }
 }

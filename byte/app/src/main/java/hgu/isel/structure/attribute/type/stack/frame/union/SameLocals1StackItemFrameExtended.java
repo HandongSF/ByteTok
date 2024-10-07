@@ -37,4 +37,18 @@ public class SameLocals1StackItemFrameExtended implements StackMapFrame {
         this.offsetDelta = offsetDelta;
         this.stack = stack;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("%02X", frameType));
+
+        for(byte b : offsetDelta) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        stringBuilder.append(stack.toString());
+
+
+        return stringBuilder.toString();
+    }
 }
