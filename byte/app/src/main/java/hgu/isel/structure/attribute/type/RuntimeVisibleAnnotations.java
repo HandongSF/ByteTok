@@ -51,7 +51,7 @@ public class RuntimeVisibleAnnotations implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nRuntimeVisibleAnnotations: ");
+        stringBuilder.append("\n        - RuntimeVisibleAnnotations: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

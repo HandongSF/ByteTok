@@ -40,7 +40,7 @@ public class SourceDebugExtension implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nSourceDebugExtension: ");
+        stringBuilder.append("\n        - SourceDebugExtension: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

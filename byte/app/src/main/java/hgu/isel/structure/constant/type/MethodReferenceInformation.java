@@ -39,7 +39,7 @@ public class MethodReferenceInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nMethodReferenceInformation: ");
+        stringBuilder.append("\n    - MethodReferenceInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : classIndex) {

@@ -39,7 +39,7 @@ public class MethodHandleInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nMethodHandleInformation: ");
+        stringBuilder.append("\n    - MethodHandleInformation: ");
         stringBuilder.append(String.format("%02X", tag));
         stringBuilder.append(String.format("%02X", referenceKind));
 

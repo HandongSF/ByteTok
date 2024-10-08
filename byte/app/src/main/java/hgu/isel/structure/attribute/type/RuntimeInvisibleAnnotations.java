@@ -52,7 +52,7 @@ public class RuntimeInvisibleAnnotations implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nRuntimeInvisibleAnnotations: ");
+        stringBuilder.append("\n        - RuntimeInvisibleAnnotations: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

@@ -40,7 +40,7 @@ public class DoubleInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nDoubleInformation: ");
+        stringBuilder.append("\n    - DoubleInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : highBytes) {

@@ -42,7 +42,7 @@ public class AnnotationDefault implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nAnnotationsDefault: ");
+        stringBuilder.append("\n        - AnnotationsDefault: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

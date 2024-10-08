@@ -51,7 +51,7 @@ public class InnerClasses implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nBootstrapMethods: ");
+        stringBuilder.append("\n        - InnerClasses: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

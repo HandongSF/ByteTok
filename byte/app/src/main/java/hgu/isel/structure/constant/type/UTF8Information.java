@@ -39,7 +39,7 @@ public class UTF8Information implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nUTF8Information: ");
+        stringBuilder.append("\n    - UTF8Information: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : length) {

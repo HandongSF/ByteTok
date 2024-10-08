@@ -51,7 +51,7 @@ public class ModulePackages implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nModulePackages: ");
+        stringBuilder.append("\n        - ModulePackages: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

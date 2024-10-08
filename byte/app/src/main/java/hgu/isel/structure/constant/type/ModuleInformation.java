@@ -29,7 +29,7 @@ public class ModuleInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nModuleInformation: ");
+        stringBuilder.append("\n    - ModuleInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : nameIndex) {

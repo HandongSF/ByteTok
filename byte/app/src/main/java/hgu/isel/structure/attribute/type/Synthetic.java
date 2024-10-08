@@ -31,7 +31,7 @@ public class Synthetic implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nRuntimeInvisibleAnnotations: ");
+        stringBuilder.append("\n        - Synthetic: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

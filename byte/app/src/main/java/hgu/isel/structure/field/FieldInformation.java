@@ -60,7 +60,7 @@ public class FieldInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nField: ");
+        stringBuilder.append("\n    Field: ");
 
         for(byte b : accessFlags) {
             stringBuilder.append(String.format("%02X", b));

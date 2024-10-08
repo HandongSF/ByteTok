@@ -60,7 +60,7 @@ public class MethodInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nMethod: ");
+        stringBuilder.append("\n    Method: ");
 
         for(byte b : accessFlags) {
             stringBuilder.append(String.format("%02X", b));

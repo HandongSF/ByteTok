@@ -41,7 +41,7 @@ public class Signature implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nSignature: ");
+        stringBuilder.append("\n        - Signature: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

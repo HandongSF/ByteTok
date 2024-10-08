@@ -52,7 +52,7 @@ public class LocalVariableTable implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nLocalVariableTable: ");
+        stringBuilder.append("\n        - LocalVariableTable: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

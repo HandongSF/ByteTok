@@ -165,7 +165,7 @@ public class Module implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nModule: ");
+        stringBuilder.append("\n        - Module: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

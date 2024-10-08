@@ -40,7 +40,7 @@ public class NestHost implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nNestHost: ");
+        stringBuilder.append("\n        - NestHost: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

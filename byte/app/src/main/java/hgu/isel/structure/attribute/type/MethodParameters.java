@@ -51,7 +51,7 @@ public class MethodParameters implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nMethodParameters: ");
+        stringBuilder.append("\n        - MethodParameters: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

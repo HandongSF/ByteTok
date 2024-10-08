@@ -39,7 +39,7 @@ public class InvokeDynamicInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nInvokeDynamicInformation: ");
+        stringBuilder.append("\n    - InvokeDynamicInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : bootstrapMethodAttributeIndex) {

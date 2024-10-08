@@ -29,7 +29,7 @@ public class StringInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nStringInformation: ");
+        stringBuilder.append("\n    - StringInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : stringIndex) {

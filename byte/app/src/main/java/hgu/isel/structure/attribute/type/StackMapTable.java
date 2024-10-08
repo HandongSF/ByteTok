@@ -52,7 +52,7 @@ public class StackMapTable implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nStackMapTable: ");
+        stringBuilder.append("\n        - StackMapTable: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

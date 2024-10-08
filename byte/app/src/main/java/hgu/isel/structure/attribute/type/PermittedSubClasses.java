@@ -51,7 +51,7 @@ public class PermittedSubClasses implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nPermittedSubClasses: ");
+        stringBuilder.append("\n        - PermittedSubClasses: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

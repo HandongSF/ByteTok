@@ -50,7 +50,7 @@ public class EnclosingMethod implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nEnclosingMethod: ");
+        stringBuilder.append("\n        - EnclosingMethod: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

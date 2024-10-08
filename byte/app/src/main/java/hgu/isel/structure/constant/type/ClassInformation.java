@@ -32,7 +32,7 @@ public class ClassInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nClassInformation: ");
+        stringBuilder.append("\n    - ClassInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : nameIndex) {
