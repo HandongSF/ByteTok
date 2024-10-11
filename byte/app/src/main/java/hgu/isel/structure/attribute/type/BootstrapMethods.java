@@ -50,7 +50,7 @@ public class BootstrapMethods implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nBootstrapMethods: ");
+        stringBuilder.append("\n        - BootstrapMethods: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

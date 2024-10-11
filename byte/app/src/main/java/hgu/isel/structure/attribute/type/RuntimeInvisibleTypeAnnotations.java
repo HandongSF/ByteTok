@@ -51,7 +51,7 @@ public class RuntimeInvisibleTypeAnnotations implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nRuntimeInvisibleTypeAnnotations: ");
+        stringBuilder.append("\n        - RuntimeInvisibleTypeAnnotations: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

@@ -39,7 +39,7 @@ public class NameAndTypeInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nNameAndTypeInformation: ");
+        stringBuilder.append("\n    - NameAndTypeInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : nameIndex) {

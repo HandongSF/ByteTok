@@ -29,7 +29,7 @@ public class MethodTypeInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nMethodTypeInformation: ");
+        stringBuilder.append("\n    - MethodTypeInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : descriptorIndex) {

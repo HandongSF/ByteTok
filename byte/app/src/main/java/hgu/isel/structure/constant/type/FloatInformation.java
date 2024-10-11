@@ -29,7 +29,7 @@ public class FloatInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nFloatInformation: ");
+        stringBuilder.append("\n    - FloatInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : bytes) {

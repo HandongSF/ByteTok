@@ -39,7 +39,7 @@ public class FieldReferenceInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nFieldReferenceInformation: ");
+        stringBuilder.append("\n    - FieldReferenceInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : classIndex) {

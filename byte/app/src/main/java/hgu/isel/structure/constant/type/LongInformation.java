@@ -39,7 +39,7 @@ public class LongInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nLongInformation: ");
+        stringBuilder.append("\n    - LongInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : highBytes) {

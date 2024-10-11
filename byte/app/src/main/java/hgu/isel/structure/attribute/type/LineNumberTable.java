@@ -52,7 +52,7 @@ public class LineNumberTable implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nLineNumberTable: ");
+        stringBuilder.append("\n        - LineNumberTable: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

@@ -19,7 +19,7 @@ public class Interfaces {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nInterface: ");
+        stringBuilder.append("\n    - Interface: ");
 
         for(byte b : bytes) {
             stringBuilder.append(String.format("%02X", b));

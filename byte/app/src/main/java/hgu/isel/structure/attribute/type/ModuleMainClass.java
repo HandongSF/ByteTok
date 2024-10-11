@@ -41,7 +41,7 @@ public class ModuleMainClass implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nModuleMainClass: ");
+        stringBuilder.append("\n        - ModuleMainClass: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

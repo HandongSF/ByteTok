@@ -40,7 +40,7 @@ public class ConstantValue implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nConstantValue: ");
+        stringBuilder.append("\n        - ConstantValue: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

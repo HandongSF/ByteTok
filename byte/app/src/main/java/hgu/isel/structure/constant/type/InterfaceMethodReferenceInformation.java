@@ -39,7 +39,7 @@ public class InterfaceMethodReferenceInformation implements ConstantPoolInformat
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nInterfaceMethodReferenceInformation: ");
+        stringBuilder.append("\n    - InterfaceMethodReferenceInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : classIndex) {

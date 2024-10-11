@@ -29,7 +29,7 @@ public class IntegerInformation implements ConstantPoolInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nIntegerInformation: ");
+        stringBuilder.append("\n    - IntegerInformation: ");
         stringBuilder.append(String.format("%02X", tag));
 
         for(byte b : bytes) {

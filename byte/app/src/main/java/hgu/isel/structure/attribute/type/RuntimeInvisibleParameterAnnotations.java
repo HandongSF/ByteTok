@@ -52,7 +52,7 @@ public class RuntimeInvisibleParameterAnnotations implements AttributeInformatio
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nRuntimeInvisibleParameterAnnotations: ");
+        stringBuilder.append("\n        - RuntimeInvisibleParameterAnnotations: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));

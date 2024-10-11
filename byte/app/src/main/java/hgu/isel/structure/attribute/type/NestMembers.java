@@ -50,7 +50,7 @@ public class NestMembers implements AttributeInformation {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\nNestMembers: ");
+        stringBuilder.append("\n        - NestMembers: ");
 
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
