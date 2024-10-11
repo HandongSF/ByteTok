@@ -209,7 +209,7 @@ public class ByteAnalyzer {
     }
 
     public void analyzeMajorVersion() {
-        this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
+        this.majorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
 
 
         this.offset = offset + 2;
