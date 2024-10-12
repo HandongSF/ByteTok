@@ -2,10 +2,10 @@ package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
 
-public class StoreByteOrBooleanIntoArrayInstruction implements Instruction {
+public class StoreIntoByteOrBooleanArrayInstruction implements Instruction {
     private byte format;
 
-    public StoreByteOrBooleanIntoArrayInstruction(byte format) {
+    public StoreIntoByteOrBooleanArrayInstruction(byte format) {
         this.format = format;
     }
 
