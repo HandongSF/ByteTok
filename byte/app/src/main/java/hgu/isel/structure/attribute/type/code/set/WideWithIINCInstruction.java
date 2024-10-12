@@ -2,17 +2,17 @@ package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
 
-public class WideWithLINCInstruction implements Instruction {
+public class WideWithIINCInstruction implements Instruction {
     private byte format;
-    private IncrementLocalVariableByConstantInstruction instruction;
+    private byte iinc;
     private byte indexByte1;
     private byte indexByte2;
     private byte constByte1;
     private byte constByte2;
 
-    public WideWithLINCInstruction(byte format, IncrementLocalVariableByConstantInstruction instruction, byte indexByte1, byte indexByte2, byte constByte1, byte constByte2) {
+    public WideWithIINCInstruction(byte format, byte iinc, byte indexByte1, byte indexByte2, byte constByte1, byte constByte2) {
         this.format = format;
-        this.instruction = instruction;
+        this.iinc = iinc;
         this.indexByte1 = indexByte1;
         this.indexByte2 = indexByte2;
         this.constByte1 = constByte1;
@@ -27,12 +27,12 @@ public class WideWithLINCInstruction implements Instruction {
         this.format = format;
     }
 
-    public IncrementLocalVariableByConstantInstruction getInstruction() {
-        return instruction;
+    public byte getIinc() {
+        return iinc;
     }
 
-    public void setInstruction(IncrementLocalVariableByConstantInstruction instruction) {
-        this.instruction = instruction;
+    public void setIinc(byte iinc) {
+        this.iinc = iinc;
     }
 
     public byte getIndexByte1() {

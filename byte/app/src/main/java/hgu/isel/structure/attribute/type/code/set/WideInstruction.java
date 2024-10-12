@@ -4,11 +4,11 @@ import hgu.isel.structure.attribute.type.code.Instruction;
 
 public class WideInstruction implements Instruction {
     private byte format;
-    private Instruction opCode;
+    private byte opCode;
     private byte indexByte1;
     private byte indexByte2;
 
-    public WideInstruction(byte format, Instruction opCode, byte indexByte1, byte indexByte2) {
+    public WideInstruction(byte format, byte opCode, byte indexByte1, byte indexByte2) {
         this.format = format;
         this.opCode = opCode;
         this.indexByte1 = indexByte1;
@@ -23,11 +23,11 @@ public class WideInstruction implements Instruction {
         this.format = format;
     }
 
-    public Instruction getOpCode() {
+    public byte getOpCode() {
         return opCode;
     }
 
-    public void setOpCode(Instruction opCode) {
+    public void setOpCode(byte opCode) {
         this.opCode = opCode;
     }
 

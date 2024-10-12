@@ -512,6 +512,7 @@ public class ByteAnalyzer {
             offset += 4;
 
             int lengthInteger = ((codeLength[0] & 0xFF) << 24) | ((codeLength[1] & 0xFF) << 16) | ((codeLength[2] & 0xFF) << 8) | (codeLength[3] & 0xFF);
+            // tableswitch instruction 실행을 위해 해당 위치에서의 offset을 가지고 와야함
             byte[] code = Arrays.copyOfRange(bytes, offset, offset + lengthInteger);
             offset += lengthInteger;
 
