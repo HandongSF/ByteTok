@@ -2,11 +2,11 @@ package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
 
-public class StoreIntoReferenceLocalVariableInstruction implements Instruction {
+public class StoreReferenceIntoLocalVariableInstruction implements Instruction {
     private byte format;
     private byte index;
 
-    public StoreIntoReferenceLocalVariableInstruction(byte format, byte index) {
+    public StoreReferenceIntoLocalVariableInstruction(byte format, byte index) {
         this.format = format;
         this.index = index;
     }

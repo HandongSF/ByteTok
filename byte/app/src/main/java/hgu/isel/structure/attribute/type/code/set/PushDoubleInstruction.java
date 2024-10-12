@@ -1,6 +1,8 @@
 package hgu.isel.structure.attribute.type.code.set;
 
-public class PushDoubleInstruction {
+import hgu.isel.structure.attribute.type.code.Instruction;
+
+public class PushDoubleInstruction implements Instruction {
     private byte format;
 
     public PushDoubleInstruction(byte format) {
