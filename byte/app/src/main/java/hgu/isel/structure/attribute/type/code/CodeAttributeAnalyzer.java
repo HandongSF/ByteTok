@@ -1,14 +1,18 @@
 package hgu.isel.structure.attribute.type.code;
 
 import hgu.isel.structure.attribute.type.code.set.*;
+import hgu.isel.structure.attribute.type.code.set.jump.JumpOffset;
+import hgu.isel.structure.attribute.type.code.set.match.MatchOffsetPair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CodeAttributeAnalyzer {
 
     private byte[] codes; // the entire bytes are in here
     private ArrayList<Instruction> instructions = new ArrayList<>(); // the entire instructions are in here
     private int offset;
+    private int totalOffset;
 
 
     public void analyze() {
@@ -17,6 +21,16 @@ public class CodeAttributeAnalyzer {
             byte format = codes[offset];
             int opcode = format & 0xFF;
             offset += 1;
+
+            int currentOffset;
+            int padding;
+            byte[] paddingBytes;
+            byte[] defaultByte;
+            byte[] lowByte;
+            byte[] highByte;
+            JumpOffset[] jumpOffsets;
+            int low;
+            int high;
 
             Instruction instruction;
             byte index;
@@ -30,6 +44,8 @@ public class CodeAttributeAnalyzer {
             byte count;
             byte dimensions;
             byte type;
+            byte const1;
+            byte const2;
 
             switch (opcode) {
                 case 0x32:
@@ -1133,6 +1149,39 @@ public class CodeAttributeAnalyzer {
                     break;
                 case 0xab:
                     // lookupswitch instruction
+                    currentOffset = offset + totalOffset - 1;
+                    padding = (4 - (currentOffset % 4)) % 4;
+
+                    paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
+
+                    offset += padding; // padding
+
+                    defaultByte = Arrays.copyOfRange(codes, offset, offset + 4);
+                    offset += 4;
+
+                    byte[] pair = Arrays.copyOfRange(codes, offset, offset + 4);
+                    offset += 4;
+
+                    int pairCount = ((pair[0] & 0xFF) << 24) |
+                            ((pair[1] & 0xFF) << 16) |
+                            ((pair[2] & 0xFF) << 8) |
+                            (pair[3] & 0xFF);
+
+                    MatchOffsetPair[] matchOffsetPairs = new MatchOffsetPair[pairCount];
+
+                    for(int i = 0; i < pairCount; i++) {
+                        byte[] match = Arrays.copyOfRange(codes, offset, offset + 4);
+                        offset += 4;
+
+                        byte[] matchOffset = Arrays.copyOfRange(codes, offset, offset + 4);
+                        offset += 4;
+
+                        matchOffsetPairs[i] = new MatchOffsetPair(match, matchOffset);
+                    }
+
+                    instruction = new LookUpSwitchInstruction(format, paddingBytes, defaultByte, pair, matchOffsetPairs);
+                    instructions.add(instruction);
+                    break;
                 case 0x81:
                     // lor instruction
                     instruction = new BooleanORLongInstruction(format);
@@ -1322,8 +1371,78 @@ public class CodeAttributeAnalyzer {
                     break;
                 case 0xaa:
                     // tableswitch instruction
+                    currentOffset = offset + totalOffset - 1;
+                    padding = (4 - (currentOffset % 4)) % 4;
+
+                    paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
+
+                    offset += padding; // padding
+
+                    defaultByte = Arrays.copyOfRange(codes, offset, offset + 4);
+                    offset += 4;
+
+                    lowByte = Arrays.copyOfRange(codes, offset, offset + 4);
+                    offset += 4;
+
+                    highByte = Arrays.copyOfRange(codes, offset, offset + 4);
+                    offset += 4;
+
+                    low = ((lowByte[0] & 0xFF) << 24) |
+                            ((lowByte[1] & 0xFF) << 16) |
+                            ((lowByte[2] & 0xFF) << 8) |
+                            (lowByte[3] & 0xFF);
+
+                    high = ((highByte[0] & 0xFF) << 24) |
+                            ((highByte[1] & 0xFF) << 16) |
+                            ((highByte[2] & 0xFF) << 8) |
+                            (highByte[3] & 0xFF);
+
+                    int jumpOffset = high - low + 1;
+
+                    jumpOffsets = new JumpOffset[jumpOffset];
+
+                    for(int i = 0; i < jumpOffset; i++) {
+                        byte[] info = Arrays.copyOfRange(codes, offset, offset + 4);
+                        jumpOffsets[i] = new JumpOffset(info);
+                        offset += 4;
+                    }
+
+                    instruction = new TableSwitchInstruction(format, paddingBytes, defaultByte, lowByte, highByte, jumpOffsets);
+                    instructions.add(instruction);
+                    break;
+
                 case 0xc4:
-                    // wide instruction
+                    byte wideOpcode = codes[offset];
+                    int opcodeInt = wideOpcode & 0xFF;
+                    offset += 1;
+
+                    if(opcodeInt == 0x84) {
+                        index1 = codes[offset];
+                        offset += 1;
+
+                        index2 = codes[offset];
+                        offset += 1;
+
+                        const1 = codes[offset];
+                        offset += 1;
+
+                        const2 = codes[offset];
+                        offset += 1;
+
+                        instruction = new WideWithIINCInstruction(format, wideOpcode, index1, index2, const1, const2);
+                        instructions.add(instruction);
+                        break;
+                    } else {
+                        index1 = codes[offset];
+                        offset += 1;
+
+                        index2 = codes[offset];
+                        offset += 1;
+
+                        instruction = new WideInstruction(format, wideOpcode, index1, index2);
+                        instructions.add(instruction);
+                        break;
+                    }
                 default:
                     throw new Error();
 
@@ -1332,9 +1451,18 @@ public class CodeAttributeAnalyzer {
 
     }
 
-    public CodeAttributeAnalyzer(byte[] codes) {
+    public CodeAttributeAnalyzer(byte[] codes, int totalOffset) {
         this.codes = codes;
         this.offset = 0;
+        this.totalOffset = totalOffset;
+    }
+
+    public int getTotalOffset() {
+        return totalOffset;
+    }
+
+    public void setTotalOffset(int totalOffset) {
+        this.totalOffset = totalOffset;
     }
 
     public byte[] getCodes() {

@@ -512,6 +512,9 @@ public class ByteAnalyzer {
             offset += 4;
 
             int lengthInteger = ((codeLength[0] & 0xFF) << 24) | ((codeLength[1] & 0xFF) << 16) | ((codeLength[2] & 0xFF) << 8) | (codeLength[3] & 0xFF);
+            // tableswitch instruction 실행을 위해 해당 위치에서의 offset을 가지고 와야함
+            int totalOffset = offset;
+
             byte[] code = Arrays.copyOfRange(bytes, offset, offset + lengthInteger);
             offset += lengthInteger;
 
@@ -545,7 +548,7 @@ public class ByteAnalyzer {
 
             AttributeInformation[] attributes = analyzeAttribute(attributesCountInteger);
 
-            returnInformation = new Code(attributeNameIndex, attributeLength, maxStack, maxLocals, codeLength, code, exceptionTableLength, exceptionTables, attributesCount, attributes);
+            returnInformation = new Code(attributeNameIndex, attributeLength, maxStack, maxLocals, codeLength, code, exceptionTableLength, exceptionTables, attributesCount, attributes, totalOffset);
 
         } else if(Arrays.equals(attributeName, "StackMapTable".getBytes("UTF-8"))) {
             byte[] numberOfEntries = Arrays.copyOfRange(bytes, offset, offset + 2);

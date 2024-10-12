@@ -27,4 +27,15 @@ public class LoadDoubleFromLocalVariableInstruction implements Instruction {
     public void setIndex(byte index) {
         this.index = index;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n             - dload instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", index));
+
+
+        return stringBuilder.toString();
+    }
 }

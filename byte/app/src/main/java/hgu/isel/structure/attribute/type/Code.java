@@ -2,7 +2,11 @@ package hgu.isel.structure.attribute.type;
 
 import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
+import hgu.isel.structure.attribute.type.code.CodeAttributeAnalyzer;
+import hgu.isel.structure.attribute.type.code.Instruction;
 import hgu.isel.structure.attribute.type.exception.ExceptionTable;
+
+import java.util.ArrayList;
 
 public class Code implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -10,7 +14,7 @@ public class Code implements AttributeInformation {
     private byte[] maxStack; // u2
     private byte[] maxLocals; // u2
     private byte[] codeLength; // u4
-    private byte[] code; // codeLength
+    private ArrayList<Instruction> code; // codeLength
     private byte[] exceptionTableLength; // u2
     private ExceptionTable[] exceptionTable; // exceptionTableLength
     private byte[] attributesCount; // u2
@@ -56,11 +60,11 @@ public class Code implements AttributeInformation {
         this.codeLength = codeLength;
     }
 
-    public byte[] getCode() {
+    public ArrayList<Instruction> getCode() {
         return code;
     }
 
-    public void setCode(byte[] code) {
+    public void setCode(ArrayList<Instruction> code) {
         this.code = code;
     }
 
@@ -96,17 +100,22 @@ public class Code implements AttributeInformation {
         this.attributes = attributes;
     }
 
-    public Code(byte[] attributeNameIndex, byte[] attributeLength, byte[] maxStack, byte[] maxLocals, byte[] codeLength, byte[] code, byte[] exceptionTableLength, ExceptionTable[] exceptionTable, byte[] attributesCount, AttributeInformation[] attributes) {
+    public Code(byte[] attributeNameIndex, byte[] attributeLength, byte[] maxStack, byte[] maxLocals, byte[] codeLength, byte[] code, byte[] exceptionTableLength, ExceptionTable[] exceptionTable, byte[] attributesCount, AttributeInformation[] attributes, int totalOffset) {
         this.attributeNameIndex = attributeNameIndex;
         this.attributeLength = attributeLength;
         this.maxStack = maxStack;
         this.maxLocals = maxLocals;
         this.codeLength = codeLength;
-        this.code = code;
+
         this.exceptionTableLength = exceptionTableLength;
         this.exceptionTable = exceptionTable;
         this.attributesCount = attributesCount;
         this.attributes = attributes;
+
+        CodeAttributeAnalyzer codeAttributeAnalyzer = new CodeAttributeAnalyzer(code, totalOffset);
+        codeAttributeAnalyzer.analyze();
+
+        this.code = codeAttributeAnalyzer.getInstructions();
     }
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -133,8 +142,8 @@ public class Code implements AttributeInformation {
             stringBuilder.append(String.format("%02X", b));
         }
 
-        for(byte b : code) {
-            stringBuilder.append(String.format("%02X", b));
+        for(Instruction b : code) {
+            stringBuilder.append(b.toString());
         }
 
         for(byte b : exceptionTableLength) {

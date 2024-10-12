@@ -36,4 +36,15 @@ public class BranchAlwaysInstruction implements Instruction {
     public void setBranchType2(byte branchType2) {
         this.branchType2 = branchType2;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - goto instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchType1));
+        stringBuilder.append(String.format("%02X", branchType2));
+
+        return stringBuilder.toString();
+    }
 }

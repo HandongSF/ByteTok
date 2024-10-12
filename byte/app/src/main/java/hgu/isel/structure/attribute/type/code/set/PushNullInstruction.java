@@ -9,11 +9,23 @@ public class PushNullInstruction implements Instruction {
         this.format = format;
     }
 
-    public byte getAConstNull() {
+    public byte getFormat() {
         return format;
     }
 
-    public void setAConstNull(byte aConstNull) {
-        this.format = aConstNull;
+    public void setFormat(byte format) {
+        this.format = format;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - aconst_null instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+
+        return stringBuilder.toString();
     }
 }

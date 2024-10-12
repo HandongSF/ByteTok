@@ -16,4 +16,13 @@ public class AddIntInstruction implements Instruction {
     public void setFormat(byte format) {
         this.format = format;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - iadd instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+        return stringBuilder.toString();
+    }
 }

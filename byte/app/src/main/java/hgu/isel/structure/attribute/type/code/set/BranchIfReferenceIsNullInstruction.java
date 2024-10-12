@@ -36,4 +36,15 @@ public class BranchIfReferenceIsNullInstruction implements Instruction {
     public void setBranchByte2(byte branchByte2) {
         this.branchByte2 = branchByte2;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - ifnull instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchByte1));
+        stringBuilder.append(String.format("%02X", branchByte2));
+
+        return stringBuilder.toString();
+    }
 }

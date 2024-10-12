@@ -36,4 +36,17 @@ public class PushShortInstruction implements Instruction {
     public void setByte2(byte byte2) {
         this.byte2 = byte2;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - sipush instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", byte1));
+        stringBuilder.append(String.format("%02X", byte2));
+
+
+
+        return stringBuilder.toString();
+    }
 }

@@ -36,4 +36,16 @@ public class CreateNewReferenceArrayInstruction implements Instruction {
     public void setIndexByte2(byte indexByte2) {
         this.indexByte2 = indexByte2;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - anewarray instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+
+
+        return stringBuilder.toString();
+    }
 }
