@@ -16,4 +16,15 @@ public class StoreReferenceIntoNLocalVariableInstruction implements Instruction 
     public void setAStoreN(byte aStoreN) {
         this.format = aStoreN;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - astore_n instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+
+        return stringBuilder.toString();
+    }
 }

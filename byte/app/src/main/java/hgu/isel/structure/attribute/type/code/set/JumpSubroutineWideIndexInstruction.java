@@ -56,4 +56,18 @@ public class JumpSubroutineWideIndexInstruction implements Instruction {
     public void setBranchByte4(byte branchByte4) {
         this.branchByte4 = branchByte4;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - jsr_w instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchByte1));
+        stringBuilder.append(String.format("%02X", branchByte2));
+        stringBuilder.append(String.format("%02X", branchByte3));
+        stringBuilder.append(String.format("%02X", branchByte4));
+
+
+        return stringBuilder.toString();
+    }
 }

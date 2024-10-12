@@ -46,4 +46,16 @@ public class CreateMultidimensionalArrayInstruction implements Instruction {
     public void setDimensions(byte dimensions) {
         this.dimensions = dimensions;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - multianewarray instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+        stringBuilder.append(String.format("%02X", dimensions));
+
+        return stringBuilder.toString();
+    }
 }

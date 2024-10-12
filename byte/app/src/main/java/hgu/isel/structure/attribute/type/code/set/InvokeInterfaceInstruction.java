@@ -47,4 +47,17 @@ public class InvokeInterfaceInstruction implements Instruction {
     public void setCount(byte count) {
         this.count = count;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - invokeinterface instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+        stringBuilder.append(String.format("%02X", count));
+
+
+        return stringBuilder.toString();
+    }
 }

@@ -36,4 +36,16 @@ public class IncrementLocalVariableByConstantInstruction implements Instruction 
     public void setConstValue(byte constValue) {
         this.constValue = constValue;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - iinc instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", index));
+        stringBuilder.append(String.format("%02X", constValue));
+
+
+        return stringBuilder.toString();
+    }
 }

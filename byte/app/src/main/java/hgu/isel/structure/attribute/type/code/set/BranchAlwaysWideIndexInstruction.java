@@ -56,4 +56,17 @@ public class BranchAlwaysWideIndexInstruction implements Instruction {
     public void setBranchType4(byte branchType4) {
         this.branchType4 = branchType4;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - goto_w instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchType1));
+        stringBuilder.append(String.format("%02X", branchType2));
+        stringBuilder.append(String.format("%02X", branchType3));
+        stringBuilder.append(String.format("%02X", branchType4));
+
+        return stringBuilder.toString();
+    }
 }

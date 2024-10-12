@@ -16,4 +16,15 @@ public class ReturnReferenceFromMethodInstruction implements Instruction {
     public void setAReturn(byte aReturn) {
         this.format = aReturn;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n           - areturn instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+
+        return stringBuilder.toString();
+    }
 }

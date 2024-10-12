@@ -16,4 +16,14 @@ public class LogicalShiftRightIntInstruction implements Instruction {
     public void setFormat(byte format) {
         this.format = format;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n             - iushr instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+        return stringBuilder.toString();
+    }
 }

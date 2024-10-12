@@ -6,4 +6,15 @@ public class JumpOffset {
     public JumpOffset(byte[] info) {
         this.info = info;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : info) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+
+
+        return stringBuilder.toString();
+    }
 }

@@ -67,4 +67,35 @@ public class TableSwitchInstruction implements Instruction {
     public void setJumpOffsets(JumpOffset[] jumpOffsets) {
         this.jumpOffsets = jumpOffsets;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n             - athrow instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+        for(byte b : paddingBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : defaultByte) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : lowBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : highBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(JumpOffset b : jumpOffsets) {
+            stringBuilder.append(b.toString());
+        }
+
+
+
+        return stringBuilder.toString();
+    }
 }

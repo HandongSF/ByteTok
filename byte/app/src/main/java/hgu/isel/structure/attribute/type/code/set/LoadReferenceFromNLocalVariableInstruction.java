@@ -16,4 +16,14 @@ public class LoadReferenceFromNLocalVariableInstruction implements Instruction {
     public void setALoadN(byte aLoadN) {
         this.format = aLoadN;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - aload_n instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+        return stringBuilder.toString();
+    }
 }

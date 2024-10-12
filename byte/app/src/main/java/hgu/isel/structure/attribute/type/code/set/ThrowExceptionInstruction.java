@@ -16,4 +16,15 @@ public class ThrowExceptionInstruction implements Instruction { // athrow
     public void setAThrow(byte aThrow) {
         this.format = aThrow;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - athrow instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+
+        return stringBuilder.toString();
+    }
 }

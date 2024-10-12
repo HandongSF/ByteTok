@@ -26,4 +26,14 @@ public class NewArrayInstruction implements Instruction {
     public void setType(byte type) {
         this.type = type;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n            - newarray instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+
+        return stringBuilder.toString();
+    }
 }

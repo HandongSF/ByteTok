@@ -1,6 +1,7 @@
 package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
+import hgu.isel.structure.attribute.type.code.set.jump.JumpOffset;
 import hgu.isel.structure.attribute.type.code.set.match.MatchOffsetPair;
 
 public class LookUpSwitchInstruction implements Instruction {
@@ -57,5 +58,33 @@ public class LookUpSwitchInstruction implements Instruction {
 
     public void setMatchOffsetPairs(MatchOffsetPair[] matchOffsetPairs) {
         this.matchOffsetPairs = matchOffsetPairs;
+    }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n             - athrow instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+
+        for(byte b : paddingByte) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : defaultBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        for(byte b : nPairs) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+
+        for(MatchOffsetPair b : matchOffsetPairs) {
+            stringBuilder.append(b.toString());
+        }
+
+
+
+        return stringBuilder.toString();
     }
 }

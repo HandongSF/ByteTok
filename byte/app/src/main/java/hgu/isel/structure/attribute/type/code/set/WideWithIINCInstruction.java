@@ -66,4 +66,20 @@ public class WideWithIINCInstruction implements Instruction {
     public void setConstByte2(byte constByte2) {
         this.constByte2 = constByte2;
     }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n              - wide instruction: ");
+
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", iinc));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+        stringBuilder.append(String.format("%02X", constByte1));
+        stringBuilder.append(String.format("%02X", constByte2));
+
+
+
+        return stringBuilder.toString();
+    }
 }
