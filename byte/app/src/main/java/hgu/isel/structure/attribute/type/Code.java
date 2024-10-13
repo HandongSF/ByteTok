@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Code implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
-    private byte[] attributeLength; // u4
+    private byte[] attributeLength; // u4 563
     private byte[] maxStack; // u2
     private byte[] maxLocals; // u2
     private byte[] codeLength; // u4

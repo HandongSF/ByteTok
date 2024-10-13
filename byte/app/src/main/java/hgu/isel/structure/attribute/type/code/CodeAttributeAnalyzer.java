@@ -1375,7 +1375,7 @@ public class CodeAttributeAnalyzer {
                     break;
                 case 0xaa:
                     // tableswitch instruction
-                    currentOffset = offset + totalOffset - 1;
+                    currentOffset = offset + totalOffset;
                     padding = (4 - (currentOffset % 4)) % 4;
 
 
