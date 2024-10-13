@@ -62,7 +62,7 @@ public class LookUpSwitchInstruction implements Instruction {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\n             - athrow instruction: ");
+        stringBuilder.append("\n             - lookupswitch instruction: ");
 
         stringBuilder.append(String.format("%02X", format));
 

@@ -1166,14 +1166,17 @@ public class CodeAttributeAnalyzer {
                     byte[] pair = Arrays.copyOfRange(codes, offset, offset + 4);
                     offset += 4;
 
-                    int pairCount = ((pair[0] & 0xFF) << 24) |
+                    int pairCount = ((pair[0]) << 24) |
                             ((pair[1] & 0xFF) << 16) |
                             ((pair[2] & 0xFF) << 8) |
                             (pair[3] & 0xFF);
 
                     MatchOffsetPair[] matchOffsetPairs = new MatchOffsetPair[pairCount];
+                    System.out.println("offset:   " + offset);
 
                     for(int i = 0; i < pairCount; i++) {
+                        System.out.println("offset:   " + offset);
+                        System.out.println(codes.length);
                         byte[] match = Arrays.copyOfRange(codes, offset, offset + 4);
                         offset += 4;
 
@@ -1393,12 +1396,12 @@ public class CodeAttributeAnalyzer {
                     highByte = Arrays.copyOfRange(codes, offset, offset + 4);
                     offset += 4;
 
-                    low = ((lowByte[0] & 0xFF) << 24) |
+                    low = ((lowByte[0]) << 24) |
                             ((lowByte[1] & 0xFF) << 16) |
                             ((lowByte[2] & 0xFF) << 8) |
                             (lowByte[3] & 0xFF);
 
-                    high = ((highByte[0] & 0xFF) << 24) |
+                    high = ((highByte[0]) << 24) |
                             ((highByte[1] & 0xFF) << 16) |
                             ((highByte[2] & 0xFF) << 8) |
                             (highByte[3] & 0xFF);

@@ -191,4 +191,9 @@ class ByteTokTest {
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/Revision.class"));
     }
 
+    @Test void test40() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/QueryValidator.class"));
+    }
+
 }

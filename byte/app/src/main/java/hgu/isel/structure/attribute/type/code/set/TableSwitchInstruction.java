@@ -70,7 +70,7 @@ public class TableSwitchInstruction implements Instruction {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("\n             - athrow instruction: ");
+        stringBuilder.append("\n             - tableswitch instruction: ");
 
         stringBuilder.append(String.format("%02X", format));
 
