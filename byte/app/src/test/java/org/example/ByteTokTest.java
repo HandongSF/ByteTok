@@ -188,7 +188,7 @@ class ByteTokTest {
 
     @Test void test39() {
         ByteTok classUnderTest = new ByteTok();
-        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/Chars.class"));
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/Revision.class"));
     }
 
 }
