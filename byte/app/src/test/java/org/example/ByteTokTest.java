@@ -176,4 +176,19 @@ class ByteTokTest {
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/BaseHttpServlet.class"));
     }
 
+    @Test void test36() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/CometDLoadClient.class"));
+    }
+
+    @Test void test38() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/AbstractResolveDependencies.class"));
+    }
+
+    @Test void test39() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/Chars.class"));
+    }
+
 }

@@ -113,6 +113,7 @@ public class Code implements AttributeInformation {
         this.attributes = attributes;
 
         CodeAttributeAnalyzer codeAttributeAnalyzer = new CodeAttributeAnalyzer(code, totalOffset);
+
         codeAttributeAnalyzer.analyze();
 
         this.code = codeAttributeAnalyzer.getInstructions();
