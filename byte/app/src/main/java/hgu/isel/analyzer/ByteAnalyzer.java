@@ -95,10 +95,15 @@ public class ByteAnalyzer {
             stringBuilder.append(String.format("%02X", b));
         }
 
+
         stringBuilder.append("\nConstant Pool: ");
         for(ConstantPoolInformation c : constantPoolInformation) {
-            stringBuilder.append(c.toString());
+            if(c != null) {
+                stringBuilder.append(c.toString());
+            }
         }
+
+
 
         stringBuilder.append("\nAccess Flag: ");
         for(byte b : accessFlag) {

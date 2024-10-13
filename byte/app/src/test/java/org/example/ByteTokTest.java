@@ -166,4 +166,14 @@ class ByteTokTest {
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/WebhookEventType.class"));
     }
 
+    @Test void test34() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/BaseForm.class"));
+    }
+
+    @Test void test35() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/BaseHttpServlet.class"));
+    }
+
 }
