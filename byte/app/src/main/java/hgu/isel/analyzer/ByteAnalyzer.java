@@ -1184,6 +1184,7 @@ public class ByteAnalyzer {
             returnInformation = new PermittedSubClasses(attributeNameIndex, attributeLength, numberOfClasses, classes);
 
         } else {
+
             throw new UnsupportedEncodingException();
         }
 

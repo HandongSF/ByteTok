@@ -16,8 +16,11 @@ public class CodeAttributeAnalyzer {
 
 
     public void analyze() {
+        System.out.println("code length: " + codes.length);
+        System.out.println("total offset: " + totalOffset);
 
         while(offset < codes.length) {
+            System.out.println("offset:  " + offset);
             byte format = codes[offset];
             int opcode = format & 0xFF;
             offset += 1;
@@ -1149,8 +1152,9 @@ public class CodeAttributeAnalyzer {
                     break;
                 case 0xab:
                     // lookupswitch instruction
-                    currentOffset = offset + totalOffset - 1;
+                    currentOffset = offset + totalOffset;
                     padding = (4 - (currentOffset % 4)) % 4;
+                    System.out.println(padding);
 
                     paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
 
@@ -1374,7 +1378,9 @@ public class CodeAttributeAnalyzer {
                     currentOffset = offset + totalOffset - 1;
                     padding = (4 - (currentOffset % 4)) % 4;
 
+
                     paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
+
 
                     offset += padding; // padding
 
@@ -1396,6 +1402,13 @@ public class CodeAttributeAnalyzer {
                             ((highByte[1] & 0xFF) << 16) |
                             ((highByte[2] & 0xFF) << 8) |
                             (highByte[3] & 0xFF);
+
+                    System.out.println(low);
+                    System.out.println(high);
+
+                    System.out.printf("default: %02X %02X %02X %02X\n", defaultByte[0], defaultByte[1], defaultByte[2], defaultByte[3]);
+                    System.out.printf("lowByte: %02X %02X %02X %02X\n", lowByte[0], lowByte[1], lowByte[2], lowByte[3]);
+                    System.out.printf("highByte: %02X %02X %02X %02X\n", highByte[0], highByte[1], highByte[2], highByte[3]);
 
                     int jumpOffset = high - low + 1;
 
