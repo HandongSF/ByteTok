@@ -167,6 +167,16 @@ public class ByteAnalyzer {
     public void analyze() throws Exception {
 
         analyzeMagicNumber();
+
+        int magicNumber = ((magic[0] & 0xFF) << 24) |
+                ((magic[1] & 0xFF) << 16) |
+                ((magic[2] & 0xFF) << 8) |
+                (magic[3] & 0xFF);
+
+        if(magicNumber != 0xCAFEBABE) {
+            return;
+        }
+
         analyzeMinorVersion();
         analyzeMajorVersion();
         analyzeConstantPoolCount();
