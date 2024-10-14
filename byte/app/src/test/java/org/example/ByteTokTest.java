@@ -196,4 +196,24 @@ class ByteTokTest {
         assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/QueryValidator.class"));
     }
 
+    @Test void test41() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/DataValidator.class"));
+    }
+
+    @Test void test42() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/OortMap.class"));
+    }
+
+    @Test void test43() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/MovingWindowAggregator.class"));
+    }
+
+    @Test void test44() {
+        ByteTok classUnderTest = new ByteTok();
+        assertDoesNotThrow(() -> classUnderTest.run("/Users/ehdrb01/Desktop/HGU/capstone/ByteParser/byte/app/src/codes/OortList.class"));
+    }
+
 }
