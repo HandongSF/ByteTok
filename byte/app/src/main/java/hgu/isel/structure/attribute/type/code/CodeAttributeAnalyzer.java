@@ -1152,9 +1152,9 @@ public class CodeAttributeAnalyzer {
                     break;
                 case 0xab:
                     // lookupswitch instruction
-                    currentOffset = offset + totalOffset;
-                    padding = (4 - (currentOffset % 4)) % 4;
-                    System.out.println(padding);
+
+                    padding = (4 - (offset % 4)) % 4;
+                    System.out.println("padding: " + padding);
 
                     paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
 
@@ -1163,8 +1163,11 @@ public class CodeAttributeAnalyzer {
                     defaultByte = Arrays.copyOfRange(codes, offset, offset + 4);
                     offset += 4;
 
+                    System.out.printf("%02X  %02X  %02X  %02X\n", defaultByte[0], defaultByte[1], defaultByte[2], defaultByte[3]);
+
                     byte[] pair = Arrays.copyOfRange(codes, offset, offset + 4);
                     offset += 4;
+                    System.out.printf("%02X  %02X  %02X  %02X\n", pair[0], pair[1], pair[2], pair[3]);
 
                     int pairCount = ((pair[0]) << 24) |
                             ((pair[1] & 0xFF) << 16) |
@@ -1378,10 +1381,8 @@ public class CodeAttributeAnalyzer {
                     break;
                 case 0xaa:
                     // tableswitch instruction
-                    currentOffset = offset + totalOffset;
-                    padding = (4 - (currentOffset % 4)) % 4;
 
-
+                    padding = (4 - (offset % 4)) % 4;
                     paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
 
 
