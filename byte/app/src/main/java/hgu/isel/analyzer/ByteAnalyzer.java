@@ -43,6 +43,7 @@ import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
+import hgu.isel.tokenizer.ByteStructure;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -164,7 +165,7 @@ public class ByteAnalyzer {
 
     }
 
-    public void analyze() throws Exception {
+    public ByteStructure analyze() throws Exception {
 
         analyzeMagicNumber();
 
@@ -174,7 +175,7 @@ public class ByteAnalyzer {
                 (magic[3] & 0xFF);
 
         if(magicNumber != 0xCAFEBABE) {
-            return;
+            return null;
         }
 
         analyzeMinorVersion();
@@ -195,8 +196,8 @@ public class ByteAnalyzer {
         analyzeMethods();
         analyzeAttributeCount();
         this.attributeInformation = analyzeAttribute(((attributesCount[0] & 0xFF) << 8) | (attributesCount[1] & 0xFF));
-        System.out.println(bytes.length + "  " + offset);
 
+        return new ByteStructure(magic, minorVersion, majorVersion, constantPoolCount, constantPoolInformation, accessFlag, thisClass, superClass, interfacesCount, interfaces, fieldsCount, fieldInformation, methodsCount, methodInformation, attributesCount, attributeInformation);
     }
 
     public void printConstantPool() {

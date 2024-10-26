@@ -16,11 +16,8 @@ public class CodeAttributeAnalyzer {
 
 
     public void analyze() {
-        System.out.println("code length: " + codes.length);
-        System.out.println("total offset: " + totalOffset);
 
         while(offset < codes.length) {
-            System.out.println("offset:  " + offset);
             byte format = codes[offset];
             int opcode = format & 0xFF;
             offset += 1;

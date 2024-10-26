@@ -5,6 +5,8 @@ package hgu.isel;
 
 import hgu.isel.analyzer.ByteAnalyzer;
 import hgu.isel.reader.ByteReader;
+import hgu.isel.tokenizer.ByteStructure;
+import hgu.isel.tokenizer.ByteTokenizer;
 
 public class ByteTok {
     byte[] bytes;
@@ -20,10 +22,17 @@ public class ByteTok {
 
         ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
         try {
-            byteAnalyzer.analyze();
+            ByteStructure byteStructure = byteAnalyzer.analyze();
             System.out.println(byteAnalyzer.printResult());
+
+            ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructure);
+
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
     }
 }
