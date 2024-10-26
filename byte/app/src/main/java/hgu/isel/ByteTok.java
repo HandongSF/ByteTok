@@ -8,6 +8,8 @@ import hgu.isel.reader.ByteReader;
 import hgu.isel.tokenizer.ByteStructure;
 import hgu.isel.tokenizer.ByteTokenizer;
 
+import java.util.Arrays;
+
 public class ByteTok {
     byte[] bytes;
 
@@ -19,6 +21,7 @@ public class ByteTok {
     public void run(String path) {
         ByteReader byteReader = new ByteReader(path);
         bytes = byteReader.readClassFile();
+
 
         ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
         try {

@@ -2,6 +2,9 @@ package hgu.isel.structure.constant.type;
 
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MethodTypeInformation implements ConstantPoolInformation {
     private byte tag;
     private byte[] descriptorIndex; // u2
@@ -37,5 +40,23 @@ public class MethodTypeInformation implements ConstantPoolInformation {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        output.add(String.format("%02X", tag));
+
+        for(byte b : descriptorIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+
+
+
+        return output;
     }
 }
