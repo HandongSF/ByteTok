@@ -1,8 +1,10 @@
 package hgu.isel.tokenizer;
 
+import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
+import hgu.isel.structure.method.MethodInformation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +56,9 @@ public class ByteTokenizer {
 
         // tokenize constant pool
         for(ConstantPoolInformation c : byteStructure.getConstantPoolInformation()) {
-            inputs.addAll(c.tokenize());
+            if(c != null) {
+                inputs.addAll(c.tokenize());
+            }
         }
 
         // tokenize access flag
@@ -87,11 +91,7 @@ public class ByteTokenizer {
 
         // tokenize interface
         for(Interfaces i : byteStructure.getInterfaces()) {
-            for(byte b : i.getBytes()) {
-                stringBuilder.append(String.format("%02X", b));
-            }
-            inputs.add(stringBuilder.toString());
-            stringBuilder.setLength(0);
+            inputs.addAll(i.tokenize());
         }
 
         // tokenize fields count
@@ -101,44 +101,38 @@ public class ByteTokenizer {
         inputs.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        // tokenize fields
         for(FieldInformation f : byteStructure.getFieldInformation()) {
-            for(byte b : f.getAccessFlags()) {
-                stringBuilder.append(String.format("%02X", b));
-            }
-            inputs.add(stringBuilder.toString());
-            stringBuilder.setLength(0);
-
-            for(byte b : f.getNameIndex()) {
-                stringBuilder.append(String.format("%02X", b));
-            }
-            inputs.add(stringBuilder.toString());
-            stringBuilder.setLength(0);
-
-            for(byte b : f.getDescriptorIndex()) {
-                stringBuilder.append(String.format("%02X", b));
-            }
-            inputs.add(stringBuilder.toString());
-            stringBuilder.setLength(0);
-
-            for(byte b : f.getAttributesCount()) {
-                stringBuilder.append(String.format("%02X", b));
-            }
-            inputs.add(stringBuilder.toString());
-            stringBuilder.setLength(0);
+            inputs.addAll(f.tokenize());
         }
 
+        // tokenize methods count
+        for(byte b : byteStructure.getMethodsCount()) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        inputs.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        // tokenize methods
+        for(MethodInformation m : byteStructure.getMethodInformation()) {
+            inputs.addAll(m.tokenize());
+        }
 
+        // tokenize attributes count
+        for(byte b : byteStructure.getAttributesCount()) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        inputs.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        // tokenize Attributes
+        for(AttributeInformation a : byteStructure.getAttributeInformation()) {
+            inputs.addAll(a.tokenize());
+        }
 
-
-
-
-
-
-
-
-
+        for(String s : inputs) {
+            System.out.println(s);
+        }
     }
 
 

@@ -26,9 +26,10 @@ public class ByteTok {
         ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
         try {
             ByteStructure byteStructure = byteAnalyzer.analyze();
-            System.out.println(byteAnalyzer.printResult());
+//            System.out.println(byteAnalyzer.printResult());
 
             ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructure);
+            byteTokenizer.tokenize();
 
 
 
