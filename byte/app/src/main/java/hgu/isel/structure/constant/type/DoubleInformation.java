@@ -3,6 +3,9 @@ package hgu.isel.structure.constant.type;
 import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DoubleInformation implements ConstantPoolInformation {
     private byte tag;
     private byte[] highBytes; // u4
@@ -52,5 +55,28 @@ public class DoubleInformation implements ConstantPoolInformation {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        output.add(String.format("%02X", tag));
+
+        for(byte b : highBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : lowBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+
+
+        return output;
     }
 }

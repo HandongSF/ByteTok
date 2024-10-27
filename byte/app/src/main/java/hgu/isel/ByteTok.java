@@ -5,6 +5,10 @@ package hgu.isel;
 
 import hgu.isel.analyzer.ByteAnalyzer;
 import hgu.isel.reader.ByteReader;
+import hgu.isel.tokenizer.ByteStructure;
+import hgu.isel.tokenizer.ByteTokenizer;
+
+import java.util.Arrays;
 
 public class ByteTok {
     byte[] bytes;
@@ -18,12 +22,21 @@ public class ByteTok {
         ByteReader byteReader = new ByteReader(path);
         bytes = byteReader.readClassFile();
 
+
         ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
         try {
-            byteAnalyzer.analyze();
-            System.out.println(byteAnalyzer.printResult());
+            ByteStructure byteStructure = byteAnalyzer.analyze();
+//            System.out.println(byteAnalyzer.printResult());
+
+            ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructure);
+            byteTokenizer.tokenize();
+
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
     }
 }

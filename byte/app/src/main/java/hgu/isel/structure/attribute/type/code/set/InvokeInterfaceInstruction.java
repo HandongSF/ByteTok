@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InvokeInterfaceInstruction implements Instruction {
     private byte format;
     private byte indexByte1;
@@ -59,5 +62,18 @@ public class InvokeInterfaceInstruction implements Instruction {
 
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+        output.add(String.format("%02X", format));
+        output.add(String.format("%02X", indexByte1));
+        output.add(String.format("%02X", indexByte2));
+        output.add(String.format("%02X", count));
+        output.add(String.format("%02X", ignoreNum));
+
+
+        return output;
     }
 }

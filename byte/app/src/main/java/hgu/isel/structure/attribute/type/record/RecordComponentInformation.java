@@ -1,6 +1,10 @@
 package hgu.isel.structure.attribute.type.record;
 
 import hgu.isel.structure.attribute.AttributeInformation;
+import hgu.isel.structure.attribute.type.nest.Classes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecordComponentInformation {
     private byte[] nameIndex; // u2
@@ -66,5 +70,36 @@ public class RecordComponentInformation {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : descriptorIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : attributesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(AttributeInformation c : attributes) {
+            output.addAll(c.tokenize());
+        }
+
+        return output;
     }
 }

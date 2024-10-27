@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.annotation;
 
 import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParameterAnnotations {
     private byte[] numberOfAnnotations; // u2
     private Annotation[] annotations; // numberOfAnnotations
@@ -38,5 +41,24 @@ public class ParameterAnnotations {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : numberOfAnnotations) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(Annotation c : annotations) {
+            output.addAll(c.tokenize());
+        }
+
+        return output;
     }
 }

@@ -1,6 +1,10 @@
 package hgu.isel.structure.attribute.type.exception;
 
 import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
+import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExceptionTable {
     private byte[] startPC; // u2
@@ -69,5 +73,38 @@ public class ExceptionTable {
 
 
         return stringBuilder.toString();
+    }
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : startPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : endPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : handlerPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : catchType) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+
+        return output;
     }
 }

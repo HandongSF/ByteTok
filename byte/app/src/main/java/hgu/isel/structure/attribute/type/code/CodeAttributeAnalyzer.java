@@ -16,11 +16,8 @@ public class CodeAttributeAnalyzer {
 
 
     public void analyze() {
-        System.out.println("code length: " + codes.length);
-        System.out.println("total offset: " + totalOffset);
 
         while(offset < codes.length) {
-            System.out.println("offset:  " + offset);
             byte format = codes[offset];
             int opcode = format & 0xFF;
             offset += 1;
@@ -1154,7 +1151,7 @@ public class CodeAttributeAnalyzer {
                     // lookupswitch instruction
 
                     padding = (4 - (offset % 4)) % 4;
-                    System.out.println("padding: " + padding);
+
 
                     paddingBytes = Arrays.copyOfRange(codes, offset, offset + padding);
 
@@ -1163,11 +1160,11 @@ public class CodeAttributeAnalyzer {
                     defaultByte = Arrays.copyOfRange(codes, offset, offset + 4);
                     offset += 4;
 
-                    System.out.printf("%02X  %02X  %02X  %02X\n", defaultByte[0], defaultByte[1], defaultByte[2], defaultByte[3]);
+
 
                     byte[] pair = Arrays.copyOfRange(codes, offset, offset + 4);
                     offset += 4;
-                    System.out.printf("%02X  %02X  %02X  %02X\n", pair[0], pair[1], pair[2], pair[3]);
+
 
                     int pairCount = ((pair[0]) << 24) |
                             ((pair[1] & 0xFF) << 16) |
@@ -1175,11 +1172,11 @@ public class CodeAttributeAnalyzer {
                             (pair[3] & 0xFF);
 
                     MatchOffsetPair[] matchOffsetPairs = new MatchOffsetPair[pairCount];
-                    System.out.println("offset:   " + offset);
+
 
                     for(int i = 0; i < pairCount; i++) {
-                        System.out.println("offset:   " + offset);
-                        System.out.println(codes.length);
+
+
                         byte[] match = Arrays.copyOfRange(codes, offset, offset + 4);
                         offset += 4;
 
@@ -1407,12 +1404,6 @@ public class CodeAttributeAnalyzer {
                             ((highByte[2] & 0xFF) << 8) |
                             (highByte[3] & 0xFF);
 
-                    System.out.println(low);
-                    System.out.println(high);
-
-                    System.out.printf("default: %02X %02X %02X %02X\n", defaultByte[0], defaultByte[1], defaultByte[2], defaultByte[3]);
-                    System.out.printf("lowByte: %02X %02X %02X %02X\n", lowByte[0], lowByte[1], lowByte[2], lowByte[3]);
-                    System.out.printf("highByte: %02X %02X %02X %02X\n", highByte[0], highByte[1], highByte[2], highByte[3]);
 
                     int jumpOffset = high - low + 1;
 

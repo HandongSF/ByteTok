@@ -1,5 +1,10 @@
 package hgu.isel.structure.attribute.type.path;
 
+import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TypePath {
     private byte pathLength;
     private Path[] path; // pathLength
@@ -34,5 +39,18 @@ public class TypePath {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        output.add(String.format("%02X", pathLength));
+
+        for(Path c : path) {
+            output.addAll(c.tokenize());
+        }
+
+        return output;
     }
 }

@@ -1,5 +1,7 @@
 package hgu.isel.structure.constant;
 
-public interface ConstantPoolInformation {
+import java.util.List;
 
+public interface ConstantPoolInformation {
+    List<String> tokenize();
 }

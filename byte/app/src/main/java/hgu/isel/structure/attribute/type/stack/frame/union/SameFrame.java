@@ -3,6 +3,9 @@ package hgu.isel.structure.attribute.type.stack.frame.union;
 import hgu.isel.structure.attribute.type.stack.frame.StackMapFrame;
 import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SameFrame implements StackMapFrame {
     private byte frameType; // 0 - 63
 
@@ -23,5 +26,15 @@ public class SameFrame implements StackMapFrame {
         stringBuilder.append(String.format("%02X", frameType));
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        output.add(String.format("%02X", frameType));
+
+
+        return output;
     }
 }

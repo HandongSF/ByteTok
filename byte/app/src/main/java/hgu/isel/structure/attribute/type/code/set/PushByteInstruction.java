@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PushByteInstruction implements Instruction {
     private byte format;
     private byte pushedByte;
@@ -36,5 +39,17 @@ public class PushByteInstruction implements Instruction {
 
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+        output.add(String.format("%02X", format));
+        output.add(String.format("%02X", pushedByte));
+
+
+
+
+        return output;
     }
 }
