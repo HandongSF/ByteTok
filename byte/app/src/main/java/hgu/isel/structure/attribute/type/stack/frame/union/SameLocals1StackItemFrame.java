@@ -3,6 +3,9 @@ package hgu.isel.structure.attribute.type.stack.frame.union;
 import hgu.isel.structure.attribute.type.stack.frame.StackMapFrame;
 import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SameLocals1StackItemFrame implements StackMapFrame {
     private byte frameType; // 64 - 127
     private VerificationTypeInformation stack; // 1
@@ -34,5 +37,18 @@ public class SameLocals1StackItemFrame implements StackMapFrame {
         stringBuilder.append(stack.toString());
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        output.add(String.format("%02X", frameType));
+        output.addAll(stack.tokenize());
+
+
+        return output;
     }
 }

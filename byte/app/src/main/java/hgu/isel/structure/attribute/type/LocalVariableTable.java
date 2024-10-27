@@ -4,6 +4,9 @@ import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.boot.BootstrapMethodInformation;
 import hgu.isel.structure.attribute.type.local.LocalVariableTableInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LocalVariableTable implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
     private byte[] attributeLength; // u4
@@ -71,5 +74,37 @@ public class LocalVariableTable implements AttributeInformation {
         }
 
         return stringBuilder.toString();
+    }
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : localVariableTableLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(LocalVariableTableInformation l : localVariableTable) {
+            output.addAll(l.tokenize());
+        }
+
+
+
+        return output;
     }
 }

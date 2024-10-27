@@ -1,5 +1,8 @@
 package hgu.isel.structure.attribute.type.local;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LocalVariableTypeTableInformation {
     private byte[] startPC; // u2
     private byte[] length; // u2
@@ -78,5 +81,45 @@ public class LocalVariableTypeTableInformation {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : startPC) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : length) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : nameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : signatureIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : index) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+
+        return output;
     }
 }

@@ -168,23 +168,10 @@ public class ByteAnalyzer {
     public ByteStructure analyze() throws Exception {
 
         analyzeMagicNumber();
-
-        int magicNumber = ((magic[0] & 0xFF) << 24) |
-                ((magic[1] & 0xFF) << 16) |
-                ((magic[2] & 0xFF) << 8) |
-                (magic[3] & 0xFF);
-
-        if(magicNumber != 0xCAFEBABE) {
-            return null;
-        }
-
         analyzeMinorVersion();
         analyzeMajorVersion();
         analyzeConstantPoolCount();
         analyzeConstantPool();
-
-//        printConstantPool();
-
         analyzeAccessFlag();
         analyzeThisClass();
         analyzeSuperClass();
@@ -502,11 +489,8 @@ public class ByteAnalyzer {
         int utf8Index = ((bytes[offset] & 0xFF) << 8) | (bytes[offset + 1] & 0xFF);
         UTF8Information utf8Information = (UTF8Information) constantPoolInformation[utf8Index - 1];
 
-        // 여기서 오류가 발생하면 안됨
-        // UTF8Information type으로 저장이 되어있기 때문에 type casting 오류가 발생할 수 없음
 
         byte[] attributeName = utf8Information.getBytes();
-        // byte[]는 switch 구문을 사용할 수 없음
         byte[] attributeNameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
         byte[] attributeLength = Arrays.copyOfRange(bytes, offset + 2, offset + 6);
         offset += 6;

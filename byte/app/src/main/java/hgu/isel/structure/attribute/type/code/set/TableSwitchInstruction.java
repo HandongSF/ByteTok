@@ -2,6 +2,10 @@ package hgu.isel.structure.attribute.type.code.set;
 
 import hgu.isel.structure.attribute.type.code.Instruction;
 import hgu.isel.structure.attribute.type.code.set.jump.JumpOffset;
+import hgu.isel.structure.attribute.type.code.set.match.MatchOffsetPair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TableSwitchInstruction implements Instruction {
     private byte format;
@@ -97,5 +101,47 @@ public class TableSwitchInstruction implements Instruction {
 
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+        output.add(String.format("%02X", format));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for(byte b : paddingBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : defaultByte) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : lowBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : highBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(JumpOffset m : jumpOffsets) {
+            output.addAll(m.tokenize());
+        }
+
+
+        return output;
     }
 }

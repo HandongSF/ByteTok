@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.boot;
 
 import hgu.isel.structure.attribute.type.annotation.ElementValuePairs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BootstrapMethodInformation {
     private byte[] bootstrapMethodReference; // u2
     private byte[] numberOfBootstrapArguments; // u2
@@ -54,5 +57,30 @@ public class BootstrapMethodInformation {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : bootstrapMethodReference) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : numberOfBootstrapArguments) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+
+        for(BootstrapArgument b : bootstrapArguments) {
+            output.addAll(b.tokenize());
+        }
+
+
+        return output;
     }
 }

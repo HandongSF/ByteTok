@@ -7,6 +7,7 @@ import hgu.isel.structure.attribute.type.code.Instruction;
 import hgu.isel.structure.attribute.type.exception.ExceptionTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Code implements AttributeInformation {
     private byte[] attributeNameIndex; // u2
@@ -165,5 +166,69 @@ public class Code implements AttributeInformation {
 
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : attributeNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : attributeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : maxStack) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : maxLocals) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : codeLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(Instruction i : code) {
+            output.addAll(i.tokenize());
+        }
+
+        for(byte b : exceptionTableLength) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(ExceptionTable i : exceptionTable) {
+            output.addAll(i.tokenize());
+        }
+
+        for(byte b : attributesCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(AttributeInformation i : attributes) {
+            output.addAll(i.tokenize());
+        }
+
+
+        return output;
     }
 }

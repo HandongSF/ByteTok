@@ -1,7 +1,11 @@
 package hgu.isel.structure.attribute.type.annotation;
 
+import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
 import hgu.isel.structure.attribute.type.path.TypePath;
 import hgu.isel.structure.attribute.type.target.TargetInformation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TypeAnnotation {
     private byte targetType;
@@ -88,5 +92,34 @@ public class TypeAnnotation {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        output.add(String.format("%02X", targetType));
+        output.addAll(targetInformation.tokenize());
+        output.addAll(targetPath.tokenize());
+
+        for(byte b : typeIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : numberOfElementValuePairs) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(ElementValuePairs c : elementValuePairs) {
+            output.addAll(c.tokenize());
+        }
+
+        return output;
     }
 }

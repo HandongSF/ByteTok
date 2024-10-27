@@ -1,5 +1,8 @@
 package hgu.isel.structure.attribute.type.annotation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ElementValuePairs {
     private byte[] elementNameIndex; // u2
     private ElementValue value;
@@ -35,5 +38,23 @@ public class ElementValuePairs {
         stringBuilder.append(value.toString());
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : elementNameIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        output.addAll(value.tokenize());
+
+
+        return output;
     }
 }

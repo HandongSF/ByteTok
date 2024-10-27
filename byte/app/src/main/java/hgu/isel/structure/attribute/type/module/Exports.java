@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.module;
 
 import hgu.isel.structure.attribute.type.module.export.ExportIndex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Exports {
     private byte[] exportsIndex; // u2
     private byte[] exportsFlags; // u2
@@ -66,5 +69,35 @@ public class Exports {
         }
 
         return stringBuilder.toString();
+    }
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : exportsIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : exportsFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : exportsToCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(ExportIndex e : exportsToIndex) {
+            output.addAll(e.tokenize());
+        }
+
+        return output;
     }
 }

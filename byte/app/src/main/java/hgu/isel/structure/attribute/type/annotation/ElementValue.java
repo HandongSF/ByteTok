@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.annotation;
 
 import hgu.isel.structure.attribute.type.annotation.elemet.ElementUnion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ElementValue {
     private byte tag;
     private ElementUnion elementUnion;
@@ -35,6 +38,18 @@ public class ElementValue {
         stringBuilder.append(elementUnion.toString());
 
         return stringBuilder.toString();
+    }
+
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        output.add(String.format("%02X", tag));
+
+        output.addAll(elementUnion.tokenize());
+
+
+        return output;
     }
 
 

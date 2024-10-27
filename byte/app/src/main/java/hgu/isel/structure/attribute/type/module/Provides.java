@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.module;
 
 import hgu.isel.structure.attribute.type.module.provide.ProvidesIndex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Provides {
     private byte[] providesIndex; // u2
     private byte[] providesWithCount; // u2
@@ -53,5 +56,29 @@ public class Provides {
         }
 
         return stringBuilder.toString();
+    }
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : providesIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : providesWithCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(ProvidesIndex p : providesWithIndex) {
+            output.addAll(p.tokenize());
+        }
+
+        return output;
     }
 }

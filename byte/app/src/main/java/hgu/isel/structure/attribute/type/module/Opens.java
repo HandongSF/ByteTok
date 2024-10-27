@@ -2,6 +2,9 @@ package hgu.isel.structure.attribute.type.module;
 
 import hgu.isel.structure.attribute.type.module.open.OpenIndex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Opens {
     private byte[] opensIndex; // u2
     private byte[] opensFlags; // u2
@@ -67,4 +70,35 @@ public class Opens {
 
         return stringBuilder.toString();
     }
+
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(byte b : opensIndex) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : opensFlags) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : opensToCount) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(OpenIndex o : opensToIndex) {
+            output.addAll(o.tokenize());
+        }
+
+        return output;
+    }
+
 }

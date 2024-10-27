@@ -4,6 +4,9 @@ import hgu.isel.structure.attribute.type.code.Instruction;
 import hgu.isel.structure.attribute.type.code.set.jump.JumpOffset;
 import hgu.isel.structure.attribute.type.code.set.match.MatchOffsetPair;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LookUpSwitchInstruction implements Instruction {
     private byte format;
     private byte[] paddingByte; // 0x00으로 채워짐
@@ -83,8 +86,41 @@ public class LookUpSwitchInstruction implements Instruction {
             stringBuilder.append(b.toString());
         }
 
-
-
         return stringBuilder.toString();
+    }
+
+    @Override
+    public List<String> tokenize() {
+        List<String> output = new ArrayList<>();
+        output.add(String.format("%02X", format));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for(byte b : paddingByte) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : defaultBytes) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(byte b : nPairs) {
+            stringBuilder.append(String.format("%02X", b));
+        }
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        for(MatchOffsetPair m : matchOffsetPairs) {
+            output.addAll(m.tokenize());
+        }
+
+
+        return output;
     }
 }
