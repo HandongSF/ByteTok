@@ -16,24 +16,43 @@ public class ByteTok {
 
     public static void main(String[] args) {
         ByteTok parser = new ByteTok();
-        parser.run(args[0]);
+        parser.run(args[0], args[1]);
     }
 
-    public void run(String path) {
-        ByteReader byteReader = new ByteReader(path);
-        List<byte[]> byteList = byteReader.readClassFiles();
-        List<ByteStructure> byteStructures = new ArrayList<>();
+    public void run(String path, String option) {
 
-        for(byte[] b : byteList) {
-            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(b);
+        if(option.equals("v")) {
+            ByteReader byteReader = new ByteReader(path);
+            List<byte[]> byteList = byteReader.readClassFiles();
+            List<ByteStructure> byteStructures = new ArrayList<>();
+
+            for(byte[] b : byteList) {
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(b);
+                try {
+                    byteStructures.add(byteAnalyzer.analyze());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructures);
+            byteTokenizer.createVocabulary();
+        } else if(option.equals("t")) {
+            ByteReader byteReader = new ByteReader(path);
+
+            byte[] bytes = byteReader.readClassFile();
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            ByteStructure byteStructure = null;
             try {
-                byteStructures.add(byteAnalyzer.analyze());
+                byteStructure = byteAnalyzer.analyze();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
 
-        ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructures);
-        byteTokenizer.createVocabulary();
+            ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+            List<String> tokens = byteTokenizer.tokenize(byteStructure);
+
+        }
     }
 }
