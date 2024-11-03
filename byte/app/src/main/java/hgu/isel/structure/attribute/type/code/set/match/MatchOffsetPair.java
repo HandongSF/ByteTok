@@ -48,6 +48,7 @@ public class MatchOffsetPair {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Match] ");
         for(byte b : match) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -55,6 +56,7 @@ public class MatchOffsetPair {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Offset] ");
         for(byte b : offset) {
             stringBuilder.append(String.format("%02X", b));
         }

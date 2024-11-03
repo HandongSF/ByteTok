@@ -56,9 +56,14 @@ public class PutStaticInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", indexByte1));
-        output.add(String.format("%02X", indexByte2));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Put Static Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+
+
+        output.add(stringBuilder.toString());
 
 
 

@@ -55,11 +55,13 @@ public class JumpSubroutineInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", branchByte1));
-        output.add(String.format("%02X", branchByte2));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Jump Subroutine Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchByte1));
+        stringBuilder.append(String.format("%02X", branchByte2));
 
-
+        output.add(stringBuilder.toString());
 
         return output;
     }

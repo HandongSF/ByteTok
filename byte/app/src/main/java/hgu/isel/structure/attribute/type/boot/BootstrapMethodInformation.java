@@ -65,6 +65,7 @@ public class BootstrapMethodInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+
         for(byte b : bootstrapMethodReference) {
             stringBuilder.append(String.format("%02X", b));
         }

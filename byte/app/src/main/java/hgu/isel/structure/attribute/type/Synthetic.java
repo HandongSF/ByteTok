@@ -53,12 +53,14 @@ public class Synthetic implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Synthetic Attribute Name Index] ");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Synthetic Attribute Length] ");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }

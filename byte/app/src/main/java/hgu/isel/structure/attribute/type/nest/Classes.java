@@ -33,6 +33,7 @@ public class Classes {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Class Byte] ");
         for(byte b : bytes) {
             stringBuilder.append(String.format("%02X", b));
         }

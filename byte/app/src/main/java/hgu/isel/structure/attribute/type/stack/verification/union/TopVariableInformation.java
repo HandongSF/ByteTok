@@ -22,7 +22,10 @@ public class TopVariableInformation implements VerificationTypeInformation {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
 
-        output.add(String.format("%02X", tag));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Top Variable Verification] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
 
         return output;
     }

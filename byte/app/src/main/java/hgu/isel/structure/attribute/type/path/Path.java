@@ -41,8 +41,18 @@ public class Path {
 
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", typePathKind));
-        output.add(String.format("%02X", typeArgumentIndex));
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("[Path Kind] ");
+        stringBuilder.append(String.format("%02X", typePathKind));
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        stringBuilder.append("[Path Argument Index] ");
+        stringBuilder.append(String.format("%02X", typeArgumentIndex));
+
+        output.add(stringBuilder.toString());
 
         return output;
     }

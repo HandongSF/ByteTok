@@ -61,8 +61,11 @@ public class SameLocals1StackItemFrameExtended implements StackMapFrame {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", frameType));
+        stringBuilder.append("[Same Locals 1 Stack Item Frame Extended] ");
+        stringBuilder.append(String.format("%02X", frameType));
+        output.add(stringBuilder.toString());
 
+        stringBuilder.append("[Same Locals 1 Stack Item Frame Extended Offset Delta] ");
         for(byte b : offsetDelta) {
             stringBuilder.append(String.format("%02X", b));
         }

@@ -48,8 +48,12 @@ public class IntegerInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", tag));
+        stringBuilder.append("[Constant Integer Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Integer Byte] ");
         for(byte b : bytes) {
             stringBuilder.append(String.format("%02X", b));
         }

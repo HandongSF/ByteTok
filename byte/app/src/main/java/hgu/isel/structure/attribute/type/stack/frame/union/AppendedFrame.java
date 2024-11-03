@@ -64,9 +64,12 @@ public class AppendedFrame implements StackMapFrame {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Appended Frame Type] ");
+        stringBuilder.append(String.format("%02X", frameType));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
-        output.add(String.format("%02X", frameType));
-
+        stringBuilder.append("[Appended Frame Offset Delta] ");
         for(byte b : offsetDelta) {
             stringBuilder.append(String.format("%02X", b));
         }

@@ -54,9 +54,15 @@ public class BranchAlwaysInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", branchType1));
-        output.add(String.format("%02X", branchType2));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Branch Always Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchType1));
+        stringBuilder.append(String.format("%02X", branchType2));
+
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
         return output;
     }

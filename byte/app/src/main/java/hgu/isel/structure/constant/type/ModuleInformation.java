@@ -48,8 +48,12 @@ public class ModuleInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", tag));
+        stringBuilder.append("[Constant Module Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Module Name Index] ");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

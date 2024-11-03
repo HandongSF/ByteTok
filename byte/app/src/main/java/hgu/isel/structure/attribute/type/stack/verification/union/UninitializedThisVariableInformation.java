@@ -21,7 +21,10 @@ public class UninitializedThisVariableInformation implements VerificationTypeInf
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
 
-        output.add(String.format("%02X", tag));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Uninitialized This Variable Verification] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
 
         return output;
     }

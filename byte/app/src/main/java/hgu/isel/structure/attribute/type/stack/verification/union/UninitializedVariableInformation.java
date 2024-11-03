@@ -36,9 +36,13 @@ public class UninitializedVariableInformation implements VerificationTypeInforma
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
 
-        output.add(String.format("%02X", tag));
-
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Uninitialized Variable Verification] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        stringBuilder.append("[Uninitialized Variable Verification Offset] ");
         for(byte b : offset) {
             stringBuilder.append(String.format("%02X", b));
         }

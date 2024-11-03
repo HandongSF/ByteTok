@@ -48,8 +48,12 @@ public class FloatInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", tag));
+        stringBuilder.append("[Constant Float Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Float Byte] ");
         for(byte b : bytes) {
             stringBuilder.append(String.format("%02X", b));
         }

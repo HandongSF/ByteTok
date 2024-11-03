@@ -93,24 +93,28 @@ public class MethodInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Method Access Flag] ");
         for(byte b : accessFlags) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Method Name Index] ");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Method Descriptor Index] ");
         for(byte b : descriptorIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Method Attribute Count] ");
         for(byte b : attributesCount) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -118,7 +122,13 @@ public class MethodInformation {
         stringBuilder.setLength(0);
 
         for(AttributeInformation a : attributes) {
-            output.addAll(a.tokenize());
+            for(String s : a.tokenize()) {
+                stringBuilder.append("[Field Attribute] ");
+                stringBuilder.append(s);
+
+                output.add(stringBuilder.toString());
+                stringBuilder.setLength(0);
+            }
         }
 
         return output;

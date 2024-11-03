@@ -43,10 +43,19 @@ public class ElementValue {
 
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", tag));
+        stringBuilder.append("[Element Value Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
-        output.addAll(elementUnion.tokenize());
+        for(String s : elementUnion.tokenize()) {
+            stringBuilder.append("[Element Value] ");
+            stringBuilder.append(s);
+            output.add(stringBuilder.toString());
+            stringBuilder.setLength(0);
+        }
 
 
         return output;

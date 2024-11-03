@@ -32,6 +32,7 @@ public class ExportIndex {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Exports To Index] ");
         for(byte b : exportsToIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

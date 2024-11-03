@@ -76,18 +76,21 @@ public class Exports {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Exports Index] ");
         for(byte b : exportsIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Exports Flag] ");
         for(byte b : exportsFlags) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Exports Count] ");
         for(byte b : exportsToCount) {
             stringBuilder.append(String.format("%02X", b));
         }

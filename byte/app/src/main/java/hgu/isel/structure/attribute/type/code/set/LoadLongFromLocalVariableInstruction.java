@@ -44,8 +44,11 @@ public class LoadLongFromLocalVariableInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", index));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Load Long From Local Variable Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", index));
+        output.add(stringBuilder.toString());
 
 
 
