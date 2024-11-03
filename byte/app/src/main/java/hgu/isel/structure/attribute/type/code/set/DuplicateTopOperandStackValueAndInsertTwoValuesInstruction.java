@@ -33,9 +33,11 @@ public class DuplicateTopOperandStackValueAndInsertTwoValuesInstruction implemen
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Duplicate Top Operand Stack Value and Insert Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
 
-
+        output.add(stringBuilder.toString());
         return output;
     }
 }

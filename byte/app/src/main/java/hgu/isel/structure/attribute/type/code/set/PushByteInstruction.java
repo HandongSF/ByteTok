@@ -44,8 +44,12 @@ public class PushByteInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", pushedByte));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Push Byte Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", pushedByte));
+
+        output.add(stringBuilder.toString());
 
 
 

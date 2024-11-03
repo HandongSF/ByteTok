@@ -50,12 +50,14 @@ public class LineNumberTableInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Line Number Table Information Start PC] ");
         for(byte b : startPC) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Line Number Table Information Line Number] ");
         for(byte b : lineNumber) {
             stringBuilder.append(String.format("%02X", b));
         }

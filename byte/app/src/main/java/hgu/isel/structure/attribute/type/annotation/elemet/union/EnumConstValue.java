@@ -50,12 +50,14 @@ public class EnumConstValue implements ElementUnion {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Enum Const Value Type and Name Index] ");
         for(byte b : typeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Enum Const Value Const Name Index] ");
         for(byte b : constNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

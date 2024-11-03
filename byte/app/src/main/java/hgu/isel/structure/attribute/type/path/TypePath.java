@@ -44,8 +44,12 @@ public class TypePath {
 
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", pathLength));
+        stringBuilder.append("[Type Path Length] ");
+        stringBuilder.append(String.format("%02X", pathLength));
+        output.add(stringBuilder.toString());
+
 
         for(Path c : path) {
             output.addAll(c.tokenize());

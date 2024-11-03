@@ -56,9 +56,14 @@ public class PushShortInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", byte1));
-        output.add(String.format("%02X", byte2));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Push Short Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", byte1));
+        stringBuilder.append(String.format("%02X", byte2));
+
+
+        output.add(stringBuilder.toString());
 
 
 

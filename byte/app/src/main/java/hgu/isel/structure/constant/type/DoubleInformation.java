@@ -62,15 +62,19 @@ public class DoubleInformation implements ConstantPoolInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Constant Double Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
-        output.add(String.format("%02X", tag));
-
+        stringBuilder.append("[Constant Double High Byte] ");
         for(byte b : highBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Double Low Byte] ");
         for(byte b : lowBytes) {
             stringBuilder.append(String.format("%02X", b));
         }

@@ -64,19 +64,28 @@ public class Annotation implements ElementUnion {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+
+        stringBuilder.append("[Annotation Type Index] ");
+
         for(byte b : typeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Annotation Element Value Pairs Number] ");
         for(byte b : numberOfElementValuePairs) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
 
         for(ElementValuePairs e : elementValuePairs) {
-            output.addAll(e.tokenize());
+            for(String s : e.tokenize()) {
+                stringBuilder.append("[Annotation Element Value Pairs] ");
+                stringBuilder.append(s);
+                output.add(stringBuilder.toString());
+                stringBuilder.setLength(0);
+            }
         }
 
         return output;

@@ -92,16 +92,18 @@ public class LookUpSwitchInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
+
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Lookup Switch Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
         for(byte b : paddingByte) {
             stringBuilder.append(String.format("%02X", b));
         }
-
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Lookup Switch Default Bytes] ");
         for(byte b : defaultBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -109,12 +111,15 @@ public class LookUpSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Lookup Switch N Pairs] ");
+
         for(byte b : nPairs) {
             stringBuilder.append(String.format("%02X", b));
         }
 
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
+
 
         for(MatchOffsetPair m : matchOffsetPairs) {
             output.addAll(m.tokenize());

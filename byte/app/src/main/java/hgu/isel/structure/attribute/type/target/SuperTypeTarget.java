@@ -1,30 +1,27 @@
 package hgu.isel.structure.attribute.type.target;
 
 
-import hgu.isel.structure.attribute.type.annotation.elemet.union.Annotation;
-import hgu.isel.structure.attribute.type.stack.verification.VerificationTypeInformation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class SuperTypeTarget implements TargetInformation {
-    private byte[] superTpeIndex; // u2
+    private byte[] superTypeIndex; // u2
 
-    public byte[] getSuperTpeIndex() {
-        return superTpeIndex;
+    public byte[] getSuperTypeIndex() {
+        return superTypeIndex;
     }
 
-    public void setSuperTpeIndex(byte[] superTpeIndex) {
-        this.superTpeIndex = superTpeIndex;
+    public void setSuperTypeIndex(byte[] superTypeIndex) {
+        this.superTypeIndex = superTypeIndex;
     }
 
-    public SuperTypeTarget(byte[] superTpeIndex) {
-        this.superTpeIndex = superTpeIndex;
+    public SuperTypeTarget(byte[] superTypeIndex) {
+        this.superTypeIndex = superTypeIndex;
     }
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(byte b : superTpeIndex) {
+        for(byte b : superTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
 
@@ -37,7 +34,8 @@ public class SuperTypeTarget implements TargetInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(byte b : superTpeIndex) {
+        stringBuilder.append("[Super Type] ");
+        for(byte b : superTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());

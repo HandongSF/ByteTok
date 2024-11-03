@@ -8,10 +8,11 @@ import hgu.isel.reader.ByteReader;
 import hgu.isel.tokenizer.ByteStructure;
 import hgu.isel.tokenizer.ByteTokenizer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ByteTok {
-    byte[] bytes;
 
     public static void main(String[] args) {
         ByteTok parser = new ByteTok();
@@ -20,23 +21,19 @@ public class ByteTok {
 
     public void run(String path) {
         ByteReader byteReader = new ByteReader(path);
-        bytes = byteReader.readClassFile();
+        List<byte[]> byteList = byteReader.readClassFiles();
+        List<ByteStructure> byteStructures = new ArrayList<>();
 
-
-        ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-        try {
-            ByteStructure byteStructure = byteAnalyzer.analyze();
-//            System.out.println(byteAnalyzer.printResult());
-
-            ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructure);
-            byteTokenizer.tokenize();
-
-
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        for(byte[] b : byteList) {
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(b);
+            try {
+                byteStructures.add(byteAnalyzer.analyze());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
-
+        ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructures);
+        byteTokenizer.createVocabulary();
     }
 }

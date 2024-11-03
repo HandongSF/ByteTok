@@ -76,12 +76,17 @@ public class BranchAlwaysWideIndexInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", branchType1));
-        output.add(String.format("%02X", branchType2));
-        output.add(String.format("%02X", branchType3));
-        output.add(String.format("%02X", branchType4));
 
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Branch Always Wide Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", branchType1));
+        stringBuilder.append(String.format("%02X", branchType2));
+        stringBuilder.append(String.format("%02X", branchType3));
+        stringBuilder.append(String.format("%02X", branchType4));
+
+
+        output.add(stringBuilder.toString());
         return output;
     }
 }

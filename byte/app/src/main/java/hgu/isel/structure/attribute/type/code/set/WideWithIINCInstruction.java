@@ -89,12 +89,17 @@ public class WideWithIINCInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", iinc));
-        output.add(String.format("%02X", indexByte1));
-        output.add(String.format("%02X", indexByte2));
-        output.add(String.format("%02X", constByte1));
-        output.add(String.format("%02X", constByte2));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Wide with IINC Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", iinc));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+        stringBuilder.append(String.format("%02X", constByte1));
+        stringBuilder.append(String.format("%02X", constByte2));
+
+
+        output.add(stringBuilder.toString());
 
 
 

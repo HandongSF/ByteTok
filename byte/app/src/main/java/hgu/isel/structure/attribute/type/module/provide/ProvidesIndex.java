@@ -32,6 +32,7 @@ public class ProvidesIndex {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Provides Information Index] ");
         for(byte b : providesIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

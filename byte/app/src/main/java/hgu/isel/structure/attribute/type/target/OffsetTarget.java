@@ -36,6 +36,7 @@ public class OffsetTarget implements TargetInformation{
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Offset Target] ");
         for(byte b : offset) {
             stringBuilder.append(String.format("%02X", b));
         }

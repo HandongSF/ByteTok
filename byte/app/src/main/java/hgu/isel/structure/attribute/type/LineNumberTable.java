@@ -82,18 +82,21 @@ public class LineNumberTable implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Line Number Table Attribute Name Index] ");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Line Number Table Attribute Length] ");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Line Number Table Attribute Table Length] ");
         for(byte b : lineNumberTableLength) {
             stringBuilder.append(String.format("%02X", b));
         }

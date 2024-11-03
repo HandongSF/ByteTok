@@ -43,8 +43,12 @@ public class NewArrayInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", type));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[New Array Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", type));
+
+        output.add(stringBuilder.toString());
 
 
 

@@ -49,13 +49,16 @@ public class TypeArgumentTarget implements TargetInformation{
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("[Type Argument Target Offset] ");
         for(byte b : offset) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add(String.format("%02X", typeArgumentIndex));
+        stringBuilder.append("[Type Argument Index] ");
+        stringBuilder.append(String.format("%02X", typeArgumentIndex));
+        output.add(stringBuilder.toString());
 
         return output;
     }

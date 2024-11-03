@@ -106,9 +106,11 @@ public class TableSwitchInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
+
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Table Switch Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
         for(byte b : paddingBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -116,6 +118,7 @@ public class TableSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Table Switch Default Byte] ");
         for(byte b : defaultByte) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -123,6 +126,7 @@ public class TableSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Table Switch Low Byte] ");
         for(byte b : lowBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -130,6 +134,7 @@ public class TableSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Table Switch High Byte] ");
         for(byte b : highBytes) {
             stringBuilder.append(String.format("%02X", b));
         }

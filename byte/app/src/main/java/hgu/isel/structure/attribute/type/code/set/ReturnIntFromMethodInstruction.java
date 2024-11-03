@@ -34,7 +34,12 @@ public class ReturnIntFromMethodInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Return Integer From Method Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+
+
+        output.add(stringBuilder.toString());
 
 
 

@@ -51,9 +51,13 @@ public class ClassInformation implements ConstantPoolInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Constant Pool Information Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
 
-        output.add(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Pool Information Name Index] ");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

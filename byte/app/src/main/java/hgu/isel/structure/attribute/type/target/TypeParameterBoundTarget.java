@@ -43,9 +43,16 @@ public class TypeParameterBoundTarget implements TargetInformation {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", typeParameterIndex));
-        output.add(String.format("%02X", boundIndex));
+        stringBuilder.append("[Type Parameter Bound Target Parameter Index] ");
+        stringBuilder.append(String.format("%02X", typeParameterIndex));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
+
+        stringBuilder.append("[Type Parameter Bound Target Bound Index] ");
+        stringBuilder.append(String.format("%02X", boundIndex));
+        output.add(stringBuilder.toString());
 
         return output;
     }

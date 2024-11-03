@@ -67,13 +67,15 @@ public class InvokeInterfaceInstruction implements Instruction {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", indexByte1));
-        output.add(String.format("%02X", indexByte2));
-        output.add(String.format("%02X", count));
-        output.add(String.format("%02X", ignoreNum));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Invoke Interface Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", indexByte1));
+        stringBuilder.append(String.format("%02X", indexByte2));
+        stringBuilder.append(String.format("%02X", count));
+        stringBuilder.append(String.format("%02X", ignoreNum));
 
-
+        output.add(stringBuilder.toString());
         return output;
     }
 }

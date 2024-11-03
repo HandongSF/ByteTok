@@ -62,14 +62,19 @@ public class NameAndTypeInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", tag));
+        stringBuilder.append("[Constant Name and Type Tag] ");
+        stringBuilder.append(String.format("%02X", tag));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Name and Type Name Index] ");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
+        stringBuilder.append("[Constant Name and Type Descriptor] ");
         for(byte b : descriptorIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

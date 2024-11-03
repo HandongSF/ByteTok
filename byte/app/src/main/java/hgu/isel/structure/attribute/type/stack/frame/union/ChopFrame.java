@@ -50,8 +50,12 @@ public class ChopFrame implements StackMapFrame {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add(String.format("%02X", frameType));
+        stringBuilder.append("[Chop Frame] ");
+        stringBuilder.append(String.format("%02X", frameType));
+        output.add(stringBuilder.toString());
+        stringBuilder.setLength(0);
 
+        stringBuilder.append("[Chop Frame Offset Delta] ");
         for(byte b : offsetDelta) {
             stringBuilder.append(String.format("%02X", b));
         }

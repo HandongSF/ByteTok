@@ -55,11 +55,13 @@ public class IncrementLocalVariableByConstantInstruction implements Instruction 
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
-        output.add(String.format("%02X", format));
-        output.add(String.format("%02X", index));
-        output.add(String.format("%02X", constValue));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Increment Local Variable by Constant Instruction] ");
+        stringBuilder.append(String.format("%02X", format));
+        stringBuilder.append(String.format("%02X", index));
+        stringBuilder.append(String.format("%02X", constValue));
 
-
+        output.add(stringBuilder.toString());
         return output;
     }
 }

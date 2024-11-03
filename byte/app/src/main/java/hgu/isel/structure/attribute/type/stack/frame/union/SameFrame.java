@@ -31,8 +31,11 @@ public class SameFrame implements StackMapFrame {
     @Override
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[Same Frame] ");
+        stringBuilder.append(String.format("%02X", frameType));
+        output.add(stringBuilder.toString());
 
-        output.add(String.format("%02X", frameType));
 
 
         return output;
