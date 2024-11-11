@@ -123,7 +123,7 @@ public class MethodInformation {
 
         for(AttributeInformation a : attributes) {
             for(String s : a.tokenize()) {
-                stringBuilder.append("[Field Attribute] ");
+                stringBuilder.append("[Method Attribute] ");
                 stringBuilder.append(s);
 
                 output.add(stringBuilder.toString());
