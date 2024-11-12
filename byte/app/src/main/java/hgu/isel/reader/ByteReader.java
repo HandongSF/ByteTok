@@ -17,6 +17,7 @@ public class ByteReader {
 
     public byte[] readClassFile() {
         try {
+
             return Files.readAllBytes(Paths.get(inputPath));
         } catch (IOException e) {
             e.printStackTrace();
@@ -25,9 +26,9 @@ public class ByteReader {
         return null;
     }
 
-    public Map<String, byte[]> readClassFiles() {
+    public List<String> readClassFilePaths() {
         Path startPath = Paths.get(inputPath);
-        Map<String, byte[]> fileDataMap = new HashMap<>();
+        List<String> filePaths = new ArrayList<>();
 
         try {
             Files.walkFileTree(startPath, new SimpleFileVisitor<Path>() {
@@ -35,8 +36,7 @@ public class ByteReader {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (file.toString().endsWith(".class")) {
                         String fileName = file.toString(); // 파일 이름
-                        byte[] fileBytes = Files.readAllBytes(file); // 파일 데이터
-                        fileDataMap.put(fileName, fileBytes);
+                        filePaths.add(fileName); // 파일 경로를 리스트에 추가
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -45,6 +45,16 @@ public class ByteReader {
             e.printStackTrace();
         }
 
-        return fileDataMap;
+        return filePaths;
+    }
+
+    public byte[] readClassFile(String path) {
+        try {
+            return Files.readAllBytes(Paths.get(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

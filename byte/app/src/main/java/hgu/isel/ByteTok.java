@@ -28,29 +28,29 @@ public class ByteTok {
 
         if(option.equals("v")) {
             ByteReader byteReader = new ByteReader(path);
-            Map<String, byte[]> byteMap = byteReader.readClassFiles(); // Map<String, byte[]>
+            List<String> filePaths = byteReader.readClassFilePaths();
             List<ByteStructure> byteStructures = new ArrayList<>();
+            byte[] bytes;
 
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
 
-            for (Map.Entry<String, byte[]> entry : byteMap.entrySet()) {
-                String fileName = entry.getKey();
-                byte[] fileBytes = entry.getValue();
-
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(fileBytes);
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
                 try {
                     ByteStructure byteStructure = byteAnalyzer.analyze();
                     byteStructures.add(byteStructure);
 
                 } catch (Exception e) {
                     try {
-                        Path filePath = Paths.get(fileName);
+                        Path filePath = Paths.get(s);
                         Files.delete(filePath);
-                        System.out.println("Deleted file: " + fileName);
+                        System.out.println("Deleted file: " + s);
                     } catch (IOException deleteException) {
-                        System.err.println("Failed to delete file: " + fileName);
+                        System.err.println("Failed to delete file: " + s);
 
                     }
                 }
+
             }
 
             ByteTokenizer byteTokenizer = new ByteTokenizer(byteStructures);
@@ -60,6 +60,7 @@ public class ByteTok {
             ByteReader byteReader = new ByteReader(path);
 
             byte[] bytes = byteReader.readClassFile();
+
             ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
             ByteStructure byteStructure = null;
             try {
@@ -77,26 +78,23 @@ public class ByteTok {
 
         } else if(option.equals("s")) { // delete kotlin / scala files
             ByteReader byteReader = new ByteReader(path);
-            Map<String, byte[]> byteMap = byteReader.readClassFiles(); // Map<String, byte[]>
-            List<ByteStructure> byteStructures = new ArrayList<>();
+            List<String> filePaths = byteReader.readClassFilePaths();
 
+            byte[] bytes;
 
-            for (Map.Entry<String, byte[]> entry : byteMap.entrySet()) {
-                String fileName = entry.getKey();
-                byte[] fileBytes = entry.getValue();
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
 
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(fileBytes);
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
                 try {
-                    ByteStructure byteStructure = byteAnalyzer.analyze();
-                    byteStructures.add(byteStructure);
-
+                    byteAnalyzer.analyze();
                 } catch (Exception e) {
                     try {
-                        Path filePath = Paths.get(fileName);
+                        Path filePath = Paths.get(s);
                         Files.delete(filePath);
-                        System.out.println("Deleted file: " + fileName);
+                        System.out.println("Deleted file: " + s);
                     } catch (IOException deleteException) {
-                        System.err.println("Failed to delete file: " + fileName);
+                        System.err.println("Failed to delete file: " + s);
 
                     }
                 }
