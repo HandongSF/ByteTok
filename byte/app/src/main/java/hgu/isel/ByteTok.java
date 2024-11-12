@@ -88,6 +88,7 @@ public class ByteTok {
                 ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
                 try {
                     byteAnalyzer.analyze();
+                    System.out.println("Success!! : " + s);
                 } catch (Exception e) {
                     try {
                         Path filePath = Paths.get(s);
