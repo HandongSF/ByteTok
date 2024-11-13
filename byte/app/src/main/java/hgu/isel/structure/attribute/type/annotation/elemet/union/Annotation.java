@@ -65,7 +65,7 @@ public class Annotation implements ElementUnion {
         StringBuilder stringBuilder = new StringBuilder();
 
 
-        stringBuilder.append("[Annotation Type Index] ");
+        output.add("[Annotation Type Index]");
 
         for(byte b : typeIndex) {
             stringBuilder.append(String.format("%02X", b));

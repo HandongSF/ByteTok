@@ -34,7 +34,7 @@ public class DuplicateTopOperandStackValueAndInsertTwoValuesInstruction implemen
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Duplicate Top Operand Stack Value and Insert Instruction] ");
+        output.add("[Duplicate Top Operand Stack Value and Insert Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

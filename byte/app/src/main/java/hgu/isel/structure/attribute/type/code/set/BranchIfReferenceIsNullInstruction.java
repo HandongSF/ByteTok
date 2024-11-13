@@ -55,7 +55,7 @@ public class BranchIfReferenceIsNullInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Branch If Reference Is Null Instruction] ");
+        output.add("[Branch If Reference Is Null Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", branchByte1));
         stringBuilder.append(String.format("%02X", branchByte2));

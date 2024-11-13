@@ -35,7 +35,7 @@ public class ConstValueIndex implements ElementUnion {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Const Value Index] ");
+        output.add("[Const Value Index]");
         for(byte b : constValueIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

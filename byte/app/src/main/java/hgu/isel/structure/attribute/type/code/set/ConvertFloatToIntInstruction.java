@@ -34,7 +34,7 @@ public class ConvertFloatToIntInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Convert Float To Integer Instruction] ");
+        output.add("[Convert Float To Integer Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 
