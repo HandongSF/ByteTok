@@ -36,7 +36,7 @@ public class ThrowsTarget implements TargetInformation{
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Throws Target Index] ");
+        output.add("[Throws Target Index]");
         for(byte b : throwsTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

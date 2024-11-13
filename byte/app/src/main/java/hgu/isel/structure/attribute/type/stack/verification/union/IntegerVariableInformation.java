@@ -23,7 +23,7 @@ public class IntegerVariableInformation implements VerificationTypeInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Integer Variable Verification] ");
+        output.add("[Integer Variable Verification]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
 

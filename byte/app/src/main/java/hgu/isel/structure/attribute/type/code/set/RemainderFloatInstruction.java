@@ -35,7 +35,7 @@ public class RemainderFloatInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Remainder Float Instruction] ");
+        output.add("[Remainder Float Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

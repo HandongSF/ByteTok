@@ -34,7 +34,7 @@ public class StoreIntoDoubleArrayInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Store into Double Array Instruction] ");
+        output.add("[Store into Double Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

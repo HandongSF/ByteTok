@@ -36,7 +36,7 @@ public class Interfaces {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Interface] ");
+        output.add("[Interface]");
         for(byte b : bytes) {
             stringBuilder.append(String.format("%02X", b));
         }

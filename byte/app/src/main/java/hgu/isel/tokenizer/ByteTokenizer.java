@@ -45,7 +45,7 @@ public class ByteTokenizer {
         StringBuilder stringBuilder = new StringBuilder();
 
         // tokenize magic number
-        stringBuilder.append("[Magic Number] ");
+        inputs.add("[Magic Number]");
         for(byte b : byteStructure.getMagic()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -53,7 +53,7 @@ public class ByteTokenizer {
         stringBuilder.setLength(0);
 
         // tokenize minor version
-        stringBuilder.append("[Minor Version] ");
+        inputs.add("[Minor Version]");
         for(byte b : byteStructure.getMinorVersion()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -61,7 +61,7 @@ public class ByteTokenizer {
         stringBuilder.setLength(0);
 
         // tokenize major version
-        stringBuilder.append("[Major Version] ");
+        inputs.add("[Major Version]");
         for(byte b : byteStructure.getMajorVersion()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -69,7 +69,7 @@ public class ByteTokenizer {
         stringBuilder.setLength(0);
 
         // tokenize constant pool count
-        stringBuilder.append("[CP Count] ");
+        inputs.add("[CP Count]");
         for(byte b : byteStructure.getConstantPoolCount()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -84,7 +84,7 @@ public class ByteTokenizer {
         }
 
         // tokenize access flag
-        stringBuilder.append("[Class Access Flag] ");
+        inputs.add("[Class Access Flag]");
         for(byte b : byteStructure.getAccessFlag()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -92,7 +92,7 @@ public class ByteTokenizer {
         stringBuilder.setLength(0);
 
         // tokenize this class
-        stringBuilder.append("[This Class] ");
+        inputs.add("[This Class]");
         for(byte b : byteStructure.getThisClass()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -100,7 +100,7 @@ public class ByteTokenizer {
         stringBuilder.setLength(0);
 
         // tokenize super class
-        stringBuilder.append("[Super Class] ");
+        inputs.add("[Super Class]");
         for(byte b : byteStructure.getSuperClass()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -108,7 +108,7 @@ public class ByteTokenizer {
         stringBuilder.setLength(0);
 
         // tokenize interface count
-        stringBuilder.append("[Interface Count] ");
+        inputs.add("[Interface Count]");
         for(byte b : byteStructure.getInterfacesCount()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -121,7 +121,7 @@ public class ByteTokenizer {
         }
 
         // tokenize fields count
-        stringBuilder.append("[Fields Count] ");
+        inputs.add("[Fields Count]");
         for(byte b : byteStructure.getFieldsCount()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -134,7 +134,7 @@ public class ByteTokenizer {
         }
 
         // tokenize methods count
-        stringBuilder.append("[Methods Count] ");
+        inputs.add("[Methods Count]");
         for(byte b : byteStructure.getMethodsCount()) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -147,7 +147,7 @@ public class ByteTokenizer {
         }
 
         // tokenize attributes count
-        stringBuilder.append("[Class Attributes Count] ");
+        inputs.add("[Class Attributes Count]");
         for(byte b : byteStructure.getAttributesCount()) {
             stringBuilder.append(String.format("%02X", b));
         }

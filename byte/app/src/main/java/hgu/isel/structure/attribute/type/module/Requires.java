@@ -63,21 +63,21 @@ public class Requires {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Requires Index] ");
+        output.add("[Requires Index]");
         for(byte b : requiresIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Requires Flag] ");
+        output.add("[Requires Flag]");
         for(byte b : requiresFlags) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Requires Version Index] ");
+        output.add("[Requires Version Index]");
         for(byte b : requiresVersionIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

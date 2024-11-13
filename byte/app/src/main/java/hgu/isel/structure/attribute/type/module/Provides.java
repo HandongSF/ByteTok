@@ -63,14 +63,14 @@ public class Provides {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Provides Index] ");
+        output.add("[Provides Index]");
         for(byte b : providesIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Provides With Count] ");
+        output.add("[Provides With Count]");
         for(byte b : providesWithCount) {
             stringBuilder.append(String.format("%02X", b));
         }

@@ -32,7 +32,7 @@ public class UsesIndex {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Uses Index] ");
+        output.add("[Uses Index]");
         for(byte b : usesIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

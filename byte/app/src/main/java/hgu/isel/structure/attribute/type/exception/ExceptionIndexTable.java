@@ -35,7 +35,7 @@ public class ExceptionIndexTable {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Exception Index Table] ");
+        output.add("[Exception Index Table]");
         for(byte b : exceptionIndexTable) {
             stringBuilder.append(String.format("%02X", b));
         }

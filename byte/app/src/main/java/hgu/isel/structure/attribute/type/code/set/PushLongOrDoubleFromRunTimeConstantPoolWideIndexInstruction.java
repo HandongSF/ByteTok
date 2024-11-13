@@ -57,7 +57,7 @@ public class PushLongOrDoubleFromRunTimeConstantPoolWideIndexInstruction impleme
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Push Long or Double Instruction] ");
+        output.add("[Push Long or Double Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", indexByte1));
         stringBuilder.append(String.format("%02X", indexByte2));

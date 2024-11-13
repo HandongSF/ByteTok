@@ -32,7 +32,7 @@ public class OpenIndex {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Opens To Index] ");
+        output.add("[Opens To Index]");
         for(byte b : opensToIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

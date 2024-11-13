@@ -66,21 +66,21 @@ public class SourceDebugExtension implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Source Debug Attribute Name Index] ");
+        output.add("[Source Debug Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Source Debug Attribute Length] ");
+        output.add("[Source Debug Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Source Debug Attribute Debug Extension] ");
+        output.add("[Source Debug Attribute Debug Extension]");
         for(byte b : debugExtension) {
             stringBuilder.append(String.format("%02X", b));
         }

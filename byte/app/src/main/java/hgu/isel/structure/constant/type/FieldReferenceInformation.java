@@ -61,19 +61,19 @@ public class FieldReferenceInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant Field Reference Tag] ");
+        output.add("[Constant Field Reference Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Field Reference Class Index] ");
+        output.add("[Constant Field Reference Class Index]");
         for(byte b : classIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Field Reference Name and Type Index] ");
+        output.add("[Constant Field Reference Name and Type Index]");
         for(byte b : nameAndTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

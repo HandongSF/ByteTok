@@ -44,7 +44,7 @@ public class SameLocals1StackItemFrame implements StackMapFrame {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Same Locals 1 Stack Item Frame] ");
+        output.add("[Same Locals 1 Stack Item Frame]");
         stringBuilder.append(String.format("%02X", frameType));
         output.add(stringBuilder.toString());
 

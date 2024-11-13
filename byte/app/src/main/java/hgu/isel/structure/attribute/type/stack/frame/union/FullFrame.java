@@ -103,20 +103,20 @@ public class FullFrame implements StackMapFrame {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Full Frame] ");
+        output.add("[Full Frame]");
         stringBuilder.append(String.format("%02X", frameType));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
 
-        stringBuilder.append("[Full Frame Offset Delta] ");
+        output.add("[Full Frame Offset Delta]");
         for(byte b : offsetDelta) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Full Frame Local Number] ");
+        output.add("[Full Frame Local Number]");
         for(byte b : numberOfLocals) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -128,7 +128,7 @@ public class FullFrame implements StackMapFrame {
             output.addAll(c.tokenize());
         }
 
-        stringBuilder.append("[Full Frame Stack Item Number] ");
+        output.add("[Full Frame Stack Item Number]");
         for(byte b : numberOfStackItems) {
             stringBuilder.append(String.format("%02X", b));
         }

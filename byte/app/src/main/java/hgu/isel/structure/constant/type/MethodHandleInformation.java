@@ -58,20 +58,20 @@ public class MethodHandleInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant Method Handle Tag] ");
+        output.add("[Constant Method Handle Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
 
 
-        stringBuilder.append("[Constant Method Handle Reference Kind] ");
+        output.add("[Constant Method Handle Reference Kind]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
 
-        stringBuilder.append("[Constant Method Handle Reference Index] ");
+        output.add("[Constant Method Handle Reference Index]");
         for(byte b : referenceIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

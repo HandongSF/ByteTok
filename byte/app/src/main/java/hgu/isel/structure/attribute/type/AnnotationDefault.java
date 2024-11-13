@@ -66,21 +66,21 @@ public class AnnotationDefault implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Annotation Attribute Name Index] ");
+        output.add("[Annotation Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Annotation Attribute Length] ");
+        output.add("[Annotation Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
 
         for(String s : defaultValue.tokenize()) {
-            stringBuilder.append("[Annotation Attribute Default Value] ");
+            output.add("[Annotation Attribute Default Value]");
             stringBuilder.append(s);
 
             output.add(stringBuilder.toString());

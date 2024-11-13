@@ -62,19 +62,19 @@ public class DynamicInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant Dynamic Tag] ");
+        output.add("[Constant Dynamic Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Dynamic Bootstrap Method Attribute] ");
+        output.add("[Constant Dynamic Bootstrap Method Attribute]");
         for(byte b : bootstrapMethodAttributeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Dynamic Name and Type Index] ");
+        output.add("[Constant Dynamic Name and Type Index]");
         for(byte b : nameAndTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

@@ -51,7 +51,7 @@ public class LocalVariableTarget implements TargetInformation{
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Local Variable Target Table Length] ");
+        output.add("[Local Variable Target Table Length]");
         for(byte b : tableLength) {
             stringBuilder.append(String.format("%02X", b));
         }
