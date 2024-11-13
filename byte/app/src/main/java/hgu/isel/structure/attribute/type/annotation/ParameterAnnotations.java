@@ -49,7 +49,7 @@ public class ParameterAnnotations {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Parameter Annotation Number] ");
+        output.add("[Parameter Annotation Number]");
         for(byte b : numberOfAnnotations) {
             stringBuilder.append(String.format("%02X", b));
         }

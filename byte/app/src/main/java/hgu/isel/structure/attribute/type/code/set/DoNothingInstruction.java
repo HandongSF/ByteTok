@@ -33,7 +33,7 @@ public class DoNothingInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Do Nothing Instruction] ");
+        output.add("[Do Nothing Instruction]");
         stringBuilder.append(String.format("%02X", format));
         output.add(stringBuilder.toString());
 

@@ -52,14 +52,14 @@ public class Deprecated implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Deprecated Attribute Name Index] ");
+        output.add("[Deprecated Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Deprecated Attribute Length] ");
+        output.add("[Deprecated Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }

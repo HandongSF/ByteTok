@@ -47,13 +47,13 @@ public class SameFrameExtended implements StackMapFrame {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Same Frame Extended] ");
+        output.add("[Same Frame Extended]");
         stringBuilder.append(String.format("%02X", frameType));
         output.add(stringBuilder.toString());
 
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Same Frame Extended Offset Delta] ");
+        output.add("[Same Frame Extended Offset Delta]");
         for(byte b : offsetDelta) {
             stringBuilder.append(String.format("%02X", b));
         }

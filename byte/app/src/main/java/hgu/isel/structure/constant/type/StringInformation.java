@@ -48,12 +48,12 @@ public class StringInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant String Tag] ");
+        output.add("[Constant String Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant String Index] ");
+        output.add("[Constant String Index]");
         for(byte b : stringIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

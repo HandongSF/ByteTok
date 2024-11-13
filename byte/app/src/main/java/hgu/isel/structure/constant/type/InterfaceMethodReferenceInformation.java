@@ -62,19 +62,19 @@ public class InterfaceMethodReferenceInformation implements ConstantPoolInformat
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant Interface Reference Tag] ");
+        output.add("[Constant Interface Reference Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Interface Reference Class Index] ");
+        output.add("[Constant Interface Reference Class Index]");
         for(byte b : classIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Interface Reference Name and Type] ");
+        output.add("[Constant Interface Reference Name and Type]");
         for(byte b : nameAndTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

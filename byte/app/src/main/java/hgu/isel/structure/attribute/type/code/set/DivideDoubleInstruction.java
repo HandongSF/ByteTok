@@ -37,7 +37,7 @@ public class DivideDoubleInstruction implements Instruction {
         output.add(String.format("%02X", format));
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Divide Double Instruction] ");
+        output.add("[Divide Double Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

@@ -56,7 +56,7 @@ public class BranchAlwaysInstruction implements Instruction {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Branch Always Instruction] ");
+        output.add("[Branch Always Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", branchType1));
         stringBuilder.append(String.format("%02X", branchType2));

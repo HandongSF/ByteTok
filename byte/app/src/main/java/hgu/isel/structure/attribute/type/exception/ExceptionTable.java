@@ -79,7 +79,7 @@ public class ExceptionTable {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Exception Table] ");
+        output.add("[Exception Table]");
         for(byte b : startPC) {
             stringBuilder.append(String.format("%02X", b));
         }

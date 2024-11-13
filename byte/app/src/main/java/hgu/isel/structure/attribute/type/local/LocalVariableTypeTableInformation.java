@@ -89,28 +89,28 @@ public class LocalVariableTypeTableInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Local Variable Type Table Information Start PC] ");
+        output.add("[Local Variable Type Table Information Start PC]");
         for(byte b : startPC) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Local Variable Type Table Information Length] ");
+        output.add("[Local Variable Type Table Information Length]");
         for(byte b : length) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Local Variable Type Table Information Name Index] ");
+        output.add("[Local Variable Type Table Information Name Index]");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Local Variable Type Table Information Signature Index] ");
+        output.add("[Local Variable Type Table Information Signature Index]");
         for(byte b : signatureIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -118,7 +118,7 @@ public class LocalVariableTypeTableInformation {
         stringBuilder.setLength(0);
 
 
-        stringBuilder.append("[Local Variable Type Table Information Index] ");
+        output.add("[Local Variable Type Table Information Index]");
         for(byte b : index) {
             stringBuilder.append(String.format("%02X", b));
         }

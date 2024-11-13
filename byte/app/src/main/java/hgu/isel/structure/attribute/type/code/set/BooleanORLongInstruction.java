@@ -33,7 +33,7 @@ public class BooleanORLongInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Boolean OR Long Instruction] ");
+        output.add("[Boolean OR Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

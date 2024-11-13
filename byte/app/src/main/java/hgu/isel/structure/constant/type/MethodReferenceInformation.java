@@ -62,19 +62,19 @@ public class MethodReferenceInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant Method Reference Tag] ");
+        output.add("[Constant Method Reference Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Method Reference Class Index] ");
+        output.add("[Constant Method Reference Class Index]");
         for(byte b : classIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Method Reference Name and Type] ");
+        output.add("[Constant Method Reference Name and Type]");
         for(byte b : nameAndTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

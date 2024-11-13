@@ -46,7 +46,7 @@ public class TypePath {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Type Path Length] ");
+        output.add("[Type Path Length]");
         stringBuilder.append(String.format("%02X", pathLength));
         output.add(stringBuilder.toString());
 

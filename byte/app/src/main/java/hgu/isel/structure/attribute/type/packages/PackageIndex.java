@@ -34,7 +34,7 @@ public class PackageIndex {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Package Index] ");
+        output.add("[Package Index]");
         for(byte b : packageIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

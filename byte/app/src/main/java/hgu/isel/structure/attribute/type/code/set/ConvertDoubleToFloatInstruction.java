@@ -34,7 +34,7 @@ public class ConvertDoubleToFloatInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Convert Double To Float Instruction] ");
+        output.add("[Convert Double To Float Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

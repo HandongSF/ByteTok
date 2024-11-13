@@ -34,7 +34,7 @@ public class AddDoubleInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Add Double Instruction] ");
+        output.add("[Add Double Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

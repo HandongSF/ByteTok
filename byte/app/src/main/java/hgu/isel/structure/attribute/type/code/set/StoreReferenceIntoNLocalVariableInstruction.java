@@ -35,7 +35,7 @@ public class StoreReferenceIntoNLocalVariableInstruction implements Instruction 
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Store Reference into Local Variable Instruction] ");
+        output.add("[Store Reference into Local Variable Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

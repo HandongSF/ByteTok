@@ -76,28 +76,28 @@ public class InnerClassInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Inner Class Information Index] ");
+        output.add("[Inner Class Information Index]");
         for(byte b : innerClassInformationIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Outer Class Information Index] ");
+        output.add("[Outer Class Information Index]");
         for(byte b : outerClassInformationIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Inner Class Name Index] ");
+        output.add("[Inner Class Name Index]");
         for(byte b : innerNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Inner Class Access Flag] ");
+        output.add("[Inner Class Access Flag]");
         for(byte b : innerClassAccessFlags) {
             stringBuilder.append(String.format("%02X", b));
         }

@@ -35,7 +35,7 @@ public class ReturnFloatFromMethodInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Return Float From Method Instruction] ");
+        output.add("[Return Float From Method Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

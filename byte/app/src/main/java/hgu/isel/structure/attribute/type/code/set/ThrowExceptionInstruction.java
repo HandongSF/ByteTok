@@ -35,7 +35,7 @@ public class ThrowExceptionInstruction implements Instruction { // athrow
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Throw Exception Instruction] ");
+        output.add("[Throw Exception Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

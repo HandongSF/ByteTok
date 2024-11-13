@@ -46,7 +46,7 @@ public class ReturnFromSubroutineInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Return From Subroutine Instruction] ");
+        output.add("[Return From Subroutine Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", index));
 

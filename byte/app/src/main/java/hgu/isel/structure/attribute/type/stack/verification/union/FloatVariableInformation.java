@@ -23,7 +23,7 @@ public class FloatVariableInformation implements VerificationTypeInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[Float Variable Verification] ");
+        output.add("[Float Variable Verification]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
 

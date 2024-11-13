@@ -46,7 +46,7 @@ public class ElementValuePairs {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Element Value Pairs Index] ");
+        output.add("[Element Value Pairs Index]");
         for(byte b : elementNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

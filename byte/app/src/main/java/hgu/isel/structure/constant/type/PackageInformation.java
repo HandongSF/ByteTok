@@ -48,12 +48,12 @@ public class PackageInformation implements ConstantPoolInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[Constant Package Tag] ");
+        output.add("[Constant Package Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Constant Package Name Index] ");
+        output.add("[Constant Package Name Index]");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
