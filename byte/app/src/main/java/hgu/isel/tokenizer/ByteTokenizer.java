@@ -16,19 +16,17 @@ import java.nio.file.Paths;
 
 public class ByteTokenizer {
 
-    private List<ByteStructure> vocabByte;
+
     private HashSet<String> tokens = new HashSet<>(); // used to generate vocabulary
-    private final int maxSize = 100000;
 
 
+    public int saveTokens(ByteStructure byteStructure) {
+        tokens.addAll(tokenize(byteStructure));
+
+        return tokens.size();
+    }
 
     public void createVocabulary() { // create vocabulary
-        for(ByteStructure b : vocabByte) {
-            tokens.addAll(tokenize(b));
-            if(tokens.size() > maxSize) {
-                break;
-            }
-        }
 
         String filePath = "output.txt";
         List<String> list = new ArrayList<>(tokens);
@@ -169,9 +167,7 @@ public class ByteTokenizer {
 
 
 
-    public ByteTokenizer(List<ByteStructure> vocabByte) {
-        this.vocabByte = vocabByte;
-    }
+
 
     public ByteTokenizer() {
     }
@@ -180,13 +176,6 @@ public class ByteTokenizer {
         return tokens;
     }
 
-    public List<ByteStructure> getVocabByte() {
-        return vocabByte;
-    }
-
-    public void setVocabByte(List<ByteStructure> vocabByte) {
-        this.vocabByte = vocabByte;
-    }
 
     public void setTokens(HashSet<String> tokens) {
         this.tokens = tokens;
