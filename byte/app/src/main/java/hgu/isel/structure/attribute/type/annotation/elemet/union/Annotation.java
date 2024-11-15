@@ -73,7 +73,7 @@ public class Annotation implements ElementUnion {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        stringBuilder.append("[Annotation Element Value Pairs Number] ");
+        output.add("[Annotation Element Value Pairs Number]");
         for(byte b : numberOfElementValuePairs) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -81,7 +81,7 @@ public class Annotation implements ElementUnion {
 
         for(ElementValuePairs e : elementValuePairs) {
             for(String s : e.tokenize()) {
-                stringBuilder.append("[Annotation Element Value Pairs] ");
+                output.add("[Annotation Element Value Pairs]");
                 stringBuilder.append(s);
                 output.add(stringBuilder.toString());
                 stringBuilder.setLength(0);
