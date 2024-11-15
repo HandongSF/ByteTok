@@ -42,6 +42,8 @@ public class ByteTok {
                     ByteStructure byteStructure = byteAnalyzer.analyze();
                     int hashSize = byteTokenizer.saveTokens(byteStructure);
 
+		    System.out.println(hashSize);
+
                     if(hashSize > 100000) { // up to maximum size
                         break;
                     }

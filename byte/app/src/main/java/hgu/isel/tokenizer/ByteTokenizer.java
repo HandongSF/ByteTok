@@ -28,7 +28,7 @@ public class ByteTokenizer {
 
     public void createVocabulary() { // create vocabulary
 
-        String filePath = "output.txt";
+        String filePath = "/data/donggyu/byteT5/Data/vocab.txt";
         List<String> list = new ArrayList<>(tokens);
 
         try {
