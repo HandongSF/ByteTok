@@ -40,122 +40,138 @@ public class ByteTokenizer {
 
     public List<String> tokenize(ByteStructure byteStructure) { // translate input to tokenized one
         List<String> inputs = new ArrayList<>();
+        List<String> methods = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
 
-        // tokenize magic number
-        inputs.add("[Magic Number]");
-        for(byte b : byteStructure.getMagic()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize magic number
+        // inputs.add("[Magic Number]");
+        // for(byte b : byteStructure.getMagic()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize minor version
-        inputs.add("[Minor Version]");
-        for(byte b : byteStructure.getMinorVersion()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize minor version
+        // inputs.add("[Minor Version]");
+        // for(byte b : byteStructure.getMinorVersion()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize major version
-        inputs.add("[Major Version]");
-        for(byte b : byteStructure.getMajorVersion()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize major version
+        // inputs.add("[Major Version]");
+        // for(byte b : byteStructure.getMajorVersion()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize constant pool count
-        inputs.add("[CP Count]");
-        for(byte b : byteStructure.getConstantPoolCount()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize constant pool count
+        // inputs.add("[CP Count]");
+        // for(byte b : byteStructure.getConstantPoolCount()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
         // tokenize constant pool
-        for(ConstantPoolInformation c : byteStructure.getConstantPoolInformation()) {
-            if(c != null) {
-                inputs.addAll(c.tokenize());
+        for(int i = 0; i < byteStructure.getConstantPoolInformation().length; i++) {
+            if(byteStructure.getConstantPoolInformation()[i] != null) {
+                inputs.addAll(byteStructure.getConstantPoolInformation()[i].tokenize(i));
             }
         }
 
-        // tokenize access flag
-        inputs.add("[Class Access Flag]");
-        for(byte b : byteStructure.getAccessFlag()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize access flag
+        // inputs.add("[Class Access Flag]");
+        // for(byte b : byteStructure.getAccessFlag()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize this class
-        inputs.add("[This Class]");
-        for(byte b : byteStructure.getThisClass()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize this class
+        // inputs.add("[This Class]");
+        // for(byte b : byteStructure.getThisClass()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize super class
-        inputs.add("[Super Class]");
-        for(byte b : byteStructure.getSuperClass()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize super class
+        // inputs.add("[Super Class]");
+        // for(byte b : byteStructure.getSuperClass()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize interface count
-        inputs.add("[Interface Count]");
-        for(byte b : byteStructure.getInterfacesCount()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize interface count
+        // inputs.add("[Interface Count]");
+        // for(byte b : byteStructure.getInterfacesCount()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize interface
-        for(Interfaces i : byteStructure.getInterfaces()) {
-            inputs.addAll(i.tokenize());
-        }
+        // // tokenize interface
+        // for(Interfaces i : byteStructure.getInterfaces()) {
+        //     inputs.addAll(i.tokenize());
+        // }
 
-        // tokenize fields count
-        inputs.add("[Fields Count]");
-        for(byte b : byteStructure.getFieldsCount()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // // tokenize fields count
+        // inputs.add("[Fields Count]");
+        // for(byte b : byteStructure.getFieldsCount()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        // tokenize fields
-        for(FieldInformation f : byteStructure.getFieldInformation()) {
-            inputs.addAll(f.tokenize());
-        }
+        // // tokenize fields
+        // for(FieldInformation f : byteStructure.getFieldInformation()) {
+        //     inputs.addAll(f.tokenize());
+        // }
 
         // tokenize methods count
-        inputs.add("[Methods Count]");
-        for(byte b : byteStructure.getMethodsCount()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // inputs.add("[Methods Count]");
+        // for(byte b : byteStructure.getMethodsCount()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
         // tokenize methods
         for(MethodInformation m : byteStructure.getMethodInformation()) {
-            inputs.addAll(m.tokenize());
-        }
+            methods.addAll(m.tokenize());
 
-        // tokenize attributes count
-        inputs.add("[Class Attributes Count]");
-        for(byte b : byteStructure.getAttributesCount()) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        inputs.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+            // for(String s : inputs) {
+            //     System.out.println(s);
+            // }
+            // for(String s : methods) {
+            //     System.out.println(s);
+            // }
 
-        // tokenize Attributes
-        for(AttributeInformation a : byteStructure.getAttributeInformation()) {
-            inputs.addAll(a.tokenize());
+            // System.out.println("[Divide New Methods]");
         }
+        for(String s : inputs) {
+            System.out.println(s);
+        }
+        System.out.println();
+        System.out.println(inputs.size());
+        // System.out.println("?!?!?!?!?!");
+
+        // // tokenize attributes count
+        // inputs.add("[Class Attributes Count]");
+        // for(byte b : byteStructure.getAttributesCount()) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // inputs.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
+
+        // // tokenize Attributes
+        // for(AttributeInformation a : byteStructure.getAttributeInformation()) {
+        //     inputs.addAll(a.tokenize());
+        // }
 
         return inputs;
     }

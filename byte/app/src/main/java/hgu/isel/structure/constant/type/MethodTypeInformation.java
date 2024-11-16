@@ -43,21 +43,21 @@ public class MethodTypeInformation implements ConstantPoolInformation {
     }
 
     @Override
-    public List<String> tokenize() {
+    public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
-
+        output.add(String.valueOf(index));
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Constant Method Type Tag]");
+        // output.add("[Constant Method Type Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Constant Method Type Descriptor]");
-        for(byte b : descriptorIndex) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
+        // output.add("[Constant Method Type Descriptor]");
+        // for(byte b : descriptorIndex) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
 
 
 

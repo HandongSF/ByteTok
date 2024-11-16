@@ -57,28 +57,29 @@ public class UTF8Information implements ConstantPoolInformation {
     }
 
     @Override
-    public List<String> tokenize() {
+    public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
+        output.add(String.valueOf(index));
 
-        output.add("[Constant UTF8 Tag]");
+        // output.add("[Constant UTF8 Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Constant UTF8 Length]");
-        for(byte b : length) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // output.add("[Constant UTF8 Length]");
+        // for(byte b : length) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        output.add("[Constant UTF8 Byte]");
-        for(byte b : bytes) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
+        // output.add("[Constant UTF8 Byte]");
+        // for(byte b : bytes) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
 
 
         return output;
