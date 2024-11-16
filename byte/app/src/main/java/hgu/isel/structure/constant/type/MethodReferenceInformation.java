@@ -57,28 +57,29 @@ public class MethodReferenceInformation implements ConstantPoolInformation {
     }
 
     @Override
-    public List<String> tokenize() {
+    public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
+        output.add(String.valueOf(index));
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Constant Method Reference Tag]");
+        // output.add("[Constant Method Reference Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Constant Method Reference Class Index]");
-        for(byte b : classIndex) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // output.add("[Constant Method Reference Class Index]");
+        // for(byte b : classIndex) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        output.add("[Constant Method Reference Name and Type]");
-        for(byte b : nameAndTypeIndex) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
+        // output.add("[Constant Method Reference Name and Type]");
+        // for(byte b : nameAndTypeIndex) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
 
 
         return output;

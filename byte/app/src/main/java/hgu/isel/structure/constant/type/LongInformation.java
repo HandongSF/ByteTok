@@ -56,28 +56,29 @@ public class LongInformation implements ConstantPoolInformation {
         return stringBuilder.toString();
     }
     @Override
-    public List<String> tokenize() {
+    public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
 
+        output.add(String.valueOf(index));
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Constant Long Tag]");
+        // output.add("[Constant Long Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Constant Long High Byte]");
-        for(byte b : highBytes) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // output.add("[Constant Long High Byte]");
+        // for(byte b : highBytes) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        output.add("[Constant Long Low Byte]");
-        for(byte b : lowBytes) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
+        // output.add("[Constant Long Low Byte]");
+        // for(byte b : lowBytes) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
 
 
         return output;

@@ -56,28 +56,29 @@ public class FieldReferenceInformation implements ConstantPoolInformation {
         return stringBuilder.toString();
     }
     @Override
-    public List<String> tokenize() {
+    public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
+        output.add(String.valueOf(index));
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Constant Field Reference Tag]");
+        // output.add("[Constant Field Reference]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Constant Field Reference Class Index]");
-        for(byte b : classIndex) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // output.add("[Constant Field Reference Class Index]");
+        // for(byte b : classIndex) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        output.add("[Constant Field Reference Name and Type Index]");
-        for(byte b : nameAndTypeIndex) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
+        // output.add("[Constant Field Reference Name and Type Index]");
+        // for(byte b : nameAndTypeIndex) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
 
 
         return output;

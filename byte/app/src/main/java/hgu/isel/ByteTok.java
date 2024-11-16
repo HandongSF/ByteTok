@@ -42,6 +42,8 @@ public class ByteTok {
                     ByteStructure byteStructure = byteAnalyzer.analyze();
                     int hashSize = byteTokenizer.saveTokens(byteStructure);
 
+		    System.out.println(hashSize);
+
                     if(hashSize > 100000) { // up to maximum size
                         break;
                     }
@@ -76,9 +78,6 @@ public class ByteTok {
             ByteTokenizer byteTokenizer = new ByteTokenizer();
 
             List<String> tokens = byteTokenizer.tokenize(byteStructure);
-            for(String s : tokens) {
-                System.out.println(s);
-            }
 
         } else if(option.equals("s")) { // delete kotlin / scala files
             ByteReader byteReader = new ByteReader(path);

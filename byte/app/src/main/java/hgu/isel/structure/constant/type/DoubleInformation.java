@@ -58,27 +58,28 @@ public class DoubleInformation implements ConstantPoolInformation {
     }
 
     @Override
-    public List<String> tokenize() {
+    public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
+        output.add(String.valueOf(index));
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Constant Double Tag]");
+        // output.add("[Constant Double]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Constant Double High Byte]");
-        for(byte b : highBytes) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
-        stringBuilder.setLength(0);
+        // output.add("[Constant Double High Byte]");
+        // for(byte b : highBytes) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
+        // stringBuilder.setLength(0);
 
-        output.add("[Constant Double Low Byte]");
-        for(byte b : lowBytes) {
-            stringBuilder.append(String.format("%02X", b));
-        }
-        output.add(stringBuilder.toString());
+        // output.add("[Constant Double Low Byte]");
+        // for(byte b : lowBytes) {
+        //     stringBuilder.append(String.format("%02X", b));
+        // }
+        // output.add(stringBuilder.toString());
 
 
         return output;
