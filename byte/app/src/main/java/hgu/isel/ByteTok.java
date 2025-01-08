@@ -148,7 +148,10 @@ public class ByteTok {
                     if(isDelete) {
                         Path filePath = Paths.get(s);
                         Files.delete(filePath);
+
+                        System.out.println("delete " + s);
                     }
+                    System.out.println("not delete");
 
 
                 } catch (Exception e) {
