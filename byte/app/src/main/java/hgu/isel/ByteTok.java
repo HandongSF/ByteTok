@@ -128,6 +128,36 @@ public class ByteTok {
 
 
             }
+        } else if(option.equals("d")) { // delete / constant pool size > 480 then delete
+            ByteReader byteReader = new ByteReader(path);
+            List<String> filePaths = byteReader.readClassFilePaths();
+
+            byte[] bytes;
+            ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
+
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+                try {
+                    ByteStructure byteStructure = byteAnalyzer.analyze();
+                    byteStructure.setFileName(s);
+
+                    boolean isDelete = byteTokenizer.removeFiles(byteStructure);
+
+                    if(isDelete) {
+                        Path filePath = Paths.get(s);
+                        Files.delete(filePath);
+                    }
+
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+
+            }
         }
     }
 }

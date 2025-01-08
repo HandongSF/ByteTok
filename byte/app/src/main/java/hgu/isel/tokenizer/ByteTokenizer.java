@@ -84,6 +84,22 @@ public class ByteTokenizer {
         }
     }
 
+    public boolean removeFiles(ByteStructure byteStructure) {
+        List<String> constantPools = new ArrayList<>();
+
+        for(int i = 0; i < byteStructure.getConstantPoolInformation().length; i++) {
+            if(byteStructure.getConstantPoolInformation()[i] != null) {
+                constantPools.addAll(byteStructure.getConstantPoolInformation()[i].tokenize(i + 1));
+            }
+        }
+
+        if(constantPools.size() > 480) { // maximum token length
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // used to tokenize option t
     public List<String> tokenize(ByteStructure byteStructure) { // translate input to tokenized one
         List<String> inputs = new ArrayList<>();
