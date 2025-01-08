@@ -66,15 +66,25 @@ public class ByteTokenizer {
             }
         }
 
+        if(constantPools.size() > 512) { // maximum token length
+            return;
+        }
+        constantPools.add("<EOC>"); // End of Constant pool token
+
         for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
             methods.addAll(byteStructure.getMethodInformation()[i].tokenize());
             String inputFileName = outputFile + "_" + i + ".txt";
+
+            if(constantPools.size() + methods.size() > 512) {
+                return;
+            }
 
             writeFiles(inputFileName, constantPools, methods);
             methods.clear();
         }
     }
 
+    // used to tokenize option t
     public List<String> tokenize(ByteStructure byteStructure) { // translate input to tokenized one
         List<String> inputs = new ArrayList<>();
         List<String> methods = new ArrayList<>();
@@ -236,15 +246,6 @@ public class ByteTokenizer {
         return inputs;
 
     }
-
-
-
-
-
-
-
-
-
 
     public ByteTokenizer() {
     }

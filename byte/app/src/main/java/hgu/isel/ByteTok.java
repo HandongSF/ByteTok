@@ -62,7 +62,7 @@ public class ByteTok {
             }
             byteTokenizer.createVocabulary();
 
-        } else if(option.equals("t")) {
+        } else if(option.equals("t")) { // tokenization
             ByteReader byteReader = new ByteReader(path);
 
             byte[] bytes = byteReader.readClassFile();
@@ -103,7 +103,7 @@ public class ByteTok {
                     }
                 }
             }
-        } else if(option.equals("n")) {
+        } else if(option.equals("n")) { // generate new files as inputs of pre-trained model
             ByteReader byteReader = new ByteReader(path);
             List<String> filePaths = byteReader.readClassFilePaths();
 
@@ -120,7 +120,7 @@ public class ByteTok {
 
                     byteTokenizer.generateNewFiles(byteStructure);
                     
-                    System.out.println("Success!! : " + s);
+                    System.out.println("Success: " + s);
                 } catch (Exception e) {
                     System.out.println("Failed: " + s);
                     e.printStackTrace();
