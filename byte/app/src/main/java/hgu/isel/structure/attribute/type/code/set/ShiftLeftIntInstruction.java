@@ -35,7 +35,7 @@ public class ShiftLeftIntInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Shift Left Integer Instruction]");
+        // output.add("[Shift Left Integer Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

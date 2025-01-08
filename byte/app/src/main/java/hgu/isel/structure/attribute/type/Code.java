@@ -174,35 +174,35 @@ public class Code implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Code Attribute Name Index]");
+        // output.add("[Code Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Code Attribute Length]");
+        // output.add("[Code Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Code Attribute Max Stack]");
+        // output.add("[Code Attribute Max Stack]");
         for(byte b : maxStack) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Code Attribute Max Locals]");
+        // output.add("[Code Attribute Max Locals]");
         for(byte b : maxLocals) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Code Attribute Code Length]");
+        // output.add("[Code Attribute Code Length]");
         for(byte b : codeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -213,7 +213,7 @@ public class Code implements AttributeInformation {
             output.addAll(i.tokenize());
         }
 
-        output.add("[Code Attribute Exception Table Length]");
+        // output.add("[Code Attribute Exception Table Length]");
         for(byte b : exceptionTableLength) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -224,7 +224,7 @@ public class Code implements AttributeInformation {
             output.addAll(i.tokenize());
         }
 
-        output.add("[Code Attribute Count]");
+        // output.add("[Code Attribute Count]");
         for(byte b : attributesCount) {
             stringBuilder.append(String.format("%02X", b));
         }

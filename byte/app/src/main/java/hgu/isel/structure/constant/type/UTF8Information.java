@@ -61,7 +61,7 @@ public class UTF8Information implements ConstantPoolInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add(String.valueOf(index));
+        // output.add(String.valueOf(index));
 
         // output.add("[Constant UTF8 Tag]");
         stringBuilder.append(String.format("%02X", tag));

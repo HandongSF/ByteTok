@@ -35,7 +35,7 @@ public class ConvertIntToCharInstruction implements Instruction {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Convert Integer To Char Instruction]");
+        // output.add("[Convert Integer To Char Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

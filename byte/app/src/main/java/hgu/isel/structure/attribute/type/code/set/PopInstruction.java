@@ -34,7 +34,7 @@ public class PopInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Pop Instruction]");
+        // output.add("[Pop Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

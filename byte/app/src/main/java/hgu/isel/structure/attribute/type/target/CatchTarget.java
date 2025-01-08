@@ -36,7 +36,7 @@ public class CatchTarget implements TargetInformation{
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Catch Target]");
+        // output.add("[Catch Target]");
         for(byte b : exceptionTableIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

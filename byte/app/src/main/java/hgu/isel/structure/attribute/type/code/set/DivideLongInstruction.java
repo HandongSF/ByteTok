@@ -36,7 +36,7 @@ public class DivideLongInstruction implements Instruction {
 
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Divide Long Instruction]");
+        // output.add("[Divide Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

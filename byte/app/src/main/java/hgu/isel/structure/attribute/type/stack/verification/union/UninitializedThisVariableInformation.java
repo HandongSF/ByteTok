@@ -22,7 +22,7 @@ public class UninitializedThisVariableInformation implements VerificationTypeInf
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Uninitialized This Variable Verification]");
+        // output.add("[Uninitialized This Variable Verification]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
 

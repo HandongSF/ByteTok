@@ -34,7 +34,7 @@ public class MultiplyLongInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Multiply Long Instruction]");
+        // output.add("[Multiply Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

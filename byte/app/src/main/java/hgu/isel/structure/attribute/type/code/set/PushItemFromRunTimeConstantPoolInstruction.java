@@ -46,7 +46,7 @@ public class PushItemFromRunTimeConstantPoolInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Push Item From Runtime Constant Pool Instruction]");
+        // output.add("[Push Item From Runtime Constant Pool Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", index));
 

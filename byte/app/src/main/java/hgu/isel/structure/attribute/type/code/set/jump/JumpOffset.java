@@ -25,7 +25,7 @@ public class JumpOffset {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Jump Offset Information]");
+        // output.add("[Jump Offset Information]");
 
         for(byte b : info) {
             stringBuilder.append(String.format("%02X", b));

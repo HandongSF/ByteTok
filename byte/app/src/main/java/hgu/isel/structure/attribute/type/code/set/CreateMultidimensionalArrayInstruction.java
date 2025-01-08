@@ -67,7 +67,7 @@ public class CreateMultidimensionalArrayInstruction implements Instruction {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Create Multi Dimensional Array Instruction]");
+        // output.add("[Create Multi Dimensional Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", indexByte1));
         stringBuilder.append(String.format("%02X", indexByte2));

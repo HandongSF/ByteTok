@@ -23,7 +23,7 @@ public class TopVariableInformation implements VerificationTypeInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Top Variable Verification]");
+        // output.add("[Top Variable Verification]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
 

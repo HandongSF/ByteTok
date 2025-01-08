@@ -33,7 +33,7 @@ public class FormalParameterTarget implements TargetInformation{
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Formal Parameter Target]");
+        // output.add("[Formal Parameter Target]");
         stringBuilder.append(String.format("%02X", formalParameterIndex));
         output.add(stringBuilder.toString());
 

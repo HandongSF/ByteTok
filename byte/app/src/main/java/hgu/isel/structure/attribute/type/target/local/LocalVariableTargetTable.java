@@ -63,21 +63,21 @@ public class LocalVariableTargetTable {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Local Variable Target Table Start PC]");
+        // output.add("[Local Variable Target Table Start PC]");
         for(byte b : startPC) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Target Table Length]");
+        // output.add("[Local Variable Target Table Length]");
         for(byte b : length) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Target Table Index]");
+        // output.add("[Local Variable Target Table Index]");
         for(byte b : index) {
             stringBuilder.append(String.format("%02X", b));
         }

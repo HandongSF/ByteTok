@@ -45,12 +45,12 @@ public class TypeParameterBoundTarget implements TargetInformation {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Type Parameter Bound Target Parameter Index]");
+        // output.add("[Type Parameter Bound Target Parameter Index]");
         stringBuilder.append(String.format("%02X", typeParameterIndex));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Type Parameter Bound Target Bound Index]");
+        // output.add("[Type Parameter Bound Target Bound Index]");
         stringBuilder.append(String.format("%02X", boundIndex));
         output.add(stringBuilder.toString());
 

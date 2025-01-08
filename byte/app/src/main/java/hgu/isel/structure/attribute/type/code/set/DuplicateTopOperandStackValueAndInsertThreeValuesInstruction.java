@@ -33,7 +33,7 @@ public class DuplicateTopOperandStackValueAndInsertThreeValuesInstruction implem
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Duplicate Top Operand Stack Value Instruction]");
+        // output.add("[Duplicate Top Operand Stack Value Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

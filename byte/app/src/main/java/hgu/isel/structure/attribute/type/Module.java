@@ -240,42 +240,42 @@ public class Module implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Module Attribute Name Index]");
+        // output.add("[Module Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Module Attribute Length]");
+        // output.add("[Module Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Module Attribute Module Name Index]");
+        // output.add("[Module Attribute Module Name Index]");
         for(byte b : moduleNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Module Attribute Flag]");
+        // output.add("[Module Attribute Flag]");
         for(byte b : moduleFlags) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Module Attribute Version Index]");
+        // output.add("[Module Attribute Version Index]");
         for(byte b : moduleVersionIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Module Attribute Requires Count]");
+        // output.add("[Module Attribute Requires Count]");
         for(byte b : requiresCount) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -286,7 +286,7 @@ public class Module implements AttributeInformation {
             output.addAll(l.tokenize());
         }
 
-        output.add("[Module Attribute Exports Count]");
+        // output.add("[Module Attribute Exports Count]");
         for(byte b : exportsCount) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -298,7 +298,7 @@ public class Module implements AttributeInformation {
         }
 
 
-        output.add("[Module Attribute Opens Count]");
+        // output.add("[Module Attribute Opens Count]");
         for(byte b : opensCount) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -310,7 +310,7 @@ public class Module implements AttributeInformation {
         }
 
 
-        output.add("[Module Attribute Uses Count]");
+        // output.add("[Module Attribute Uses Count]");
         for(byte b : usesCount) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -320,7 +320,7 @@ public class Module implements AttributeInformation {
         for(UsesIndex l : usesIndex) {
             output.addAll(l.tokenize());
         }
-        output.add("[Module Attribute Provides Count]");
+        // output.add("[Module Attribute Provides Count]");
         for(byte b : providesCount) {
             stringBuilder.append(String.format("%02X", b));
         }

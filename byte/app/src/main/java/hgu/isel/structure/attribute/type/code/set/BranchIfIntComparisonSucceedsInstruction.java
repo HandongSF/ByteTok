@@ -58,7 +58,7 @@ public class BranchIfIntComparisonSucceedsInstruction implements Instruction {
 
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Branch If Integer Comparison Succeeds Instruction]");
+        // output.add("[Branch If Integer Comparison Succeeds Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", branchByte1));
         stringBuilder.append(String.format("%02X", branchByte2));

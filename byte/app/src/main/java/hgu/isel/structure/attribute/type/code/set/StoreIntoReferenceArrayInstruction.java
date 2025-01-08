@@ -35,7 +35,7 @@ public class StoreIntoReferenceArrayInstruction implements Instruction { // aast
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Store into Reference Array Instruction]");
+        // output.add("[Store into Reference Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

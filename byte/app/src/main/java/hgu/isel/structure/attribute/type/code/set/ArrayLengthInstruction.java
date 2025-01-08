@@ -33,7 +33,7 @@ public class ArrayLengthInstruction implements Instruction { // arraylength
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Array Length Instruction]");
+        // output.add("[Array Length Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

@@ -34,7 +34,7 @@ public class StoreIntoByteOrBooleanArrayInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Store into Byte or Boolean Array Instruction]");
+        // output.add("[Store into Byte or Boolean Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

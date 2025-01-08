@@ -35,7 +35,7 @@ public class SubtractFloatInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Store Float Instruction]");
+        // output.add("[Store Float Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

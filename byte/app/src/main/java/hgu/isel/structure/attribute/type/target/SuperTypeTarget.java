@@ -34,7 +34,7 @@ public class SuperTypeTarget implements TargetInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Super Type]");
+        // output.add("[Super Type]");
         for(byte b : superTypeIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

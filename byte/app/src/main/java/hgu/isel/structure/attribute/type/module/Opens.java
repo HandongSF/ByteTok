@@ -76,21 +76,21 @@ public class Opens {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Opens Index]");
+        // output.add("[Opens Index]");
         for(byte b : opensIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Opens Flag]");
+        // output.add("[Opens Flag]");
         for(byte b : opensFlags) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Opens To Count]");
+        // output.add("[Opens To Count]");
         for(byte b : opensToCount) {
             stringBuilder.append(String.format("%02X", b));
         }

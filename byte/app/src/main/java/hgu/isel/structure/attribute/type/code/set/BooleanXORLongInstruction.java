@@ -33,7 +33,7 @@ public class BooleanXORLongInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Boolean XOR Long Instruction]");
+        // output.add("[Boolean XOR Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

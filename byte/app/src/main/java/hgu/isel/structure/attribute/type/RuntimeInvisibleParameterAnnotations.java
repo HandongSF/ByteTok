@@ -80,21 +80,21 @@ public class RuntimeInvisibleParameterAnnotations implements AttributeInformatio
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Runtime Invisible Parameter Annotation Attribute Name Index]");
+        // output.add("[Runtime Invisible Parameter Annotation Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Runtime Invisible Parameter Annotation Attribute Length]");
+        // output.add("[Runtime Invisible Parameter Annotation Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Runtime Invisible Parameter Annotation Attribute Parameter Number]");
+        // output.add("[Runtime Invisible Parameter Annotation Attribute Parameter Number]");
         stringBuilder.append(String.format("%02X", numberOfParameters));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);

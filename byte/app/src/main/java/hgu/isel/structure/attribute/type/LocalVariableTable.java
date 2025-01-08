@@ -81,21 +81,21 @@ public class LocalVariableTable implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Local Variable Table Attribute Name Index]");
+        // output.add("[Local Variable Table Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Table Attribute Length]");
+        // output.add("[Local Variable Table Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Table Attribute Table Length]");
+        // output.add("[Local Variable Table Attribute Table Length]");
         for(byte b : localVariableTableLength) {
             stringBuilder.append(String.format("%02X", b));
         }

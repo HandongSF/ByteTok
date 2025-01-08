@@ -34,7 +34,7 @@ public class LogicalShiftRightLongInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Logical Shift Right Long Instruction]");
+        // output.add("[Logical Shift Right Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

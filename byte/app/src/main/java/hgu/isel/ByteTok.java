@@ -42,7 +42,7 @@ public class ByteTok {
                     ByteStructure byteStructure = byteAnalyzer.analyze();
                     int hashSize = byteTokenizer.saveTokens(byteStructure);
 
-		    System.out.println(hashSize);
+		    
 
                     if(hashSize > 100000) { // up to maximum size
                         break;
@@ -102,6 +102,31 @@ public class ByteTok {
 
                     }
                 }
+            }
+        } else if(option.equals("n")) {
+            ByteReader byteReader = new ByteReader(path);
+            List<String> filePaths = byteReader.readClassFilePaths();
+
+            byte[] bytes;
+            ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
+
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+                try {
+                    ByteStructure byteStructure = byteAnalyzer.analyze();
+                    byteStructure.setFileName(s);
+
+                    byteTokenizer.generateNewFiles(byteStructure);
+                    
+                    System.out.println("Success!! : " + s);
+                } catch (Exception e) {
+                    System.out.println("Failed: " + s);
+                    e.printStackTrace();
+                }
+
+
             }
         }
     }

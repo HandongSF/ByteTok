@@ -45,13 +45,13 @@ public class ElementValue {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Element Value Tag]");
+        // output.add("[Element Value Tag]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
         for(String s : elementUnion.tokenize()) {
-            output.add("[Element Value]");
+            // output.add("[Element Value]");
             output.add(s);
         }
 

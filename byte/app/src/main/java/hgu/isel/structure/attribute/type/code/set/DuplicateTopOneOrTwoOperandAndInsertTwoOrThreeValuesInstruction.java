@@ -34,7 +34,7 @@ public class DuplicateTopOneOrTwoOperandAndInsertTwoOrThreeValuesInstruction imp
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Duplicate Top One / Two / Three Operand with Values Instruction]");
+        // output.add("[Duplicate Top One / Two / Three Operand with Values Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

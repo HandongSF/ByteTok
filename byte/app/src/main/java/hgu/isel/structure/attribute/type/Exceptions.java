@@ -81,21 +81,21 @@ public class Exceptions implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Exceptions Attribute Name Index]");
+        // output.add("[Exceptions Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Exceptions Attribute Length]");
+        // output.add("[Exceptions Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Exceptions Attribute Exception Number]");
+        // output.add("[Exceptions Attribute Exception Number]");
         for(byte b : numberOfExceptions) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -104,7 +104,7 @@ public class Exceptions implements AttributeInformation {
 
         for(ExceptionIndexTable e : exceptionIndexTable) {
             for(String s : e.tokenize()) {
-                output.add("[Exceptions Attribute Exception Index Table]");
+                // output.add("[Exceptions Attribute Exception Index Table]");
                 stringBuilder.append(s);
                 output.add(stringBuilder.toString());
                 stringBuilder.setLength(0);

@@ -55,7 +55,7 @@ public class BranchIfIntComparisonWithZeroSucceedsInstruction implements Instruc
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Branch If Integer Comparison With Zero Succeeds Instruction]");
+        // output.add("[Branch If Integer Comparison With Zero Succeeds Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", branchByte1));
         stringBuilder.append(String.format("%02X", branchByte2));

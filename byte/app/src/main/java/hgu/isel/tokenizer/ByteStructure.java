@@ -7,6 +7,7 @@ import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
 
 public class ByteStructure {
+    private String fileName;
     private byte[] magic;
     private byte[] minorVersion;
     private byte[] majorVersion;
@@ -169,5 +170,13 @@ public class ByteStructure {
         this.methodInformation = methodInformation;
         this.attributesCount = attributesCount;
         this.attributeInformation = attributeInformation;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

@@ -34,7 +34,7 @@ public class LoadReferenceFromArrayInstruction implements Instruction { // aaloa
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Load Reference From Array Instruction]");
+        // output.add("[Load Reference From Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

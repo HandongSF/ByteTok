@@ -83,21 +83,21 @@ public class StackMapTable implements AttributeInformation {
         StringBuilder stringBuilder = new StringBuilder();
 
 
-        output.add("[Stack Map Table Attribute Name Index]");
+        // output.add("[Stack Map Table Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Stack Map Table Attribute Length]");
+        // output.add("[Stack Map Table Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Stack Map Table Attribute Entry Number]");
+        // output.add("[Stack Map Table Attribute Entry Number]");
         for(byte b : numberOfEntries) {
             stringBuilder.append(String.format("%02X", b));
         }

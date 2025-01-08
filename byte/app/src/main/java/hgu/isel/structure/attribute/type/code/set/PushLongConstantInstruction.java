@@ -35,7 +35,7 @@ public class PushLongConstantInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Push Long Constant Instruction]");
+        // output.add("[Push Long Constant Instruction]");
         stringBuilder.append(String.format("%02X", format));
         
 

@@ -35,7 +35,7 @@ public class StoreIntoIntArrayInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Store into Integer Array Instruction]");
+        // output.add("[Store into Integer Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

@@ -109,7 +109,7 @@ public class TableSwitchInstruction implements Instruction {
 
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Table Switch Instruction]");
+        // output.add("[Table Switch Instruction]");
         stringBuilder.append(String.format("%02X", format));
         for(byte b : paddingBytes) {
             stringBuilder.append(String.format("%02X", b));
@@ -118,7 +118,7 @@ public class TableSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Table Switch Default Byte]");
+        // output.add("[Table Switch Default Byte]");
         for(byte b : defaultByte) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -126,7 +126,7 @@ public class TableSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Table Switch Low Byte]");
+        // output.add("[Table Switch Low Byte]");
         for(byte b : lowBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -134,7 +134,7 @@ public class TableSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Table Switch High Byte]");
+        // output.add("[Table Switch High Byte]");
         for(byte b : highBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
