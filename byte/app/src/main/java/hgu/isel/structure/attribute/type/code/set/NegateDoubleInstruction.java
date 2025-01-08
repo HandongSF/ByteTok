@@ -34,7 +34,7 @@ public class NegateDoubleInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Negate Double Instruction]");
+        // output.add("[Negate Double Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

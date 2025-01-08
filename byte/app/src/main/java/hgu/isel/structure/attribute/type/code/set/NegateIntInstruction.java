@@ -34,7 +34,7 @@ public class NegateIntInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Negate Integer Instruction]");
+        // output.add("[Negate Integer Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

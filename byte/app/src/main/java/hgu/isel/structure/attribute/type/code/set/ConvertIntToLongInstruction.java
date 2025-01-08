@@ -34,7 +34,7 @@ public class ConvertIntToLongInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Convert Integer To Long Instruction]");
+        // output.add("[Convert Integer To Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

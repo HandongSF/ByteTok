@@ -35,7 +35,7 @@ public class LoadCharFromArrayInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Load Char From Array Instruction]");
+        // output.add("[Load Char From Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
         output.add(stringBuilder.toString());
 

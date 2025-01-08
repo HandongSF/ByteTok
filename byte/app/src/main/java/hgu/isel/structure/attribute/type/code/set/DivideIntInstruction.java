@@ -36,7 +36,7 @@ public class DivideIntInstruction implements Instruction {
         output.add(String.format("%02X", format));
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Divide Integer Instruction]");
+        // output.add("[Divide Integer Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

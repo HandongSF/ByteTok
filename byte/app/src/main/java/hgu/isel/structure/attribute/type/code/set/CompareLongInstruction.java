@@ -34,7 +34,7 @@ public class CompareLongInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Compare Long Instruction]");
+        // output.add("[Compare Long Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

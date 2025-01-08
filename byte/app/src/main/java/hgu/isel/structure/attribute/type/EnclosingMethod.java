@@ -80,28 +80,28 @@ public class EnclosingMethod implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Enclosing Method Attribute Name Index]");
+        // output.add("[Enclosing Method Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Enclosing Method Attribute Length]");
+        // output.add("[Enclosing Method Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Enclosing Method Attribute Class Index]");
+        // output.add("[Enclosing Method Attribute Class Index]");
         for(byte b : classIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Enclosing Method Attribute Method Index]");
+        // output.add("[Enclosing Method Attribute Method Index]");
         for(byte b : methodIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

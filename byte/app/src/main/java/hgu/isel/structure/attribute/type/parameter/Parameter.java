@@ -49,14 +49,14 @@ public class Parameter {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Parameter Name Index]");
+        // output.add("[Parameter Name Index]");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Parameter Access Flag]");
+        // output.add("[Parameter Access Flag]");
         for(byte b : accessFlags) {
             stringBuilder.append(String.format("%02X", b));
         }

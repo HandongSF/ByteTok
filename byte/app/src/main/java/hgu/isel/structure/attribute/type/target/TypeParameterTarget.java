@@ -33,7 +33,7 @@ public class TypeParameterTarget implements TargetInformation{
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Type Parameter Target Parameter Index]");
+        // output.add("[Type Parameter Target Parameter Index]");
         stringBuilder.append(String.format("%02X", typeParameterIndex));
         output.add(stringBuilder.toString());
 

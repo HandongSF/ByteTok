@@ -35,7 +35,7 @@ public class SubtractDoubleInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Subtract Double Instruction]");
+        // output.add("[Subtract Double Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

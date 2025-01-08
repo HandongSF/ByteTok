@@ -46,7 +46,7 @@ public class FloatInformation implements ConstantPoolInformation {
     public List<String> tokenize(int index) {
         List<String> output = new ArrayList<>();
 
-        output.add(String.valueOf(index));
+        // output.add(String.valueOf(index));
 
         StringBuilder stringBuilder = new StringBuilder();
 

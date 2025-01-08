@@ -51,7 +51,7 @@ public class ArrayValue implements ElementUnion {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Array Value Number]");
+        // output.add("[Array Value Number]");
         for(byte b : numValues) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -60,7 +60,7 @@ public class ArrayValue implements ElementUnion {
 
         for(ElementValue e : values) {
             for(String s : e.tokenize()){
-                output.add("[Array Value]");
+                // output.add("[Array Value]");
                 stringBuilder.append(s);
                 output.add(stringBuilder.toString());
                 stringBuilder.setLength(0);

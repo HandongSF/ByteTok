@@ -37,12 +37,12 @@ public class UninitializedVariableInformation implements VerificationTypeInforma
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Uninitialized Variable Verification]");
+        // output.add("[Uninitialized Variable Verification]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Uninitialized Variable Verification Offset]");
+        // output.add("[Uninitialized Variable Verification Offset]");
         for(byte b : offset) {
             stringBuilder.append(String.format("%02X", b));
         }

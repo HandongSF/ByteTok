@@ -90,7 +90,7 @@ public class WideWithIINCInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Wide with IINC Instruction]");
+        // output.add("[Wide with IINC Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", iinc));
         stringBuilder.append(String.format("%02X", indexByte1));

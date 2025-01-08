@@ -34,7 +34,7 @@ public class MonitorEnterInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Monitor Enter Instruction]");
+        // output.add("[Monitor Enter Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
         output.add(stringBuilder.toString());

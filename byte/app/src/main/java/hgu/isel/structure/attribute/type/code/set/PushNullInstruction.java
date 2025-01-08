@@ -36,7 +36,7 @@ public class PushNullInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Push Null Instruction]");
+        // output.add("[Push Null Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

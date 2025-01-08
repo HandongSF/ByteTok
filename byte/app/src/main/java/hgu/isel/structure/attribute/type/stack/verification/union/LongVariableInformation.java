@@ -23,7 +23,7 @@ public class LongVariableInformation implements VerificationTypeInformation {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Long Variable Verification]");
+        // output.add("[Long Variable Verification]");
         stringBuilder.append(String.format("%02X", tag));
         output.add(stringBuilder.toString());
 

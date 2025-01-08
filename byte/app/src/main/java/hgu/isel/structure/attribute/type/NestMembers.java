@@ -80,21 +80,21 @@ public class NestMembers implements AttributeInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Nest Members Attribute Name Index]");
+        // output.add("[Nest Members Attribute Name Index]");
         for(byte b : attributeNameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Nest Members Attribute Length]");
+        // output.add("[Nest Members Attribute Length]");
         for(byte b : attributeLength) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Nest Members Attribute Class Number]");
+        // output.add("[Nest Members Attribute Class Number]");
         for(byte b : numberOfClasses) {
             stringBuilder.append(String.format("%02X", b));
         }

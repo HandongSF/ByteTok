@@ -35,7 +35,7 @@ public class StoreIntoLongArrayInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Store into Long Array Instruction]");
+        // output.add("[Store into Long Array Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

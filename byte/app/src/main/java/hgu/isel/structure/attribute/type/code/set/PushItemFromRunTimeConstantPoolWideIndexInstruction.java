@@ -57,7 +57,7 @@ public class PushItemFromRunTimeConstantPoolWideIndexInstruction implements Inst
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Push Item From Runtime Constant Pool Wide Instruction]");
+        // output.add("[Push Item From Runtime Constant Pool Wide Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", indexByte1));
         stringBuilder.append(String.format("%02X", indexByte2));

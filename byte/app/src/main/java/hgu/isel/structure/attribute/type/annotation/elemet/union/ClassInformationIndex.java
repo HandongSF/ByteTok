@@ -36,7 +36,7 @@ public class ClassInformationIndex implements ElementUnion {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Class Information Index]");
+        // output.add("[Class Information Index]");
         for(byte b : classInformationIndex) {
             stringBuilder.append(String.format("%02X", b));
         }

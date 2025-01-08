@@ -78,21 +78,21 @@ public class RecordComponentInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Record Component Name Index]");
+        // output.add("[Record Component Name Index]");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Record Component Descriptor Index]");
+        // output.add("[Record Component Descriptor Index]");
         for(byte b : descriptorIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Record Component Attribute Count]");
+        // output.add("[Record Component Attribute Count]");
         for(byte b : attributesCount) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -101,7 +101,7 @@ public class RecordComponentInformation {
 
         for(AttributeInformation c : attributes) {
             for(String s : c.tokenize()) {
-                output.add("[Record Component]");
+                // output.add("[Record Component]");
                 stringBuilder.append(s);
                 output.add(stringBuilder.toString());
                 stringBuilder.setLength(0);

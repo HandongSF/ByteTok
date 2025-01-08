@@ -56,7 +56,7 @@ public class BranchIfReferenceComparisonSucceedsInstruction implements Instructi
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Branch If Reference Comparison Succeeds Instruction]");
+        // output.add("[Branch If Reference Comparison Succeeds Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", branchByte1));
         stringBuilder.append(String.format("%02X", branchByte2));

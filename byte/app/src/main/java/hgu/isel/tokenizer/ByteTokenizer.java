@@ -5,6 +5,8 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
+import java.nio.file.StandardOpenOption;
+import java.io.File;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class ByteTokenizer {
 
 
     public int saveTokens(ByteStructure byteStructure) {
-        tokens.addAll(tokenize(byteStructure));
+        tokens.addAll(tokenize4vocab(byteStructure));
 
         return tokens.size();
     }
@@ -35,6 +37,41 @@ public class ByteTokenizer {
             Files.write(Paths.get(filePath), list);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void writeFiles(String filePath, List<String> constantPool, List<String> method) {
+        try {
+            Files.write(Paths.get(filePath), constantPool, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(Paths.get(filePath), method, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void generateNewFiles(ByteStructure byteStructure) {
+        List<String> constantPools = new ArrayList<>();
+        List<String> methods = new ArrayList<>();
+
+        String outputDirectory = "/data2/donggyu/input2/";
+        File file = new File(byteStructure.getFileName());
+        String fileName = file.getName();
+        String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
+
+        String outputFile = outputDirectory + fileNameWithoutExtension;
+
+        for(int i = 0; i < byteStructure.getConstantPoolInformation().length; i++) {
+            if(byteStructure.getConstantPoolInformation()[i] != null) {
+                constantPools.addAll(byteStructure.getConstantPoolInformation()[i].tokenize(i + 1));
+            }
+        }
+
+        for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
+            methods.addAll(byteStructure.getMethodInformation()[i].tokenize());
+            String inputFileName = outputFile + "_" + i + ".txt";
+
+            writeFiles(inputFileName, constantPools, methods);
+            methods.clear();
         }
     }
 
@@ -78,7 +115,7 @@ public class ByteTokenizer {
         // tokenize constant pool
         for(int i = 0; i < byteStructure.getConstantPoolInformation().length; i++) {
             if(byteStructure.getConstantPoolInformation()[i] != null) {
-                inputs.addAll(byteStructure.getConstantPoolInformation()[i].tokenize(i));
+                inputs.addAll(byteStructure.getConstantPoolInformation()[i].tokenize(i + 1));
             }
         }
 
@@ -141,24 +178,28 @@ public class ByteTokenizer {
         // stringBuilder.setLength(0);
 
         // tokenize methods
+        // for(int i = 0; i < byteStructure.getMethodInformation()) {
+        //     methods.addAll(byteStructure.getMethodInformation[i].tokenize());
+        //     String fileName = byteStructure.getFileName() + "_" + i;
+
+        //     writeFiles(fileName, inputs, methods);
+        //     methods.clear();
+        // }
+
         for(MethodInformation m : byteStructure.getMethodInformation()) {
             methods.addAll(m.tokenize());
 
-            // for(String s : inputs) {
-            //     System.out.println(s);
-            // }
-            // for(String s : methods) {
-            //     System.out.println(s);
-            // }
+            for(String s : inputs) {
+                System.out.println(s);
+            }
+            for(String s : methods) {
+                System.out.println(s);
+            }
 
-            // System.out.println("[Divide New Methods]");
+            System.out.println("[marker]");
+            methods.clear();
         }
-        for(String s : inputs) {
-            System.out.println(s);
-        }
-        System.out.println();
-        System.out.println(inputs.size());
-        // System.out.println("?!?!?!?!?!");
+        
 
         // // tokenize attributes count
         // inputs.add("[Class Attributes Count]");
@@ -174,6 +215,26 @@ public class ByteTokenizer {
         // }
 
         return inputs;
+    }
+
+    public List<String> tokenize4vocab(ByteStructure byteStructure) {
+
+        List<String> inputs = new ArrayList<>();
+        List<String> methods = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int i = 0; i < byteStructure.getConstantPoolInformation().length; i++) {
+            if(byteStructure.getConstantPoolInformation()[i] != null) {
+                inputs.addAll(byteStructure.getConstantPoolInformation()[i].tokenize(i + 1));
+            }
+        }
+
+        for(MethodInformation m : byteStructure.getMethodInformation()) {
+            inputs.addAll(m.tokenize());
+        }
+
+        return inputs;
+
     }
 
 

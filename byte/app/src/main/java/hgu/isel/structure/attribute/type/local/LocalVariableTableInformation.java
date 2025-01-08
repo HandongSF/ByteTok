@@ -90,35 +90,35 @@ public class LocalVariableTableInformation {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        output.add("[Local Variable Table Information Start PC]");
+        // output.add("[Local Variable Table Information Start PC]");
         for(byte b : startPC) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Table Information Length]");
+        // output.add("[Local Variable Table Information Length]");
         for(byte b : length) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Table Information Name Index]");
+        // output.add("[Local Variable Table Information Name Index]");
         for(byte b : nameIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Table Information Descriptor]");
+        // output.add("[Local Variable Table Information Descriptor]");
         for(byte b : descriptorIndex) {
             stringBuilder.append(String.format("%02X", b));
         }
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Local Variable Table Information Index]");
+        // output.add("[Local Variable Table Information Index]");
         for(byte b : index) {
             stringBuilder.append(String.format("%02X", b));
         }

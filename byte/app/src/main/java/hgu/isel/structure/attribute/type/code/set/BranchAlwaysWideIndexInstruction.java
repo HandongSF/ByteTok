@@ -78,7 +78,7 @@ public class BranchAlwaysWideIndexInstruction implements Instruction {
         List<String> output = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Branch Always Wide Instruction]");
+        // output.add("[Branch Always Wide Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", branchType1));
         stringBuilder.append(String.format("%02X", branchType2));

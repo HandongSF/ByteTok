@@ -56,7 +56,7 @@ public class InvokeStaticInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Invoke Static Instruction]");
+        // output.add("[Invoke Static Instruction]");
         stringBuilder.append(String.format("%02X", format));
         stringBuilder.append(String.format("%02X", indexByte1));
         stringBuilder.append(String.format("%02X", indexByte2));

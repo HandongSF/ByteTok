@@ -34,7 +34,7 @@ public class ConvertLongToFloatInstruction implements Instruction {
     public List<String> tokenize() {
         List<String> output = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Convert Long To Float Instruction]");
+        // output.add("[Convert Long To Float Instruction]");
         stringBuilder.append(String.format("%02X", format));
 
 

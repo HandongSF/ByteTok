@@ -95,7 +95,7 @@ public class LookUpSwitchInstruction implements Instruction {
 
 
         StringBuilder stringBuilder = new StringBuilder();
-        output.add("[Lookup Switch Instruction]");
+        // output.add("[Lookup Switch Instruction]");
         stringBuilder.append(String.format("%02X", format));
         for(byte b : paddingByte) {
             stringBuilder.append(String.format("%02X", b));
@@ -103,7 +103,7 @@ public class LookUpSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Lookup Switch Default Bytes]");
+        // output.add("[Lookup Switch Default Bytes]");
         for(byte b : defaultBytes) {
             stringBuilder.append(String.format("%02X", b));
         }
@@ -111,7 +111,7 @@ public class LookUpSwitchInstruction implements Instruction {
         output.add(stringBuilder.toString());
         stringBuilder.setLength(0);
 
-        output.add("[Lookup Switch N Pairs]");
+        // output.add("[Lookup Switch N Pairs]");
 
         for(byte b : nPairs) {
             stringBuilder.append(String.format("%02X", b));
