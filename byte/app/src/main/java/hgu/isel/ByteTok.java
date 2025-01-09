@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ByteTok {
 
@@ -160,6 +157,36 @@ public class ByteTok {
                 }
 
 
+            }
+        } else if(option.equals("a")) { // find all customized attributes
+            ByteReader byteReader = new ByteReader(path);
+            List<String> filePaths = byteReader.readClassFilePaths();
+
+            byte[] bytes;
+            HashSet<String> customAttributes = new HashSet<>();
+
+
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
+
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+                try {
+                    byteAnalyzer.analyze();
+//                    System.out.println("Success!! : " + s);
+                } catch (Exception e) {
+                    String attributeName = e.getMessage();
+                    System.out.println("new attribute: " + attributeName);
+                    customAttributes.add(attributeName);
+                }
+
+                String filePath = "/data2/donggyu/ICST/additional_experiment/attribute.txt";
+                List<String> list = new ArrayList<>(customAttributes);
+
+                try {
+                    Files.write(Paths.get(filePath), list);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

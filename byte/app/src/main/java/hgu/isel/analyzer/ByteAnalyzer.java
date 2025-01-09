@@ -46,6 +46,7 @@ import hgu.isel.structure.constant.ConstantPoolInformation;
 import hgu.isel.tokenizer.ByteStructure;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class ByteAnalyzer {
@@ -1180,7 +1181,7 @@ public class ByteAnalyzer {
 
         } else {
 
-            throw new UnsupportedEncodingException();
+            throw new UnsupportedEncodingException(new String(attributeName, StandardCharsets.UTF_8));
         }
 
         return returnInformation;
