@@ -53,7 +53,7 @@ public class ByteTokenizer {
         List<String> constantPools = new ArrayList<>();
         List<String> methods = new ArrayList<>();
 
-        String outputDirectory = "/data2/donggyu/input2/";
+        String outputDirectory = "/data2/donggyu/ICST/additional_experiment/files_token";
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
@@ -66,9 +66,7 @@ public class ByteTokenizer {
             }
         }
 
-        if(constantPools.size() > 512) { // maximum token length
-            return;
-        }
+
         constantPools.add("<EOC>"); // End of Constant pool token
 
         for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
