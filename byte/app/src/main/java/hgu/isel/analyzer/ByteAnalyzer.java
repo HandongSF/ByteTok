@@ -327,7 +327,7 @@ public class ByteAnalyzer {
                 offset += 3;
                 break;
             default:
-                throw new Exception();
+                throw new Exception("Constant pool Error");
         }
 
         return returnInformation;
