@@ -30,7 +30,7 @@ public class ByteTokenizer {
 
     public void createVocabulary() { // create vocabulary
 
-        String filePath = "/data/donggyu/byteT5/Data/vocab.txt";
+        String filePath = "/data2/donggyu/ICST/additional_experiment/vocab.txt";
         List<String> list = new ArrayList<>(tokens);
 
         try {

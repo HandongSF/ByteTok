@@ -1,5 +1,6 @@
 package hgu.isel.analyzer;
 
+import hgu.isel.ByteTok;
 import hgu.isel.structure.attribute.AttributeInformation;
 import hgu.isel.structure.attribute.type.*;
 import hgu.isel.structure.attribute.type.Deprecated;
@@ -48,6 +49,7 @@ import hgu.isel.tokenizer.ByteStructure;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class ByteAnalyzer {
     private final byte[] bytes; // all bytes
@@ -1181,7 +1183,16 @@ public class ByteAnalyzer {
 
         } else {
 
-            throw new UnsupportedEncodingException(new String(attributeName, StandardCharsets.UTF_8));
+            HashSet<String> customAttributes = ByteTok.getCustomAttributes();
+            customAttributes.add(new String(attributeName, StandardCharsets.UTF_8)); // add custom attribute name static variable
+            ByteTok.setCustomAttributes(customAttributes);
+
+            int attributeContents = ((attributeLength[0] & 0xFF) << 24) | ((attributeLength[1] & 0xFF) << 16) | ((attributeLength[2] & 0xFF) << 8) | (attributeLength[3] & 0xFF);
+
+            byte[] attributeContentsByte = Arrays.copyOfRange(bytes, offset, offset + attributeContents);
+            offset += attributeContents;
+
+            returnInformation = new CustomDefined(attributeNameIndex, attributeLength, attributeContentsByte);
         }
 
         return returnInformation;

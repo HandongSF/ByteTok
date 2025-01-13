@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class ByteTok {
+    private static HashSet<String> customAttributes = new HashSet<>();
 
     public static void main(String[] args) {
         ByteTok parser = new ByteTok();
@@ -163,7 +164,6 @@ public class ByteTok {
             List<String> filePaths = byteReader.readClassFilePaths();
 
             byte[] bytes;
-            HashSet<String> customAttributes = new HashSet<>();
 
 
             for(String s : filePaths) {
@@ -172,7 +172,6 @@ public class ByteTok {
                 ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
                 try {
                     byteAnalyzer.analyze();
-//                    System.out.println("Success!! : " + s);
                 } catch (Exception e) {
                     String attributeName = e.getMessage();
                     System.out.println("new attribute: " + attributeName);
@@ -189,5 +188,13 @@ public class ByteTok {
                 }
             }
         }
+    }
+
+    public static HashSet<String> getCustomAttributes() {
+        return customAttributes;
+    }
+
+    public static void setCustomAttributes(HashSet<String> customAttributes) {
+        ByteTok.customAttributes = customAttributes;
     }
 }
