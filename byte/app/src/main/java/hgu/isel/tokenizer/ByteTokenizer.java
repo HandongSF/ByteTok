@@ -1,16 +1,11 @@
 package hgu.isel.tokenizer;
 
-import hgu.isel.structure.attribute.AttributeInformation;
-import hgu.isel.structure.constant.ConstantPoolInformation;
-import hgu.isel.structure.field.FieldInformation;
-import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
 import java.nio.file.StandardOpenOption;
 import java.io.File;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.nio.file.Files;
@@ -49,7 +44,15 @@ public class ByteTokenizer {
         }
     }
 
-    public void generateNewFiles(ByteStructure byteStructure) {
+    public void writeFiles(String filePath, List<String> method) {
+        try{
+            Files.write(Paths.get(filePath), method, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
+    public void generateNewFilesWithConstantPool(ByteStructure byteStructure) {
         List<String> constantPools = new ArrayList<>();
         List<String> methods = new ArrayList<>();
 
@@ -81,6 +84,27 @@ public class ByteTokenizer {
             methods.clear();
         }
     }
+
+    public void generateNewFiles(ByteStructure byteStructure) {
+        List<String> methods = new ArrayList<>();
+
+        String outputDirectory = "";
+        File file = new File(byteStructure.getFileName());
+        String fileName = file.getName();
+        String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
+
+        String outputFile = outputDirectory + fileNameWithoutExtension;
+
+        for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
+            methods.addAll(byteStructure.getMethodInformation()[i].tokenize());
+            String inputFileName = outputFile + "_" + i + ".txt";
+
+            writeFiles(inputFileName, methods);
+            methods.clear();
+        }
+    }
+
+
 
     public boolean removeFiles(ByteStructure byteStructure) {
         List<String> constantPools = new ArrayList<>();

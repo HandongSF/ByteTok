@@ -1189,9 +1189,14 @@ public class ByteAnalyzer {
 
             System.out.println(new String(attributeName, StandardCharsets.UTF_8));
 
+//            if("Bridge".compareTo(new String(attributeName, StandardCharsets.UTF_8)) == 1) {
+//            }
+
+
             int attributeContents = ((attributeLength[0] & 0xFF) << 24) | ((attributeLength[1] & 0xFF) << 16) | ((attributeLength[2] & 0xFF) << 8) | (attributeLength[3] & 0xFF);
 
             byte[] attributeContentsByte = Arrays.copyOfRange(bytes, offset, offset + attributeContents);
+            System.out.println(attributeContents);
             offset += attributeContents;
 
             returnInformation = new CustomDefined(attributeNameIndex, attributeLength, attributeContentsByte);

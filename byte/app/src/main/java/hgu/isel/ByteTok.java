@@ -116,7 +116,7 @@ public class ByteTok {
                     ByteStructure byteStructure = byteAnalyzer.analyze();
                     byteStructure.setFileName(s);
 
-                    byteTokenizer.generateNewFiles(byteStructure);
+                    byteTokenizer.generateNewFilesWithConstantPool(byteStructure);
                     
                     System.out.println("Success: " + s);
                 } catch (Exception e) {
@@ -177,14 +177,28 @@ public class ByteTok {
                     System.out.println("new attribute: " + attributeName);
                     customAttributes.add(attributeName);
                 }
+            }
+        } else if(option.equals("m")) { // extract all methods from the input path
+            ByteReader byteReader = new ByteReader(path);
+            List<String> filePaths = byteReader.readClassFilePaths();
 
-                String filePath = "/data2/donggyu/ICST/additional_experiment/attribute.txt";
-                List<String> list = new ArrayList<>(customAttributes);
+            byte[] bytes;
+            ByteTokenizer byteTokenizer = new ByteTokenizer();
 
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
+
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
                 try {
-                    Files.write(Paths.get(filePath), list);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    ByteStructure byteStructure = byteAnalyzer.analyze();
+                    byteStructure.setFileName(s);
+
+                    byteTokenizer.generateNewFiles(byteStructure);
+
+                    System.out.println("Success: " + s);
+                } catch (Exception e) {
+                    System.out.println("Failed: " + s);
+                    e.printStackTrace();
                 }
             }
         }
