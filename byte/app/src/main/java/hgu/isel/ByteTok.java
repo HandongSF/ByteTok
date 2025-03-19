@@ -19,10 +19,10 @@ public class ByteTok {
 
     public static void main(String[] args) {
         ByteTok parser = new ByteTok();
-        parser.run(args[0], args[1]);
+        parser.run(args[0], args[1], args[2]);
     }
 
-    public void run(String path, String option) {
+    public void run(String path, String option, String methodName) {
 
         if(option.equals("v")) {
             ByteReader byteReader = new ByteReader(path);
@@ -194,6 +194,29 @@ public class ByteTok {
                     byteStructure.setFileName(s);
 
                     byteTokenizer.generateNewFiles(byteStructure);
+
+                    System.out.println("Success: " + s);
+                } catch (Exception e) {
+                    System.out.println("Failed: " + s);
+                    e.printStackTrace();
+                }
+            }
+        } else if(option.equals("p")) { // find specific method with input string
+            ByteReader byteReader = new ByteReader(path);
+            List<String> filePaths = byteReader.readClassFilePaths();
+
+            byte[] bytes;
+            ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+            for(String s : filePaths) {
+                bytes = byteReader.readClassFile(s);
+
+                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+                try {
+                    ByteStructure byteStructure = byteAnalyzer.analyze();
+                    byteStructure.setFileName(s);
+
+                    byteTokenizer.findSpecificMethod(byteStructure, "");
 
                     System.out.println("Success: " + s);
                 } catch (Exception e) {

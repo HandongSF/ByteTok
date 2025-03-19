@@ -1,5 +1,7 @@
 package hgu.isel.tokenizer;
 
+import hgu.isel.structure.constant.ConstantPoolInformation;
+import hgu.isel.structure.constant.type.UTF8Information;
 import hgu.isel.structure.method.MethodInformation;
 import java.nio.file.StandardOpenOption;
 import java.io.File;
@@ -25,7 +27,7 @@ public class ByteTokenizer {
 
     public void createVocabulary() { // create vocabulary
 
-        String filePath = "/data2/donggyu/ICST/additional_experiment/vocab.txt";
+        String filePath = "/data2/donggyu/ICST/additional_experiment/vocab_instruction.txt";
         List<String> list = new ArrayList<>(tokens);
 
         try {
@@ -88,7 +90,7 @@ public class ByteTokenizer {
     public void generateNewFiles(ByteStructure byteStructure) {
         List<String> methods = new ArrayList<>();
 
-        String outputDirectory = "";
+        String outputDirectory = "/data2/donggyu/ICST/additional_experiment/files_token_methods";
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
@@ -101,6 +103,34 @@ public class ByteTokenizer {
 
             writeFiles(inputFileName, methods);
             methods.clear();
+        }
+    }
+
+    public void findSpecificMethod(ByteStructure byteStructure, String methodName) {
+        List<String> methods = new ArrayList<>();
+
+        String outputDirectory = "/data2/donggyu/ICST/additional_experiment/files_token_methods";
+        File file = new File(byteStructure.getFileName());
+        String fileName = file.getName();
+        String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
+
+        String outputFile = outputDirectory + fileNameWithoutExtension;
+
+        for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
+            methods.addAll(byteStructure.getMethodInformation()[i].tokenize());
+            String inputFileName = outputFile + "_" + i + ".txt";
+
+            byte[] index = byteStructure.getMethodInformation()[i].getDescriptorIndex();
+
+            ConstantPoolInformation constantPoolInformation = byteStructure.getConstantPoolInformation()[((index[0] & 0xFF) << 8) | (index[1] & 0xFF) - 1];
+
+            if(constantPoolInformation instanceof UTF8Information) {
+                String targetMethodName = new String(((UTF8Information) constantPoolInformation).getBytes());
+                System.out.println(targetMethodName);
+            }
+
+
+//            writeFiles(inputFileName, methods);
         }
     }
 
