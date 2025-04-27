@@ -3,6 +3,8 @@ package hgu.isel.tokenizer;
 import hgu.isel.structure.constant.ConstantPoolInformation;
 import hgu.isel.structure.constant.type.UTF8Information;
 import hgu.isel.structure.method.MethodInformation;
+
+import java.nio.charset.StandardCharsets;
 import java.nio.file.StandardOpenOption;
 import java.io.File;
 
@@ -47,10 +49,16 @@ public class ByteTokenizer {
     }
 
     public void writeFiles(String filePath, List<String> method) {
-        try{
-            Files.write(Paths.get(filePath), method, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        String content = String.join(" ", method);
+        try {
+            Files.writeString(
+                    Paths.get(filePath),
+                    content,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            );
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -90,7 +98,7 @@ public class ByteTokenizer {
     public void generateNewFiles(ByteStructure byteStructure) {
         List<String> methods = new ArrayList<>();
 
-        String outputDirectory = "/data2/donggyu/ICST/additional_experiment/files_token_methods";
+        String outputDirectory = "/data2/donggyu/files_wordpiece";
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
