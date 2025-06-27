@@ -69,13 +69,14 @@ public class ByteTok {
             ByteStructure byteStructure = null;
             try {
                 byteStructure = byteAnalyzer.analyze();
+                System.out.println(byteAnalyzer.printResult());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
-            ByteTokenizer byteTokenizer = new ByteTokenizer();
+//            ByteTokenizer byteTokenizer = new ByteTokenizer();
 
-            List<String> tokens = byteTokenizer.tokenize(byteStructure);
+//            List<String> tokens = byteTokenizer.tokenize(byteStructure);
 
         } else if(option.equals("s")) { // delete kotlin / scala files
             ByteReader byteReader = new ByteReader(path);

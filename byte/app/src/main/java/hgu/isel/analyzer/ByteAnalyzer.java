@@ -51,6 +51,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 
+/**
+ * The ByteAnalyzer class can analyze the entire structure of the input bytecode.
+ * In addition, it can divide whole sections of the bytecode by using the JVM 23 official document.
+ * <p>
+ * The overall process of the ByteAnalyzer is important to understand the entire structure of the ByteTok.
+ * This method uses offset which represents the current position of the bytecode.
+ * If the ByteAnalyzer reads 10 bytes in specific position, the ByteAnalyzer automatically increases 10 bytes to read the next bytes of the bytecode.
+ * <p>
+ * All getters and setters in this class are simple property accessors with no side effects.
+ */
 public class ByteAnalyzer {
     private final byte[] bytes; // all bytes
     private byte[] magic = new byte[4]; // u4
@@ -72,10 +82,22 @@ public class ByteAnalyzer {
     private int offset = 0;
     private int cpCount;
 
+    /**
+     * It is a constructor of the ByteAnalyzer class.
+     * @param bytes It is an input bytecode(the class file which is a result of the compilation process).
+     */
     public ByteAnalyzer(byte[] bytes) {
         this.bytes = bytes;
     }
 
+    /**
+     * This method is used to generate String values of the result of analyzing bytecode.
+     * It can merge the whole result data structures of the bytecode to one String value by using the StringBuilder.
+     * <p>
+     * If someone who want to customize the result of the analyzing, this method will be used.
+     *
+     * @return The return value contains single String value which is representing the entire architecture of the bytecode.
+     */
     public String printResult() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -106,7 +128,6 @@ public class ByteAnalyzer {
                 stringBuilder.append(c.toString());
             }
         }
-
 
 
         stringBuilder.append("\nAccess Flag: ");
@@ -168,6 +189,16 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method is used to analyze input bytecode.
+     * It contains several analyze methods, which are same with the JVM data structure.
+     *
+     *
+     * @return The return value is ByteStructure class. It contains several fields of the bytecode structure.
+     * @throws Exception This method can generate the exception due to the attribute sections. The JVM allows the customized attributes which are not defined at JVM.
+     * However, the current ByteTok focuses on the only class files which are compiled by the Java.
+     * For this reason, if there is an attribute which are not defined at JVM, it can make the exceptions.
+     */
     public ByteStructure analyze() throws Exception {
 
         analyzeMagicNumber();
@@ -190,6 +221,10 @@ public class ByteAnalyzer {
         return new ByteStructure(magic, minorVersion, majorVersion, constantPoolCount, constantPoolInformation, accessFlag, thisClass, superClass, interfacesCount, interfaces, fieldsCount, fieldInformation, methodsCount, methodInformation, attributesCount, attributeInformation);
     }
 
+    /**
+     * This method is related to the constant pool. It prints the instances of the constant pool entries.
+     * @deprecated
+     */
     public void printConstantPool() {
         for(int i = 0; i < constantPoolInformation.length; i++) {
             if(constantPoolInformation[i] != null) {
@@ -198,6 +233,9 @@ public class ByteAnalyzer {
         }
     }
 
+    /**
+     * This method analyzes the magic number of the bytecode.
+     */
     public void analyzeMagicNumber() {
         this.magic = Arrays.copyOfRange(bytes, 0, 4);
 
@@ -206,6 +244,9 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes the minor version of the bytecode.
+     */
     public void analyzeMinorVersion() {
         this.minorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -214,6 +255,9 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes the major version of the bytecode.
+     */
     public void analyzeMajorVersion() {
         this.majorVersion =  Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -222,6 +266,10 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes the number of the constant pool entries.
+     * The bytecode represents the total number of the constant pool, and then it keeps the actual values.
+     */
     public void analyzeConstantPoolCount() {
         this.constantPoolCount = Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -231,9 +279,19 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method actually analyzes the constant pool entries.
+     * In this method, it will use the total number of the constant pool entries by using the analyzeConstantPoolCount() method.
+     * <p>
+     * Actually, JVM doesn't use the 0 index, so there will be constant pool count - 1 constant instances.
+     * </p>
+     * In addition, the LongInformation and DoubleInformation constant instance occupy the 2 indexes of the constant pool.
+     *
+     * @throws Exception This method can generate the exception due to the
+     */
+
     public void analyzeConstantPool() throws Exception {
         int count = 0;
-        // 실제로 index 0이 사용되지 않기 때문에 constant pool count - 1개의 constant가 존재함
         this.constantPoolInformation = new ConstantPoolInformation[cpCount - 1];
 
         while(count < cpCount - 1) {
@@ -248,6 +306,19 @@ public class ByteAnalyzer {
         }
 
     }
+
+
+    /**
+     * This method is used to generate ConstantPoolInformation classes.
+     * By using the offset and the value of the tag, it can divide the entire cases.
+     * <p>
+     * Each of the cases has different length of the bytes. For example, IntegerInformation has 5 as its length, but the LongInformation has 9 as its length.
+     * The analyzeConstantPool() method uses this method to make constant pool array.
+     *
+     * @return The return value is ConstantPoolInformation because there are many subtypes of the constant pool, but ByteTok needs to keep this types in the one ArrayList.
+     * For this reason, each of the subtypes of the constant pool implements the ConstantPoolInformation interface.
+     * @throws Exception If the tah value is not mapped with the switch-case phase, it means there is an error of the source code, so it leads to the exception cases.
+     */
 
     public ConstantPoolInformation createConstantPoolEntry() throws Exception {
         int tag = bytes[offset] & 0xFF;
@@ -333,6 +404,9 @@ public class ByteAnalyzer {
         return returnInformation;
     }
 
+    /**
+     * This method analyzes the value of the access flag of the bytecode.
+     */
     public void analyzeAccessFlag() {
         this.accessFlag = Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -341,6 +415,9 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes this class value of the bytecode.
+     */
     public void analyzeThisClass() {
         this.thisClass = Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -349,6 +426,9 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes the super class value of the bytecode.
+     */
     public void analyzeSuperClass() {
         this.superClass = Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -357,6 +437,9 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes the number of the interface of the bytecode.
+     */
     public void analyzeInterfaceCount() {
         this.interfacesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
 
@@ -365,6 +448,10 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method analyzes the interfaces in the bytecode.
+     * By using the number of the total interfaces, this method automatically finds interfaces.
+     */
     public void analyzeInterfaces() {
         int count = 0;
         int interfaceLength = ((interfacesCount[0] & 0xFF) << 8) | (interfacesCount[1] & 0xFF);
@@ -376,6 +463,10 @@ public class ByteAnalyzer {
             count ++;
         }
     }
+
+    /**
+     * This method analyzes the number of the fields of the bytecode.
+     */
 
     public void analyzeFieldsCount() {
         this.fieldsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
@@ -391,6 +482,11 @@ public class ByteAnalyzer {
         this.fieldInformation = new FieldInformation[fieldsCount];
     }
 
+    /**
+     * By using the number of the fields generated from the analyzeFieldsCount() method, it analyzes the entire fields of the bytecode.
+     * @throws UnsupportedEncodingException According to the JVM official document, the fields architecture contains the attribute section. However, this section can generate the UnsupportedEncodingException in our implementation due to customized attributes.
+     * So, this method can also generate UnsupportedEncodingException.
+     */
     public void analyzeFields() throws UnsupportedEncodingException {
         int count = 0;
         int fieldsCount = ((this.fieldsCount[0] & 0xFF) << 8) | (this.fieldsCount[1] & 0xFF);
@@ -402,6 +498,13 @@ public class ByteAnalyzer {
         }
     }
 
+    /**
+     * In this method, ByteTok actually analyzes the fields.
+     * The field architecture contains 5 fields, access flag, name index, descriptor index, attributes count, attributes.
+     * @return The return value is FieldInformation to represent the field architecture.
+     * @throws UnsupportedEncodingException There are attributes sections which can generate the UnsupportedEncodingException due to the customized attributes.
+     * For this reason, this method can also generate the UnsupportedEncodingException.
+     */
     public FieldInformation createField() throws UnsupportedEncodingException {
         byte[] accessFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
         offset += 2;
@@ -421,19 +524,23 @@ public class ByteAnalyzer {
         return new FieldInformation(accessFlags, nameIndex, descriptorIndex, attributesCount, attributeInformation);
     }
 
+    /**
+     * This method analyzes the number of the methods of the bytecode.
+     */
     public void analyzeMethodsCount() {
         this.methodsCount = Arrays.copyOfRange(bytes, offset, offset + 2);
 
-
         offset += 2;
-
-
-
-
         int methodsCount = ((this.methodsCount[0] & 0xFF) << 8) | (this.methodsCount[1] & 0xFF);
 
         this.methodInformation = new MethodInformation[methodsCount];
     }
+
+    /**
+     * By using the number of the methods generated from the analyzeMethodsCount() method, it analyzes the entire methods of the bytecode.
+     * @throws UnsupportedEncodingException According to the JVM official document, the methods architecture contains the attribute section. However, this section can generate the UnsupportedEncodingException in our implementation due to customized attributes.
+     * So, this method can also generate UnsupportedEncodingException.
+     */
 
     public void analyzeMethods() throws UnsupportedEncodingException {
         int count = 0;
@@ -447,6 +554,13 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * In this method, ByteTok actually analyzes the methods.
+     * The method architecture contains 5 fields, access flag, name index, descriptor index, attributes count, attributes.
+     * @return The return value is MethodInformation to represent the method architecture.
+     * @throws UnsupportedEncodingException There are attributes sections which can generate the UnsupportedEncodingException due to the customized attributes.
+     * For this reason, this method can also generate the UnsupportedEncodingException.
+     */
     public MethodInformation createMethod() throws UnsupportedEncodingException {
         byte[] accessFlags = Arrays.copyOfRange(bytes, offset, offset + 2);
         offset += 2;
@@ -467,25 +581,40 @@ public class ByteAnalyzer {
 
     }
 
+    /**
+     * This method can analyze the number of the attributes in the bytecode.
+     */
     public void analyzeAttributeCount() {
         this.attributesCount = Arrays.copyOfRange(bytes, offset, offset + 2);
         offset += 2;
     }
 
-    // 해당 method 실행 전에 무조건 offset 값 증가 시키기
+
+    /**
+     * This method can analyze the attribute by using total number of the attributes generated by analyzeAttributeCount() method.
+     * @param attributeSize This method is using the total number of the attributes.
+     * @return The return value is the array of AttributeInformation to represent the structure of attribute.
+     * @throws UnsupportedEncodingException It is possible to find out customized attribute, so the UnsupportedEncodingException can be occurred.
+     */
     public AttributeInformation[] analyzeAttribute(int attributeSize) throws UnsupportedEncodingException {
         int count = 0;
-        // input으로 들어온 size 만큼의 attribute 배열 생성
+
         AttributeInformation[] returnInformation = new AttributeInformation[attributeSize];
 
         while(count < attributeSize) {
-            returnInformation[count] = createAttribute(); // index는 method 안에서 증가시켜야 함
+            returnInformation[count] = createAttribute();
             count++;
         }
 
         return returnInformation;
     }
 
+    /**
+     * This method get a name of each attribute.
+     * By using the name of attribute, it parses the bytecode attributes. For example, if the name is ConstantValue, then this method will increase offset + 2
+     * @return The return value is AttributeInformation to support polymorphism. Each attribute implements the AttributeInformation interface.
+     * @throws UnsupportedEncodingException It is possible to find out customized attribute, so the UnsupportedEncodingException can be occurred.
+     */
     public AttributeInformation createAttribute() throws UnsupportedEncodingException {
 
         AttributeInformation returnInformation;
@@ -515,7 +644,7 @@ public class ByteAnalyzer {
             offset += 4;
 
             int lengthInteger = ((codeLength[0] & 0xFF) << 24) | ((codeLength[1] & 0xFF) << 16) | ((codeLength[2] & 0xFF) << 8) | (codeLength[3] & 0xFF);
-            // tableswitch instruction 실행을 위해 해당 위치에서의 offset을 가지고 와야함
+
             int totalOffset = offset;
 
             byte[] code = Arrays.copyOfRange(bytes, offset, offset + lengthInteger);
@@ -1205,6 +1334,10 @@ public class ByteAnalyzer {
         return returnInformation;
     }
 
+    /**
+     * The attributes from the JVM has specific structures like stackMapTable. This architecture has verificationType structure which has several tag values.
+     * @return The return value is VerificationTypeInformation which are used it the attribute analyze step.
+     */
     public VerificationTypeInformation analyzeVerificationTypeInformation() {
         VerificationTypeInformation verificationTypeInformation;
 
@@ -1247,6 +1380,10 @@ public class ByteAnalyzer {
         return verificationTypeInformation;
     }
 
+    /**
+     * This method analyzes the TypeAnnotation structure which are used at RuntimeVisibleTypeAnnotations. There are several cases which are divided by the value of the targetType.
+     * @return The return value is TypeAnnotation to represent the architecture of TypeAnnotation.
+     */
     public TypeAnnotation analyzeTypeAnnotations() {
         byte targetType = bytes[offset];
         offset += 1;
@@ -1457,6 +1594,10 @@ public class ByteAnalyzer {
         return new TypeAnnotation(targetType, targetInformation, typePath, typeIndex, numberOfElementValuePairs, elementValuePairs);
     }
 
+    /**
+     * The analyzeTypePath method is used to analyze TypePath architecture.
+     * @return The return value is TypePath.
+     */
     public TypePath analyzeTypePath() {
         byte pathLength = bytes[offset];
         offset += 1;
@@ -1474,6 +1615,11 @@ public class ByteAnalyzer {
         return new TypePath(pathLength, path);
     }
 
+    /**
+     * This method is used to analyze the entire number of the annotations in the bytecode.
+     * @param numberOfAnnotations By using the number of the annotations, it can analyze entire annotations.
+     * @return The return value is an array which can save the instances which type is Annotation.
+     */
     public Annotation[] analyzeAnnotations(int numberOfAnnotations) {
         int count = 0;
         Annotation[] annotations = new Annotation[numberOfAnnotations];
@@ -1487,6 +1633,10 @@ public class ByteAnalyzer {
         return annotations;
     }
 
+    /**
+     * By using the offset value, it can extract the value of type index and number of element value pairs. Finally, it generates Annotation class.
+     * @return The Annotation class is a return value which represents one instance of the Annotation.
+     */
     public Annotation createAnnotation() {
         byte[] typeIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
         offset += 2;
@@ -1499,6 +1649,11 @@ public class ByteAnalyzer {
         return new Annotation(typeIndex, numberOfElementValuePairs, elementValuePairs);
     }
 
+    /**
+     * The createAnnotation() method extracts the number of element value pairs. By using this value, it can analyze the whole element value pair structures.
+     * @param numberOfElementValuePairs It represents the number of element value pairs.
+     * @return The return value is an array which can save the ElementValuePairs.
+     */
     public ElementValuePairs[] analyzeElementValuePairs(int numberOfElementValuePairs) {
         int count = 0;
         ElementValuePairs[] elementValuePairs = new ElementValuePairs[numberOfElementValuePairs];
@@ -1512,6 +1667,10 @@ public class ByteAnalyzer {
         return elementValuePairs;
     }
 
+    /**
+     * By using the tag value in the ElementValuePair, it analyzes the entire ElementValuePair.
+     * @return The return value is ElementValuePairs.
+     */
     public ElementValuePairs createElementValuePairs() {
         byte[] elementNameIndex = Arrays.copyOfRange(bytes, offset, offset + 2);
         offset += 2;
@@ -1612,6 +1771,11 @@ public class ByteAnalyzer {
         return new ElementValuePairs(elementNameIndex, elementValue);
     }
 
+    /**
+     * By using the number of ElementValue, it analyzes the entire ElementValues.
+     * @param numberOfElementValue This parameter shows the number of ElementValues.
+     * @return The return value is an array of the ElementValue which represent the structure of ElementValue structure of the JVM.
+     */
     public ElementValue[] analyzeElementValue(int numberOfElementValue) {
         int count = 0;
 
@@ -1626,6 +1790,11 @@ public class ByteAnalyzer {
         return elementValues;
     }
 
+
+    /**
+     * It divides several element value types with tag value which are in the ElementValue structure.
+     * @return The return value is ElementValue structure to represent the structure of ElementValue structure of the JVM.
+     */
     public ElementValue createElementValue() {
         byte tag = bytes[offset];
         offset += 1;
@@ -1722,43 +1891,6 @@ public class ByteAnalyzer {
 
         return elementValue;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void check(byte[] input) {
-        for(byte s : input) {
-            System.out.printf("%02X", s);
-        }
-        System.out.println();
-    }
-
-    public int byteArrayToDecimal(byte[] byteArray) {
-        // 바이트 배열을 순회하며, 각 바이트를 16진수로 결합하여 정수로 변환
-        int result = 0;
-        for (int i = 0; i < byteArray.length; i++) {
-            result = (result << 8) | (byteArray[i] & 0xFF);  // 각 바이트를 왼쪽으로 시프트하여 결합
-        }
-        return result;  // 10진수 결과 반환
-    }
-
-
-
-
-
-
 
     public byte[] getBytes() {
         return bytes;
