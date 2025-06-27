@@ -6,6 +6,12 @@ import hgu.isel.structure.field.FieldInformation;
 import hgu.isel.structure.interfaces.Interfaces;
 import hgu.isel.structure.method.MethodInformation;
 
+/**
+ * This class represents the entire structure of the input bytecodes.
+ * Bytecode consists of several fields like magic number, versions, or the others. After analyzing bytecode, ByteTok generates ByteStructure and each of them represents one single bytecode.
+ * <p>
+ * All getters and setters in this class are simple property accessors with no side effects.
+ */
 public class ByteStructure {
     private String fileName;
     private byte[] magic;

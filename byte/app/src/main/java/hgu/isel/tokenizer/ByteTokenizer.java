@@ -18,18 +18,31 @@ import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The purpose of the ByteTokenizer class is tokenize input bytecodes.
+ * <p>
+ * All getters and setters in this class are simple property accessors with no side effects.
+ */
 public class ByteTokenizer {
 
 
     private HashSet<String> tokens = new HashSet<>(); // used to generate vocabulary
 
 
+    /**
+     * This method generates tokens by using the ByteStructure parameter.
+     * @param byteStructure This parameter contains the entire structure of the input bytecodes.
+     * @return It returns the size of the tokens to check the current number of the tokens.
+     */
     public int saveTokens(ByteStructure byteStructure) {
         tokens.addAll(tokenize4vocab(byteStructure));
 
         return tokens.size();
     }
 
+    /**
+     * It generates vocabulary to the filePath. It uses tokens and makes txt file.
+     */
     public void createVocabulary() { // create vocabulary
 
         String filePath = "/data2/donggyu/ICST/additional_experiment/vocab_instruction.txt";
@@ -42,6 +55,12 @@ public class ByteTokenizer {
         }
     }
 
+    /**
+     * This method writes files with only constant pool and method structures. There are many other structures, but the purpose of this method focuses on only constant pool and method structures.
+     * @param filePath The generated file's path.
+     * @param constantPool The entire instances of the constant pool.
+     * @param method The entire instances of the method structure.
+     */
     public void writeFiles(String filePath, List<String> constantPool, List<String> method) {
         try {
             Files.write(Paths.get(filePath), constantPool, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -51,6 +70,11 @@ public class ByteTokenizer {
         }
     }
 
+    /**
+     * This method writes files with only method structures. There are many other structures, but the purpose of this method focuses on only method structures.
+     * @param filePath The generated file's path.
+     * @param method The entire instances of the method structure.
+     */
     public void writeFiles(String filePath, List<String> method) {
         String content = String.join(" ", method);
         try {
@@ -65,6 +89,10 @@ public class ByteTokenizer {
         }
     }
 
+    /**
+     * This method generates new tokenized bytecode txt files with constant pool.
+     * @param byteStructure It contains the result of analyzing bytecode process.
+     */
     public void generateNewFilesWithConstantPool(ByteStructure byteStructure) {
         List<String> constantPools = new ArrayList<>();
         List<String> methods = new ArrayList<>();
@@ -98,6 +126,11 @@ public class ByteTokenizer {
         }
     }
 
+    /**
+     * This method generates new tokenized bytecode txt files without constant pool.
+     * It focuses on only method structure, so the other structures are ignored.
+     * @param byteStructure It contains the result of analyzing bytecode process.
+     */
     public void generateNewFiles(ByteStructure byteStructure) {
         List<String> methods = new ArrayList<>();
 
@@ -117,6 +150,11 @@ public class ByteTokenizer {
         }
     }
 
+    /**
+     * By using the name of the method, it can find a section of specific method.
+     * @param byteStructure It contains the result of analyzing bytecode process.
+     * @param methodName It is a name of the target method.
+     */
     public void findSpecificMethod(ByteStructure byteStructure, String methodName) {
         List<String> methods = new ArrayList<>();
 
@@ -145,8 +183,12 @@ public class ByteTokenizer {
         }
     }
 
-
-
+    /**
+     * If there are so many constant pool values, it might not be used to training process due to lack of method instructions.
+     * For this reason, this method automatically removes byteStructures which have bigger size of constant pool than 400.
+     * @param byteStructure It contains the result of analyzing bytecode process.
+     * @return It returns boolean values to check whether input byteStructure is removed or not.
+     */
     public boolean removeFiles(ByteStructure byteStructure) {
         List<String> constantPools = new ArrayList<>();
 
@@ -164,6 +206,13 @@ public class ByteTokenizer {
     }
 
     // used to tokenize option t
+
+    /**
+     * This method is used to tokenize option t.
+     * It retrieves the entire structures of the bytecode, then put values into the ArrayList.
+     * @param byteStructure It contains the result of analyzing bytecode process.
+     * @return It returns List which contains Strings.
+     */
     public List<String> tokenize(ByteStructure byteStructure) { // translate input to tokenized one
         List<String> inputs = new ArrayList<>();
         List<String> methods = new ArrayList<>();
@@ -306,6 +355,11 @@ public class ByteTokenizer {
         return inputs;
     }
 
+    /**
+     * This method is used to tokenize for generate vocabulary.
+     * @param byteStructure It contains the result of analyzing bytecode process.
+     * @return It returns List.
+     */
     public List<String> tokenize4vocab(ByteStructure byteStructure) {
 
         List<String> inputs = new ArrayList<>();
@@ -328,17 +382,5 @@ public class ByteTokenizer {
 
     public ByteTokenizer() {
     }
-
-    public HashSet<String> getTokens() {
-        return tokens;
-    }
-
-
-    public void setTokens(HashSet<String> tokens) {
-        this.tokens = tokens;
-    }
-
-
-
 
 }
