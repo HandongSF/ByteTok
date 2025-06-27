@@ -6,6 +6,12 @@ import hgu.isel.structure.attribute.type.annotation.elemet.ElementUnion;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class supports the structure of the JVM bytecodes.
+ * By overriding the toString(), tokenize() methods, it can analyze / tokenize the bytecodes.
+ * <p>
+ * All getters and setters in this class are simple property accessors with no side effects.
+ */
 public class Annotation implements ElementUnion {
     private byte[] typeIndex; // u2
     private byte[] numberOfElementValuePairs; // u2

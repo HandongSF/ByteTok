@@ -7,6 +7,12 @@ import hgu.isel.structure.attribute.type.code.set.match.MatchOffsetPair;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class supports the structure of the JVM bytecodes.
+ * By overriding the toString(), tokenize() methods, it can analyze / tokenize the bytecodes.
+ * <p>
+ * All getters and setters in this class are simple property accessors with no side effects.
+ */
 public class LookUpSwitchInstruction implements Instruction {
     private byte format;
     private byte[] paddingByte; // 0x00으로 채워짐

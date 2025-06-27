@@ -7,6 +7,10 @@ import hgu.isel.structure.attribute.type.code.set.match.MatchOffsetPair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class analyzes the code attributes.
+ * All getters and setters in this class are simple property accessors with no side effects.
+ */
 public class CodeAttributeAnalyzer {
 
     private byte[] codes; // the entire bytes are in here
@@ -15,6 +19,10 @@ public class CodeAttributeAnalyzer {
     private int totalOffset;
 
 
+    /**
+     * The purpose of this method is analyzing the code attributes.
+     * The code attribute is in the method information, and it contains the entire instructions. This method divides instructions by using the opcode.
+     */
     public void analyze() {
 
         while(offset < codes.length) {
