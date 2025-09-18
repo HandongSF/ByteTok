@@ -43,13 +43,12 @@ public class ByteTokenizer {
     /**
      * It generates vocabulary to the filePath. It uses tokens and makes txt file.
      */
-    public void createVocabulary() { // create vocabulary
+    public void createVocabulary(String vocabPath) { // create vocabulary
 
-        String filePath = "/data2/donggyu/ICST/additional_experiment/vocab_instruction.txt";
         List<String> list = new ArrayList<>(tokens);
 
         try {
-            Files.write(Paths.get(filePath), list);
+            Files.write(Paths.get(vocabPath), list);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -93,11 +92,10 @@ public class ByteTokenizer {
      * This method generates new tokenized bytecode txt files with constant pool.
      * @param byteStructure It contains the result of analyzing bytecode process.
      */
-    public void generateNewFilesWithConstantPool(ByteStructure byteStructure) {
+    public void generateNewFilesWithConstantPool(ByteStructure byteStructure, String outputDirectory) {
         List<String> constantPools = new ArrayList<>();
         List<String> methods = new ArrayList<>();
 
-        String outputDirectory = "/data2/donggyu/ICST/additional_experiment/files_token";
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
@@ -131,10 +129,9 @@ public class ByteTokenizer {
      * It focuses on only method structure, so the other structures are ignored.
      * @param byteStructure It contains the result of analyzing bytecode process.
      */
-    public void generateNewFiles(ByteStructure byteStructure) {
+    public void generateNewFiles(ByteStructure byteStructure, String outputDirectory) {
         List<String> methods = new ArrayList<>();
 
-        String outputDirectory = "/data2/donggyu/files_wordpiece/";
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
@@ -155,10 +152,10 @@ public class ByteTokenizer {
      * @param byteStructure It contains the result of analyzing bytecode process.
      * @param methodName It is a name of the target method.
      */
-    public void findSpecificMethod(ByteStructure byteStructure, String methodName) {
+    public void findSpecificMethod(ByteStructure byteStructure, String methodName, String outputDirectory) {
         List<String> methods = new ArrayList<>();
 
-        String outputDirectory = "/data2/donggyu/ICST/additional_experiment/files_token_methods";
+
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");

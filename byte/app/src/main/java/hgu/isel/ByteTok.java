@@ -4,9 +4,12 @@
 package hgu.isel;
 
 import hgu.isel.analyzer.ByteAnalyzer;
+import hgu.isel.options.CommandLineOptions;
 import hgu.isel.reader.ByteReader;
 import hgu.isel.tokenizer.ByteStructure;
 import hgu.isel.tokenizer.ByteTokenizer;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,214 +22,290 @@ public class ByteTok {
 
     public static void main(String[] args) {
         ByteTok parser = new ByteTok();
-        parser.run(args[0], args[1], args[2]);
+        parser.run(args);
     }
 
-    public void run(String path, String option, String methodName) {
+    public void run(String[] args) {
 
-        if(option.equals("v")) {
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
+        CommandLineOptions commandLineOptions = new CommandLineOptions();
 
-            ByteTokenizer byteTokenizer = new ByteTokenizer();
+        try {
+            CommandLine cmd = commandLineOptions.parse(args);
 
+            if(cmd.hasOption("v")) {
 
-            for(String s : filePaths) {
-                byte[] bytes;
-                bytes = byteReader.readClassFile(s);
+                String[] vocabArgs = cmd.getOptionValues("v");
+                String inputPath = vocabArgs[0];
+                int maximumSize = Integer.parseInt(vocabArgs[1]);
+                String vocabPath = vocabArgs[2];
 
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-                try {
-                    ByteStructure byteStructure = byteAnalyzer.analyze();
-                    int hashSize = byteTokenizer.saveTokens(byteStructure);
+                createVocabulary(inputPath, maximumSize, vocabPath);
 
-		    
+            } else if(cmd.hasOption("a")) {
 
-                    if(hashSize > 100000) { // up to maximum size
-                        break;
-                    }
+                String[] tokenizeArgs = cmd.getOptionValues("a");
+                String inputPath = tokenizeArgs[0];
 
-                } catch (Exception e) {
-                    try {
-                        Path filePath = Paths.get(s);
-                        Files.delete(filePath);
-                        System.out.println("Deleted file: " + s);
-                    } catch (IOException deleteException) {
-                        System.err.println("Failed to delete file: " + s);
+                analyze(inputPath);
 
-                    }
-                }
+            } else if(cmd.hasOption("r")) {
 
+                String[] removeArgs = cmd.getOptionValues("r");
+                String inputPath = removeArgs[0];
+
+                remove(inputPath);
+
+            } else if(cmd.hasOption("g")) {
+
+                String[] generateArgs = cmd.getOptionValues("g");
+                String inputPath = generateArgs[0];
+                String directory = generateArgs[1];
+
+                generate(inputPath, directory);
+
+            } else if(cmd.hasOption("d")) {
+
+                String[] deleteArgs = cmd.getOptionValues("d");
+                String inputPath = deleteArgs[0];
+
+                delete(inputPath);
+
+            } else if(cmd.hasOption("f")) {
+
+                String[] findArgs = cmd.getOptionValues("f");
+                String inputPath = findArgs[0];
+
+                findCustomizedAttributes(inputPath);
+
+            } else if(cmd.hasOption("e")) {
+
+                String[] extractArgs = cmd.getOptionValues("e");
+                String inputPath = extractArgs[0];
+                String directory = extractArgs[1];
+
+                extract(inputPath, directory);
+
+            } else if(cmd.hasOption("s")) {
+                String[] searchArgs = cmd.getOptionValues("s");
+                String inputPath = searchArgs[0];
+                String methodName = searchArgs[1];
+                String outputDirectory = searchArgs[2];
+
+                findMethodWithSignature(inputPath, methodName, outputDirectory);
             }
-            byteTokenizer.createVocabulary();
 
-        } else if(option.equals("t")) { // tokenization
-            ByteReader byteReader = new ByteReader(path);
+        } catch (ParseException e) {
+            System.out.println("옵션 파싱 에러: " + e.getMessage());
+            commandLineOptions.printHelp();
+        }
 
-            byte[] bytes = byteReader.readClassFile();
+    }
+
+    private void createVocabulary(String path, int maximumSize, String vocabPath) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+
+        for(String s : filePaths) {
+            byte[] bytes;
+            bytes = byteReader.readClassFile(s);
 
             ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-            ByteStructure byteStructure = null;
             try {
-                byteStructure = byteAnalyzer.analyze();
-                System.out.println(byteAnalyzer.printResult());
+                ByteStructure byteStructure = byteAnalyzer.analyze();
+                int hashSize = byteTokenizer.saveTokens(byteStructure);
+
+                if(hashSize > maximumSize) { // up to maximum size
+                    break;
+                }
+
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                System.exit(0);
             }
 
-//            ByteTokenizer byteTokenizer = new ByteTokenizer();
+        }
+        System.out.println("Success creating vocab");
+        byteTokenizer.createVocabulary(vocabPath);
+    }
 
-//            List<String> tokens = byteTokenizer.tokenize(byteStructure);
+    private void analyze(String path) {
+        ByteReader byteReader = new ByteReader(path);
 
-        } else if(option.equals("s")) { // delete kotlin / scala files
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
+        byte[] bytes = byteReader.readClassFile();
 
-            byte[] bytes;
+        ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+        ByteStructure byteStructure = null;
+        try {
+            byteStructure = byteAnalyzer.analyze();
+            System.out.println(byteAnalyzer.printResult());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-            for(String s : filePaths) {
-                bytes = byteReader.readClassFile(s);
+    }
 
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+    private void remove(String path) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        byte[] bytes;
+
+        for(String s : filePaths) {
+            bytes = byteReader.readClassFile(s);
+
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            try {
+                byteAnalyzer.analyze();
+                System.out.println("Success!! : " + s);
+            } catch (Exception e) {
                 try {
-                    byteAnalyzer.analyze();
-                    System.out.println("Success!! : " + s);
-                } catch (Exception e) {
-                    try {
-                        Path filePath = Paths.get(s);
-                        Files.delete(filePath);
-                        System.out.println("Deleted file: " + s);
-                    } catch (IOException deleteException) {
-                        System.err.println("Failed to delete file: " + s);
+                    Path filePath = Paths.get(s);
+                    Files.delete(filePath);
+                    System.out.println("Deleted file: " + s);
+                } catch (IOException deleteException) {
+                    System.err.println("Failed to delete file: " + s);
 
-                    }
-                }
-            }
-        } else if(option.equals("n")) { // generate new files as inputs of pre-trained model
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
-
-            byte[] bytes;
-            ByteTokenizer byteTokenizer = new ByteTokenizer();
-
-            for(String s : filePaths) {
-                bytes = byteReader.readClassFile(s);
-
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-                try {
-                    ByteStructure byteStructure = byteAnalyzer.analyze();
-                    byteStructure.setFileName(s);
-
-                    byteTokenizer.generateNewFilesWithConstantPool(byteStructure);
-                    
-                    System.out.println("Success: " + s);
-                } catch (Exception e) {
-                    System.out.println("Failed: " + s);
-                    e.printStackTrace();
-                }
-
-
-            }
-        } else if(option.equals("d")) { // delete / constant pool size > 480 then delete
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
-
-            byte[] bytes;
-            ByteTokenizer byteTokenizer = new ByteTokenizer();
-
-            for(String s : filePaths) {
-                bytes = byteReader.readClassFile(s);
-
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-                try {
-                    ByteStructure byteStructure = byteAnalyzer.analyze();
-                    byteStructure.setFileName(s);
-
-                    boolean isDelete = byteTokenizer.removeFiles(byteStructure);
-
-                    if(isDelete) {
-                        Path filePath = Paths.get(s);
-                        Files.delete(filePath);
-
-                        System.out.println("delete " + s);
-                    }
-                    System.out.println("not delete");
-
-
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-                }
-
-
-            }
-        } else if(option.equals("a")) { // find all customized attributes
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
-
-            byte[] bytes;
-
-
-            for(String s : filePaths) {
-                bytes = byteReader.readClassFile(s);
-
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-                try {
-                    byteAnalyzer.analyze();
-                } catch (Exception e) {
-                    String attributeName = e.getMessage();
-                    System.out.println("new attribute: " + attributeName);
-                    customAttributes.add(attributeName);
-                }
-            }
-        } else if(option.equals("m")) { // extract all methods from the input path
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
-
-            byte[] bytes;
-            ByteTokenizer byteTokenizer = new ByteTokenizer();
-
-            for(String s : filePaths) {
-                bytes = byteReader.readClassFile(s);
-
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-                try {
-                    ByteStructure byteStructure = byteAnalyzer.analyze();
-                    byteStructure.setFileName(s);
-
-                    byteTokenizer.generateNewFiles(byteStructure);
-
-                    System.out.println("Success: " + s);
-                } catch (Exception e) {
-                    System.out.println("Failed: " + s);
-                    e.printStackTrace();
-                }
-            }
-        } else if(option.equals("p")) { // find specific method with input string
-            ByteReader byteReader = new ByteReader(path);
-            List<String> filePaths = byteReader.readClassFilePaths();
-
-            byte[] bytes;
-            ByteTokenizer byteTokenizer = new ByteTokenizer();
-
-            for(String s : filePaths) {
-                bytes = byteReader.readClassFile(s);
-
-                ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
-                try {
-                    ByteStructure byteStructure = byteAnalyzer.analyze();
-                    byteStructure.setFileName(s);
-
-                    byteTokenizer.findSpecificMethod(byteStructure, "");
-
-                    System.out.println("Success: " + s);
-                } catch (Exception e) {
-                    System.out.println("Failed: " + s);
-                    e.printStackTrace();
                 }
             }
         }
     }
+
+    private void generate(String path, String directory) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        byte[] bytes;
+        ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+        for(String s : filePaths) {
+            bytes = byteReader.readClassFile(s);
+
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            try {
+                ByteStructure byteStructure = byteAnalyzer.analyze();
+                byteStructure.setFileName(s);
+
+                byteTokenizer.generateNewFilesWithConstantPool(byteStructure, directory);
+
+                System.out.println("Success: " + s);
+            } catch (Exception e) {
+                System.out.println("Failed: " + s);
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+    private void delete(String path) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        byte[] bytes;
+        ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+        for(String s : filePaths) {
+            bytes = byteReader.readClassFile(s);
+
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            try {
+                ByteStructure byteStructure = byteAnalyzer.analyze();
+                byteStructure.setFileName(s);
+
+                boolean isDelete = byteTokenizer.removeFiles(byteStructure);
+
+                if(isDelete) {
+                    Path filePath = Paths.get(s);
+                    Files.delete(filePath);
+
+                    System.out.println("delete " + s);
+                }
+                System.out.println("not delete");
+
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void findCustomizedAttributes(String path) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        byte[] bytes;
+
+
+        for(String s : filePaths) {
+            bytes = byteReader.readClassFile(s);
+
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            try {
+                byteAnalyzer.analyze();
+            } catch (Exception e) {
+                String attributeName = e.getMessage();
+                System.out.println("new attribute: " + attributeName);
+                customAttributes.add(attributeName);
+            }
+        }
+    }
+
+    private void extract(String path, String directory) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        byte[] bytes;
+        ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+        for(String s : filePaths) {
+            bytes = byteReader.readClassFile(s);
+
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            try {
+                ByteStructure byteStructure = byteAnalyzer.analyze();
+                byteStructure.setFileName(s);
+
+                byteTokenizer.generateNewFiles(byteStructure, directory);
+
+                System.out.println("Success: " + s);
+            } catch (Exception e) {
+                System.out.println("Failed: " + s);
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void findMethodWithSignature(String path, String methodName, String directory) {
+        ByteReader byteReader = new ByteReader(path);
+        List<String> filePaths = byteReader.readClassFilePaths();
+
+        byte[] bytes;
+        ByteTokenizer byteTokenizer = new ByteTokenizer();
+
+        for(String s : filePaths) {
+            bytes = byteReader.readClassFile(s);
+
+            ByteAnalyzer byteAnalyzer = new ByteAnalyzer(bytes);
+            try {
+                ByteStructure byteStructure = byteAnalyzer.analyze();
+                byteStructure.setFileName(s);
+
+                byteTokenizer.findSpecificMethod(byteStructure, "", directory);
+
+                System.out.println("Success: " + s);
+            } catch (Exception e) {
+                System.out.println("Failed: " + s);
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 
     public static HashSet<String> getCustomAttributes() {
         return customAttributes;
