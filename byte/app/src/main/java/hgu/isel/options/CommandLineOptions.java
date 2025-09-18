@@ -12,50 +12,50 @@ public class CommandLineOptions {
         Option vocab = Option.builder("v")
                 .longOpt("vocab")
                 .hasArgs()
-                .desc("create vocabulary with input path and max length")
+                .desc("create vocabulary with input path and max length / 1) input path 2) max size 3) generated vocab path")
                 .build();
 
 
         Option tokenize = Option.builder("a")
                 .longOpt("analyze")
                 .hasArgs()
-                .desc("analyze input class file")
+                .desc("analyze input class file / 1) input path")
                 .build();
 
         Option remove = Option.builder("r")
                 .longOpt("remove")
                 .hasArgs()
-                .desc("remove scala / kotlin files which include customized attributes from input directory path")
+                .desc("remove scala / kotlin files which include customized attributes from input directory path / 1) input path")
                 .build();
 
         Option generate = Option.builder("g")
                 .longOpt("generate")
                 .hasArgs()
-                .desc("generate new text files as inputs of pre-trained model")
+                .desc("generate new text files as inputs of pre-trained model / 1) input path 2) base directory for generating")
                 .build();
 
         Option delete = Option.builder("d")
                 .longOpt("delete")
                 .hasArgs()
-                .desc("delete files which have large constant pool")
+                .desc("delete files which have large constant pool / 1) input path")
                 .build();
 
         Option find = Option.builder("f")
                 .longOpt("find")
                 .hasArgs()
-                .desc("find all customized attributes in scala / kotlin class files")
+                .desc("find all customized attributes in scala / kotlin class files / 1) input path")
                 .build();
 
         Option extract = Option.builder("e")
                 .longOpt("extract")
                 .hasArgs()
-                .desc("extract all methods from the input path")
+                .desc("extract all methods from the input path / 1) input path 2) base directory for extracting")
                 .build();
 
         Option search = Option.builder("s")
                 .longOpt("search")
                 .hasArgs()
-                .desc("search specific method with input string")
+                .desc("search specific method with input string / 1) input path 2) method name 3) output directory")
                 .build();
 
         options.addOption(vocab);
