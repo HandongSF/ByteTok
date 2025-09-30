@@ -158,7 +158,7 @@ public class ByteTokenizer {
         String fileName = file.getName();
         String fileNameWithoutExtension = fileName.replaceFirst("\\.class&?$", "");
 
-        String outputFile = outputDirectory + fileNameWithoutExtension;
+        String outputFile = outputDirectory + "/" + fileNameWithoutExtension;
 
 
 
