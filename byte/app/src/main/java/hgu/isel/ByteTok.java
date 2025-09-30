@@ -11,6 +11,8 @@ import hgu.isel.tokenizer.ByteTokenizer;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -92,6 +94,43 @@ public class ByteTok {
                 String outputDirectory = searchArgs[2];
 
                 findMethodWithSignature(inputPath, methodName, outputDirectory);
+            } else if(cmd.hasOption("sc")) {
+                String[] searchArgs = cmd.getOptionValues("sc");
+
+                ArrayList<String> pathList = new ArrayList<>();
+                ArrayList<String> classNameList = new ArrayList<>();
+                ArrayList<String> methodNameList = new ArrayList<>();
+                int count = 0;
+
+
+                try (BufferedReader br = new BufferedReader(new FileReader(searchArgs[0]))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        String[] values = line.split(",");
+
+                        if (values.length >= 3) {
+                            String path = values[0].trim();
+                            String className = values[1].trim();
+                            String methodName = values[2].trim();
+
+                            pathList.add(path);
+                            classNameList.add(className);
+                            methodNameList.add(methodName);
+
+                            count++;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                for(int i = 0; i < count; i++) {
+                    String inputPath = pathList.get(i) + "/" + classNameList.get(i);
+                    String methodName = methodNameList.get(i);
+                    String outputDirectory = searchArgs[1];
+
+                    findMethodWithSignature(inputPath, methodName, outputDirectory);
+                }
             }
 
         } catch (ParseException e) {

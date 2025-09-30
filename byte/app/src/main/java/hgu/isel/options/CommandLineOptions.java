@@ -58,6 +58,13 @@ public class CommandLineOptions {
                 .desc("search specific method with input string / 1) input path 2) method name 3) output directory")
                 .build();
 
+
+        Option searchCSV = Option.builder("sc")
+                .longOpt("searchCSV")
+                .hasArgs()
+                .desc("search specific method with input string / 1) input csv file path 2) method name 3) output directory")
+                .build();
+
         options.addOption(vocab);
         options.addOption(tokenize);
         options.addOption(remove);
@@ -66,6 +73,7 @@ public class CommandLineOptions {
         options.addOption(find);
         options.addOption(extract);
         options.addOption(search);
+        options.addOption(searchCSV);
 
     }
 
