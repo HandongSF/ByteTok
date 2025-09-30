@@ -170,7 +170,7 @@ public class ByteTokenizer {
 
             byte[] index = byteStructure.getMethodInformation()[i].getNameIndex();
 
-            ConstantPoolInformation constantPoolInformation = byteStructure.getConstantPoolInformation()[((index[0] & 0xFF) << 8) | (index[1] & 0xFF) - 1];
+            ConstantPoolInformation constantPoolInformation = byteStructure.getConstantPoolInformation()[(((index[0] & 0xFF) << 8) | (index[1] & 0xFF)) - 1];
 
             if(constantPoolInformation instanceof UTF8Information) {
                 String targetMethodName = new String(((UTF8Information) constantPoolInformation).getBytes());
