@@ -125,7 +125,7 @@ public class ByteTok {
                 }
 
                 for(int i = 0; i < count; i++) {
-                    String inputPath = pathList.get(i) + "/" + classNameList.get(i);
+                    String inputPath = pathList.get(i) + "/" + classNameList.get(i) + ".class";
                     String methodName = methodNameList.get(i);
                     String outputDirectory = searchArgs[1];
 
