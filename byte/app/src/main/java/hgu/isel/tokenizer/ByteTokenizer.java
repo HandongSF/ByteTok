@@ -177,7 +177,6 @@ public class ByteTokenizer {
 
 
                 if(targetMethodName.equals(methodName)) {
-                    System.out.println(targetMethodName);
 
                     byte[] descriptorIndex = byteStructure.getMethodInformation()[i].getDescriptorIndex();
 
