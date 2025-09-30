@@ -223,7 +223,7 @@ public class ByteAnalyzer {
 
     /**
      * This method is related to the constant pool. It prints the instances of the constant pool entries.
-     * @deprecated
+     *
      */
     public void printConstantPool() {
         for(int i = 0; i < constantPoolInformation.length; i++) {

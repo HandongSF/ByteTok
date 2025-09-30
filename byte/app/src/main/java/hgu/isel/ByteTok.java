@@ -294,7 +294,7 @@ public class ByteTok {
                 ByteStructure byteStructure = byteAnalyzer.analyze();
                 byteStructure.setFileName(s);
 
-                byteTokenizer.findSpecificMethod(byteStructure, "", directory);
+                byteTokenizer.findSpecificMethod(byteStructure, methodName, directory);
 
                 System.out.println("Success: " + s);
             } catch (Exception e) {

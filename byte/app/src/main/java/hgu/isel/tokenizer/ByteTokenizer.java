@@ -75,6 +75,7 @@ public class ByteTokenizer {
      * @param method The entire instances of the method structure.
      */
     public void writeFiles(String filePath, List<String> method) {
+        System.out.println(filePath);
         String content = String.join(" ", method);
         try {
             Files.writeString(
@@ -153,30 +154,45 @@ public class ByteTokenizer {
      * @param methodName It is a name of the target method.
      */
     public void findSpecificMethod(ByteStructure byteStructure, String methodName, String outputDirectory) {
-        List<String> methods = new ArrayList<>();
-
-
         File file = new File(byteStructure.getFileName());
         String fileName = file.getName();
-        String fileNameWithoutExtension = fileName.replaceFirst("\\.class&", "");
+        String fileNameWithoutExtension = fileName.replaceFirst("\\.class&?$", "");
 
         String outputFile = outputDirectory + fileNameWithoutExtension;
 
-        for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
-            methods.addAll(byteStructure.getMethodInformation()[i].tokenize());
-            String inputFileName = outputFile + "_" + i + ".txt";
 
-            byte[] index = byteStructure.getMethodInformation()[i].getDescriptorIndex();
+
+        for(int i = 0; i < byteStructure.getMethodInformation().length; i++) {
+            List<String> methods = new ArrayList<>();
+
+            methods.addAll(byteStructure.getMethodInformation()[i].tokenize());
+            String inputFileName = outputFile + "_" + i + "_" + methodName + ".txt";
+
+            byte[] index = byteStructure.getMethodInformation()[i].getNameIndex();
 
             ConstantPoolInformation constantPoolInformation = byteStructure.getConstantPoolInformation()[((index[0] & 0xFF) << 8) | (index[1] & 0xFF) - 1];
 
             if(constantPoolInformation instanceof UTF8Information) {
                 String targetMethodName = new String(((UTF8Information) constantPoolInformation).getBytes());
-                System.out.println(targetMethodName);
+
+
+                if(targetMethodName.equals(methodName)) {
+                    System.out.println(targetMethodName);
+
+                    byte[] descriptorIndex = byteStructure.getMethodInformation()[i].getDescriptorIndex();
+
+                    ConstantPoolInformation descriptorInformation = byteStructure.getConstantPoolInformation()[((descriptorIndex[0] & 0xFF) << 8) | (descriptorIndex[1] & 0xFF) - 1];
+                    if(descriptorInformation instanceof UTF8Information) {
+                        String targetDescriptorName = new String(((UTF8Information) descriptorInformation).getBytes());
+
+
+                        methods.add(targetDescriptorName);
+                        writeFiles(inputFileName, methods);
+                    }
+
+                }
             }
 
-
-//            writeFiles(inputFileName, methods);
         }
     }
 
